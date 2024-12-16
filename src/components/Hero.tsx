@@ -28,13 +28,15 @@ export const Hero = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white/10"
+              className="text-white border-white hover:bg-white/10 font-semibold"
               onClick={() => {
                 const featuresSection = document.querySelector("#features");
-                featuresSection?.scrollIntoView({ behavior: "smooth" });
+                if (featuresSection) {
+                  featuresSection.scrollIntoView({ behavior: "smooth" });
+                }
               }}
             >
-              Explore Features
+              Learn More
             </Button>
           </div>
         </div>
