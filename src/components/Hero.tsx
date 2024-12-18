@@ -28,7 +28,7 @@ export const Hero = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="text-white border-white hover:bg-white/10 font-semibold"
+              className="bg-black text-white border-white hover:bg-black/90 font-semibold"
               onClick={() => {
                 const featuresSection = document.querySelector("#features");
                 if (featuresSection) {
