@@ -7,7 +7,7 @@ const categories = [
     title: "PPL Training",
     description: "Start your aviation journey with Private Pilot License preparation",
     icon: Plane,
-    path: "ppl",
+    path: "ppl-subjects",
   },
   {
     title: "CPL Advanced",
@@ -41,7 +41,7 @@ export const Categories = () => {
             <Card 
               key={category.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${category.path}`)}
+              onClick={() => navigate(`/${category.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">
