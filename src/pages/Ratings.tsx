@@ -1,53 +1,29 @@
-import { BookOpen, Cloud, Scale, Compass, Radio, FileText } from "lucide-react";
+import { Moon, Compass } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 
 const subjects = [
   {
-    title: "ATPL Flight Planning",
-    description: "Advanced flight planning and operations",
-    icon: FileText,
-    path: "atpl-flight-planning",
+    title: "Night Rating",
+    description: "Night flying certification preparation",
+    icon: Moon,
+    path: "night-rating",
   },
   {
-    title: "ATPL ATG & POF",
-    description: "Aircraft technical and principles of flight",
-    icon: Scale,
-    path: "atpl-atg-pof",
-  },
-  {
-    title: "ATPL Instruments & Electronics",
-    description: "Complex aircraft systems",
-    icon: Scale,
-    path: "atpl-instruments",
-  },
-  {
-    title: "ATPL Navigation",
-    description: "Advanced navigation systems",
+    title: "Instrument Rating",
+    description: "Instrument flight certification",
     icon: Compass,
-    path: "atpl-navigation",
-  },
-  {
-    title: "ATPL Radio Aids",
-    description: "Advanced radio navigation",
-    icon: Radio,
-    path: "atpl-radio-aids",
-  },
-  {
-    title: "ATPL Meteorology",
-    description: "Advanced weather systems",
-    icon: Cloud,
-    path: "atpl-meteorology",
+    path: "instrument-rating",
   },
 ];
 
-const ATPLSubjects = () => {
+const Ratings = () => {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-muted py-24">
       <div className="container">
-        <h1 className="text-4xl font-bold text-center mb-12">ATPL Training Subjects</h1>
+        <h1 className="text-4xl font-bold text-center mb-12">Aviation Ratings</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 
@@ -72,4 +48,4 @@ const ATPLSubjects = () => {
   );
 };
 
-export default ATPLSubjects;
+export default Ratings;

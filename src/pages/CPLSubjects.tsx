@@ -1,43 +1,55 @@
-import { BookOpen, Cloud, Scale, Compass, Wrench, FileText } from "lucide-react";
+import { BookOpen, Cloud, Scale, Compass, Wrench, Brain, Radio, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 
 const subjects = [
   {
-    title: "Advanced Aerodynamics",
-    description: "Complex flight dynamics and aircraft performance",
-    icon: Scale,
-    path: "aerodynamics",
-  },
-  {
-    title: "Advanced Navigation",
-    description: "Complex navigation systems and procedures",
+    title: "CPL General Navigation",
+    description: "Advanced navigation techniques",
     icon: Compass,
-    path: "navigation",
+    path: "cpl-navigation",
   },
   {
-    title: "Commercial Operations",
-    description: "Commercial flight operations and procedures",
+    title: "CPL Instruments and Electronics",
+    description: "Aircraft instrumentation systems",
+    icon: Scale,
+    path: "cpl-instruments",
+  },
+  {
+    title: "CPL Air Law",
+    description: "Commercial aviation regulations",
     icon: BookOpen,
-    path: "operations",
+    path: "cpl-air-law",
   },
   {
-    title: "Advanced Meteorology",
-    description: "Complex weather systems and forecasting",
-    icon: Cloud,
-    path: "meteorology",
-  },
-  {
-    title: "Systems & Performance",
-    description: "Advanced aircraft systems and performance",
+    title: "CPL Aircraft Technical and General",
+    description: "Advanced aircraft systems",
     icon: Wrench,
-    path: "systems",
+    path: "cpl-technical",
   },
   {
-    title: "Mock Exams",
-    description: "Practice tests and exam preparation",
+    title: "CPL Flight Planning",
+    description: "Advanced flight planning",
     icon: FileText,
-    path: "mock-exams",
+    path: "cpl-flight-planning",
+  },
+  {
+    title: "CPL Meteorology",
+    description: "Advanced weather systems",
+    icon: Cloud,
+    path: "cpl-meteorology",
+  },
+  {
+    title: "CPL Radio Aids",
+    description: "Radio navigation systems",
+    icon: Radio,
+    path: "cpl-radio-aids",
+  },
+  {
+    title: "CPL Human Performance",
+    description: "Advanced human factors",
+    icon: Brain,
+    path: "cpl-human-performance",
   },
 ];
 

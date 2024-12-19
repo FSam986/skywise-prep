@@ -10,22 +10,22 @@ const categories = [
     path: "ppl-subjects",
   },
   {
-    title: "CPL Advanced",
+    title: "CPL Training",
     description: "Take the next step with Commercial Pilot License materials",
     icon: Navigation,
     path: "cpl-subjects",
   },
   {
-    title: "ATPL Professional",
+    title: "ATPL Training",
     description: "Prepare for Airline Transport Pilot License certification",
     icon: Globe,
     path: "atpl-subjects",
   },
   {
-    title: "Interview Prep",
-    description: "Ace your aviation interviews with our comprehensive guides",
+    title: "Ratings",
+    description: "Prepare for additional pilot ratings and certifications",
     icon: Compass,
-    path: "interview",
+    path: "ratings",
   },
 ];
 

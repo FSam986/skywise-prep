@@ -11,6 +11,7 @@ import Quiz from "./pages/Quiz";
 import PPLSubjects from "./pages/PPLSubjects";
 import CPLSubjects from "./pages/CPLSubjects";
 import ATPLSubjects from "./pages/ATPLSubjects";
+import Ratings from "./pages/Ratings";
 import "./lib/firebase";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/ppl-subjects" element={<PPLSubjects />} />
             <Route path="/cpl-subjects" element={<CPLSubjects />} />
             <Route path="/atpl-subjects" element={<ATPLSubjects />} />
+            <Route path="/ratings" element={<Ratings />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

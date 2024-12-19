@@ -1,43 +1,49 @@
-import { BookOpen, Cloud, Scale, Compass, Wrench, FileText } from "lucide-react";
+import { BookOpen, Cloud, Scale, Compass, Wrench, FileText, Brain, Plane } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 
 const subjects = [
   {
-    title: "Basic Physics",
-    description: "Principles of flight, forces, and motion",
-    icon: Scale,
-    path: "physics",
-  },
-  {
-    title: "Meteorology",
-    description: "Weather patterns and atmospheric conditions",
-    icon: Cloud,
-    path: "meteorology",
-  },
-  {
-    title: "Navigation",
-    description: "Flight planning and navigation techniques",
+    title: "PPL Navigation",
+    description: "Basic navigation principles and techniques",
     icon: Compass,
-    path: "navigation",
+    path: "ppl-navigation",
   },
   {
-    title: "Air Law",
+    title: "PPL Flight Planning (A)",
+    description: "Flight planning fundamentals",
+    icon: FileText,
+    path: "ppl-flight-planning",
+  },
+  {
+    title: "PPL Meteorology",
+    description: "Weather patterns and meteorological principles",
+    icon: Cloud,
+    path: "ppl-meteorology",
+  },
+  {
+    title: "PPL Human Performance",
+    description: "Human factors in aviation",
+    icon: Brain,
+    path: "ppl-human-performance",
+  },
+  {
+    title: "PPL Principles of Flight (A)",
+    description: "Basic aerodynamics and flight principles",
+    icon: Plane,
+    path: "ppl-principles",
+  },
+  {
+    title: "PPL Aircraft Technical and General (A)",
+    description: "Aircraft systems and technical knowledge",
+    icon: Wrench,
+    path: "ppl-technical",
+  },
+  {
+    title: "PPL Air Law",
     description: "Aviation regulations and procedures",
     icon: BookOpen,
-    path: "air-law",
-  },
-  {
-    title: "Aircraft Technical General",
-    description: "Aircraft systems and operations",
-    icon: Wrench,
-    path: "technical",
-  },
-  {
-    title: "Mock Papers",
-    description: "Practice tests and exam preparation",
-    icon: FileText,
-    path: "mock-papers",
+    path: "ppl-air-law",
   },
 ];
 
