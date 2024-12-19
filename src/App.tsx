@@ -12,6 +12,11 @@ import PPLSubjects from "./pages/PPLSubjects";
 import CPLSubjects from "./pages/CPLSubjects";
 import ATPLSubjects from "./pages/ATPLSubjects";
 import Ratings from "./pages/Ratings";
+import StudyMaterial from "./pages/StudyMaterial";
+import PPLStudyMaterial from "./pages/PPLStudyMaterial";
+import CPLStudyMaterial from "./pages/CPLStudyMaterial";
+import ATPLStudyMaterial from "./pages/ATPLStudyMaterial";
+import RatingsMaterial from "./pages/RatingsMaterial";
 import "./lib/firebase";
 
 const queryClient = new QueryClient();
@@ -34,6 +39,11 @@ const App = () => (
             <Route path="/cpl-subjects" element={<CPLSubjects />} />
             <Route path="/atpl-subjects" element={<ATPLSubjects />} />
             <Route path="/ratings" element={<Ratings />} />
+            <Route path="/study-material" element={<StudyMaterial />} />
+            <Route path="/ppl-study-material" element={<PPLStudyMaterial />} />
+            <Route path="/cpl-study-material" element={<CPLStudyMaterial />} />
+            <Route path="/atpl-study-material" element={<ATPLStudyMaterial />} />
+            <Route path="/ratings-material" element={<RatingsMaterial />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
