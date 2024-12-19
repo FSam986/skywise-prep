@@ -1,27 +1,23 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
-import { getAnalytics } from 'firebase/analytics';
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getAnalytics, isSupported } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBMHv21KLL2hqeQxwhW0yY0nlp1ZTXH8xU",
-  authDomain: "altitude-expert.firebaseapp.com",
-  projectId: "altitude-expert",
-  storageBucket: "altitude-expert.firebasestorage.app",
-  messagingSenderId: "471337751066",
-  appId: "1:471337751066:web:363893bfdf0f7e73dbf7a3",
-  measurementId: "G-G0TQNYVPEQ"
+  apiKey: "AIzaSyDYpDxWqqXw9NBpXOxUj0CvDH_BaZS7Ync",
+  authDomain: "aviation-quiz-app-2024.firebaseapp.com",
+  projectId: "aviation-quiz-app-2024",
+  storageBucket: "aviation-quiz-app-2024.appspot.com",
+  messagingSenderId: "1098765432",
+  appId: "1:1098765432:web:abcdef1234567890",
+  measurementId: "G-ABCDEF1234"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-// Initialize services
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const analytics = getAnalytics(app);
+// Initialize Analytics only if supported
+const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
-// Log initialization
-console.log('Firebase initialized successfully');
+console.log("Firebase initialized successfully");
 
-export default app;
+export { app, auth, analytics };
