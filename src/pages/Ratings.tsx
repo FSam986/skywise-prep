@@ -23,7 +23,7 @@ const Ratings = () => {
   return (
     <div className="min-h-screen bg-muted py-24">
       <div className="container">
-        <h1 className="text-4xl font-bold text-center mb-12">Aviation Ratings</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-primary">Aviation Ratings</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 
