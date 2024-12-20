@@ -29,12 +29,7 @@ export const Hero = () => {
             <Button 
               variant="outline" 
               className="bg-black text-white border-white hover:bg-black/90 font-semibold"
-              onClick={() => {
-                const featuresSection = document.querySelector("#features");
-                if (featuresSection) {
-                  featuresSection.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
+              onClick={() => navigate("/pricing")}
             >
               Learn More
             </Button>
