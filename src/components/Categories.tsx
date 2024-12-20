@@ -29,7 +29,7 @@ const categories = [
   },
   {
     title: "Study Material",
-    description: "Access comprehensive study materials for all aviation courses",
+    description: "Access comprehensive study notes and detailed explanations for all aviation subjects",
     icon: BookOpen,
     path: "study-material",
   },
