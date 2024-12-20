@@ -17,6 +17,7 @@ import PPLStudyMaterial from "./pages/PPLStudyMaterial";
 import CPLStudyMaterial from "./pages/CPLStudyMaterial";
 import ATPLStudyMaterial from "./pages/ATPLStudyMaterial";
 import RatingsMaterial from "./pages/RatingsMaterial";
+import Pricing from "./pages/Pricing";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/cpl-study-material" element={<CPLStudyMaterial />} />
             <Route path="/atpl-study-material" element={<ATPLStudyMaterial />} />
             <Route path="/ratings-material" element={<RatingsMaterial />} />
+            <Route path="/pricing" element={<Pricing />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>

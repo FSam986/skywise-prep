@@ -41,7 +41,9 @@ export const Categories = () => {
   return (
     <section className="py-24 bg-muted">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Study Categories</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary bg-white/50 py-4 rounded-lg shadow-sm">
+          Study Categories
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {categories.map((category) => (
             <Card 
