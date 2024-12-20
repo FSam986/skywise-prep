@@ -17,7 +17,6 @@ import PPLStudyMaterial from "./pages/PPLStudyMaterial";
 import CPLStudyMaterial from "./pages/CPLStudyMaterial";
 import ATPLStudyMaterial from "./pages/ATPLStudyMaterial";
 import RatingsMaterial from "./pages/RatingsMaterial";
-import "./lib/firebase";
 
 const queryClient = new QueryClient();
 
