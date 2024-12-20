@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { auth } from "@/lib/firebase";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
@@ -12,31 +11,41 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const googleProvider = new GoogleAuthProvider();
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+        toast.success("Welcome back!");
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+        });
+        if (error) throw error;
+        toast.success("Account created successfully!");
       }
-      toast.success(isLogin ? "Welcome back!" : "Account created successfully!");
       navigate("/dashboard");
-    } catch (error) {
-      toast.error("Authentication failed. Please try again.");
+    } catch (error: any) {
+      toast.error(error.message || "Authentication failed. Please try again.");
       console.error("Auth error:", error);
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+      });
+      if (error) throw error;
       toast.success("Successfully signed in with Google!");
       navigate("/dashboard");
-      console.log("Google Sign-in successful:", result.user);
-    } catch (error) {
+    } catch (error: any) {
       toast.error("Google sign-in failed. Please try again.");
       console.error("Google sign-in error:", error);
     }
