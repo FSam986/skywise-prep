@@ -106,7 +106,7 @@ const PPLMeteorologicalMaterial = () => {
                     <ul className="list-disc pl-6 space-y-2">
                       <li>Dry Adiabatic Lapse Rate (DALR): 3°C/1000 ft</li>
                       <li>Saturated Adiabatic Lapse Rate (SALR): ~1.5°C/1000 ft (varies with moisture)</li>
-                      <li>Stability: SALR < DALR (Stable), SALR > DALR (Unstable)</li>
+                      <li>Stability: SALR &lt; DALR (Stable), SALR &gt; DALR (Unstable)</li>
                     </ul>
 
                     <h2 className="text-2xl font-semibold mt-8 mb-4">7. Turbulence</h2>
