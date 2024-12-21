@@ -16,9 +16,44 @@ export const MasteryTracker = ({
   streakDays,
 }: MasteryTrackerProps) => {
   const { category } = useParams();
-  const [totalQuestions, setTotalQuestions] = useState(100); // Default value
+  const [totalQuestions, setTotalQuestions] = useState(0);
   const [level, setLevel] = useState("Ground School");
-  const progress = Math.min((questionsCompleted / totalQuestions) * 100, 100);
+  
+  // Calculate progress based on completed questions
+  const progress = totalQuestions > 0 ? Math.min((questionsCompleted / totalQuestions) * 100, 100) : 0;
+
+  useEffect(() => {
+    const fetchTotalQuestions = async () => {
+      if (!category) return;
+
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        console.error('No user found');
+        return;
+      }
+
+      // For now, we'll set a default total based on category
+      // In a real app, this would come from your questions database
+      let total = 10; // Default value
+      switch (category) {
+        case 'ppl-navigation':
+          total = 20;
+          break;
+        case 'ppl-principles':
+          total = 15;
+          break;
+        // Add more categories as needed
+        default:
+          total = 10;
+      }
+      
+      setTotalQuestions(total);
+      console.log('Total questions set to:', total);
+    };
+
+    fetchTotalQuestions();
+  }, [category]);
 
   useEffect(() => {
     // Update mastery level based on progress
@@ -81,7 +116,9 @@ export const MasteryTracker = ({
         </div>
         <div className="bg-slate-50 p-3 rounded-lg space-y-1">
           <p className="text-sm text-slate-500">Accuracy</p>
-          <p className="font-medium text-slate-800">{Math.round((questionsCompleted / totalQuestions) * 100)}%</p>
+          <p className="font-medium text-slate-800">
+            {totalQuestions > 0 ? Math.round((questionsCompleted / totalQuestions) * 100) : 0}%
+          </p>
         </div>
       </div>
 
