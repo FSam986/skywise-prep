@@ -14,10 +14,10 @@ const PPLMeteorologicalMaterial = () => {
       <div className="container">
         <Button 
           variant="ghost" 
-          onClick={() => navigate("/ppl-subjects")}
+          onClick={() => navigate(-1)}
           className="mb-6"
         >
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back to Subjects
+          <ChevronLeft className="mr-2 h-4 w-4" /> Back
         </Button>
 
         <div className="space-y-8">
