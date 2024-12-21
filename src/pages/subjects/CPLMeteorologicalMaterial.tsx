@@ -1,9 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AtmosphericStructure } from "@/components/meteorology/AtmosphericStructure";
 import { PrecipitationSection } from "@/components/meteorology/PrecipitationSection";
 
@@ -23,18 +20,11 @@ const CPLMeteorologicalMaterial = () => {
             </p>
           </div>
 
-          <Tabs defaultValue="study" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="study">Study Material</TabsTrigger>
-              <TabsTrigger value="quiz">Practice Quiz</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="study">
-              <Card>
-                <CardContent className="p-6">
-                  <div className="prose prose-slate max-w-none">
-                    <section className="space-y-8">
-                      <AtmosphericStructure />
+          <Card>
+            <CardContent className="p-6">
+              <div className="prose prose-slate max-w-none">
+                <section className="space-y-8">
+                  <AtmosphericStructure />
                       <div>
                         <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
                         <h3 className="text-xl mb-3">Pressure Calculations and Systems:</h3>
@@ -292,31 +282,10 @@ const CPLMeteorologicalMaterial = () => {
                           </li>
                         </ul>
                       </div>
-                    </section>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="quiz">
-              <Card>
-                <CardContent className="p-6 text-center">
-                  <h2 className="text-2xl font-semibold mb-4">Ready to Test Your Knowledge?</h2>
-                  <p className="text-muted-foreground mb-8">
-                    Take a practice quiz to test your understanding of CPL Meteorology concepts.
-                  </p>
-                  <Button 
-                    size="lg"
-                    onClick={() => navigate("/quiz/cpl-meteorology")}
-                    className="gap-2"
-                  >
-                    <BookOpen className="h-5 w-5" />
-                    Start Practice Quiz
-                  </Button>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
+                </section>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
