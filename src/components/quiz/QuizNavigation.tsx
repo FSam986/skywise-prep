@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 interface QuizNavigationProps {
   showExplanation: boolean;
@@ -19,6 +20,32 @@ export const QuizNavigation = ({
   onQuestionSelect,
   questionStatuses,
 }: QuizNavigationProps) => {
+  const handleFinishQuiz = () => {
+    const results = {
+      correct: questionStatuses.filter(status => status === 'correct').length,
+      wrong: questionStatuses.filter(status => status === 'wrong').length,
+      unanswered: questionStatuses.filter(status => status === null || status === 'unanswered').length
+    };
+
+    const totalAnswered = results.correct + results.wrong;
+    const score = totalAnswered > 0 ? Math.round((results.correct / totalAnswered) * 100) : 0;
+
+    toast.success(
+      <div className="space-y-2">
+        <p className="font-semibold text-lg">Quiz Complete!</p>
+        <div className="space-y-1">
+          <p>Score: {score}%</p>
+          <p className="text-green-600">Correct: {results.correct}</p>
+          <p className="text-red-600">Wrong: {results.wrong}</p>
+          <p className="text-yellow-600">Unanswered: {results.unanswered}</p>
+        </div>
+      </div>,
+      {
+        duration: 5000,
+      }
+    );
+  };
+
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-5 gap-2">
@@ -39,14 +66,22 @@ export const QuizNavigation = ({
         ))}
       </div>
 
-      {showExplanation && !isLastQuestion && (
+      <div className="flex gap-2">
+        {showExplanation && !isLastQuestion && (
+          <Button 
+            className="flex-1 bg-secondary text-primary hover:bg-secondary/90"
+            onClick={onNextQuestion}
+          >
+            Next Question
+          </Button>
+        )}
         <Button 
-          className="w-full bg-secondary text-primary hover:bg-secondary/90"
-          onClick={onNextQuestion}
+          className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+          onClick={handleFinishQuiz}
         >
-          Next Question
+          Finish Quiz
         </Button>
-      )}
+      </div>
     </div>
   );
 };
