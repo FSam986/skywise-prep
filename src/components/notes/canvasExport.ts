@@ -32,7 +32,8 @@ export const exportCanvasToPDF = (canvas: fabric.Canvas) => {
       quality: 1
     });
     
-    pdf.addImage(dataUrl, 'PNG', 0, 0);
+    // Fixed the addImage parameters to match the correct overload
+    pdf.addImage(dataUrl, 'PNG', 0, 0, canvas.width || 800, canvas.height || 600);
     pdf.save('notes.pdf');
     toast.success('Notes exported as PDF');
   } catch (error) {
