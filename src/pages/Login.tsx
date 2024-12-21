@@ -32,20 +32,14 @@ const Login = () => {
 
     checkUser();
 
-    // Check for password reset hash in URL
-    const hash = window.location.hash;
-    if (hash && hash.includes('type=recovery')) {
-      console.log("Password reset flow detected");
-    }
-
     // Listen for auth state changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth state changed on login page:", event, session);
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log("Auth state changed:", event, session);
       
       if (event === 'SIGNED_IN' && session) {
-        console.log("User signed in, redirecting to dashboard");
+        console.log("User signed in successfully, redirecting to dashboard");
         toast({
           title: "Success",
           description: "Successfully signed in"
@@ -67,20 +61,11 @@ const Login = () => {
     return () => subscription.unsubscribe();
   }, [navigate, toast]);
 
-  // Determine the initial view based on URL parameters
-  const getInitialView = () => {
-    const hash = window.location.hash;
-    if (hash && hash.includes('type=recovery')) {
-      console.log("Showing update password view");
-      return 'update_password';
-    }
-    return 'sign_in';
-  };
-
   // Get the site URL for redirects
   const getSiteUrl = () => {
-    console.log("Getting site URL:", window.location.origin);
-    return window.location.origin;
+    const url = window.location.origin;
+    console.log("Site URL for auth redirects:", url);
+    return url;
   };
 
   return (
@@ -112,7 +97,6 @@ const Login = () => {
           providers={['google']}
           redirectTo={getSiteUrl()}
           onlyThirdPartyProviders={false}
-          view={getInitialView()}
           showLinks={true}
           magicLink={true}
         />
