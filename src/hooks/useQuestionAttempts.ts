@@ -1,46 +1,43 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 
-export type QuestionStatus = 'correct' | 'wrong' | 'unanswered' | null;
+type Difficulty = 'beginner' | 'intermediate' | 'expert';
 
 export const useQuestionAttempts = (
-  category: string | undefined,
-  totalQuestions: number,
-  questions: Array<{ id: number }>
+  category?: string,
+  totalQuestions: number = 0,
+  questions: any[] = [],
+  difficulty: Difficulty = 'beginner'
 ) => {
-  const [questionStatuses, setQuestionStatuses] = useState<QuestionStatus[]>(
+  const [questionStatuses, setQuestionStatuses] = useState<Array<'correct' | 'wrong' | 'unanswered' | null>>(
     new Array(totalQuestions).fill(null)
   );
 
   useEffect(() => {
     const fetchAttempts = async () => {
-      if (!category) return;
+      if (!category || questions.length === 0) return;
 
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        console.error('No user found');
-        return;
-      }
+      if (!user) return;
 
-      const { data: attemptsData, error: attemptsError } = await supabase
+      const { data: attempts, error } = await supabase
         .from('question_attempts')
         .select('*')
+        .eq('user_id', user.id)
         .eq('category', category)
-        .eq('user_id', user.id);
+        .eq('difficulty', difficulty);
 
-      if (attemptsError) {
-        console.error('Error fetching attempts:', attemptsError);
-        toast.error('Failed to load attempts');
+      if (error) {
+        console.error('Error fetching attempts:', error);
         return;
       }
 
-      if (attemptsData) {
+      if (attempts) {
         const newStatuses = [...questionStatuses];
-        attemptsData.forEach(attempt => {
+        attempts.forEach(attempt => {
           const questionIndex = questions.findIndex(q => q.id === attempt.question_id);
           if (questionIndex !== -1) {
-            newStatuses[questionIndex] = attempt.status as QuestionStatus;
+            newStatuses[questionIndex] = attempt.status as 'correct' | 'wrong';
           }
         });
         setQuestionStatuses(newStatuses);
@@ -48,7 +45,7 @@ export const useQuestionAttempts = (
     };
 
     fetchAttempts();
-  }, [category, questions, totalQuestions]);
+  }, [category, questions, difficulty]);
 
   return { questionStatuses, setQuestionStatuses };
 };

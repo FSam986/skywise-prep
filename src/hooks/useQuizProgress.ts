@@ -1,15 +1,10 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
 
-export interface QuizProgress {
-  questionsCompleted: number;
-  averageTime: number;
-  streakDays: number;
-}
+type Difficulty = 'beginner' | 'intermediate' | 'expert';
 
-export const useQuizProgress = (category: string | undefined) => {
-  const [progress, setProgress] = useState<QuizProgress>({
+export const useQuizProgress = (category?: string, difficulty: Difficulty = 'beginner') => {
+  const [progress, setProgress] = useState({
     questionsCompleted: 0,
     averageTime: 0,
     streakDays: 0
@@ -20,35 +15,32 @@ export const useQuizProgress = (category: string | undefined) => {
       if (!category) return;
 
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        console.error('No user found');
-        return;
-      }
+      if (!user) return;
 
-      const { data: progressData, error: progressError } = await supabase
+      const { data, error } = await supabase
         .from('quiz_progress')
         .select('*')
-        .eq('category', category)
         .eq('user_id', user.id)
-        .maybeSingle();
+        .eq('category', category)
+        .eq('difficulty', difficulty)
+        .single();
 
-      if (progressError) {
-        console.error('Error fetching progress:', progressError);
-        toast.error('Failed to load progress');
+      if (error) {
+        console.error('Error fetching progress:', error);
         return;
       }
 
-      if (progressData) {
+      if (data) {
         setProgress({
-          questionsCompleted: progressData.questions_completed || 0,
-          averageTime: progressData.average_time || 0,
-          streakDays: progressData.streak_days || 0
+          questionsCompleted: data.questions_completed || 0,
+          averageTime: data.average_time || 0,
+          streakDays: data.streak_days || 0
         });
       }
     };
 
     fetchProgress();
-  }, [category]);
+  }, [category, difficulty]);
 
   return { progress, setProgress };
 };

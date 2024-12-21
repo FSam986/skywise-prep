@@ -61,6 +61,7 @@ export type Database = {
         Row: {
           category: string
           created_at: string
+          difficulty: string
           id: string
           question_id: number
           status: string
@@ -69,6 +70,7 @@ export type Database = {
         Insert: {
           category: string
           created_at?: string
+          difficulty?: string
           id?: string
           question_id: number
           status: string
@@ -77,6 +79,7 @@ export type Database = {
         Update: {
           category?: string
           created_at?: string
+          difficulty?: string
           id?: string
           question_id?: number
           status?: string
@@ -89,6 +92,7 @@ export type Database = {
           average_time: number | null
           category: string
           created_at: string | null
+          difficulty: string
           id: string
           last_quiz_date: string | null
           questions_completed: number | null
@@ -101,6 +105,7 @@ export type Database = {
           average_time?: number | null
           category: string
           created_at?: string | null
+          difficulty?: string
           id?: string
           last_quiz_date?: string | null
           questions_completed?: number | null
@@ -113,6 +118,7 @@ export type Database = {
           average_time?: number | null
           category?: string
           created_at?: string | null
+          difficulty?: string
           id?: string
           last_quiz_date?: string | null
           questions_completed?: number | null

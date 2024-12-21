@@ -6,18 +6,27 @@ import { QuizWidgets } from "@/components/widgets/QuizWidgets";
 import { QuizQuestion } from "@/components/quiz/QuizQuestion";
 import { QuizNavigation } from "@/components/quiz/QuizNavigation";
 import { MasteryTracker } from "@/components/quiz/MasteryTracker";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { useQuizProgress } from "@/hooks/useQuizProgress";
 import { useQuestionAttempts } from "@/hooks/useQuestionAttempts";
 import { ArrowLeft } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+type Difficulty = 'beginner' | 'intermediate' | 'expert';
 
 // Demo quiz data - in a real app, this would come from an API
-const demoQuiz = {
-  title: "Basic Aviation Knowledge",
-  questions: [
+const generateQuizQuestions = (difficulty: Difficulty) => {
+  const questions = [
     {
       id: 1,
+      difficulty: 'beginner',
       question: "What does PPL stand for?",
       options: [
         "Personal Pilot License",
@@ -30,6 +39,7 @@ const demoQuiz = {
     },
     {
       id: 2,
+      difficulty: 'intermediate',
       question: "What is the primary purpose of ailerons?",
       options: [
         "Control pitch",
@@ -40,7 +50,9 @@ const demoQuiz = {
       correctAnswer: 1,
       explanation: "Ailerons are control surfaces that create roll by changing the lift on the wings."
     }
-  ]
+  ];
+
+  return questions.filter(q => q.difficulty === difficulty).slice(0, 100);
 };
 
 const Quiz = () => {
@@ -49,19 +61,23 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [difficulty, setDifficulty] = useState<Difficulty>('beginner');
   
-  const { progress, setProgress } = useQuizProgress(category);
+  const questions = generateQuizQuestions(difficulty);
+  
+  const { progress, setProgress } = useQuizProgress(category, difficulty);
   const { questionStatuses, setQuestionStatuses } = useQuestionAttempts(
     category,
-    demoQuiz.questions.length,
-    demoQuiz.questions
+    questions.length,
+    questions,
+    difficulty
   );
 
   const handleAnswerSelect = async (index: number) => {
     setSelectedAnswer(index);
     setShowExplanation(true);
 
-    const question = demoQuiz.questions[currentQuestion];
+    const question = questions[currentQuestion];
     const status = index === question.correctAnswer ? 'correct' : 'wrong';
     
     const newStatuses = [...questionStatuses];
@@ -77,7 +93,8 @@ const Quiz = () => {
             user_id: user.id,
             category,
             question_id: question.id,
-            status
+            status,
+            difficulty
           }, {
             onConflict: 'user_id,category,question_id'
           });
@@ -106,7 +123,8 @@ const Quiz = () => {
         category,
         questions_completed: progress.questionsCompleted + 1,
         average_time: progress.averageTime,
-        last_quiz_date: new Date().toISOString()
+        last_quiz_date: new Date().toISOString(),
+        difficulty
       }, {
         onConflict: 'user_id,category'
       });
@@ -125,7 +143,7 @@ const Quiz = () => {
     setSelectedAnswer(null);
     setShowExplanation(false);
     setCurrentQuestion((prev) => 
-      prev < demoQuiz.questions.length - 1 ? prev + 1 : prev
+      prev < questions.length - 1 ? prev + 1 : prev
     );
   };
 
@@ -139,32 +157,63 @@ const Quiz = () => {
     }
   };
 
-  const question = demoQuiz.questions[currentQuestion];
-  const isLastQuestion = currentQuestion === demoQuiz.questions.length - 1;
+  const handleDifficultyChange = (newDifficulty: Difficulty) => {
+    setDifficulty(newDifficulty);
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setQuestionStatuses(new Array(100).fill(null));
+  };
+
+  if (questions.length === 0) {
+    return (
+      <div className="min-h-screen bg-muted py-8 px-4">
+        <div className="container max-w-6xl mx-auto">
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-center">No questions available for this difficulty level.</p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-muted py-8 px-4">
       <div className="container max-w-6xl mx-auto space-y-6">
-        <Button
-          variant="outline"
-          size="sm"
-          className="mb-4"
-          onClick={() => navigate('/')}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Index
-        </Button>
+        <div className="flex items-center justify-between">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate('/')}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Index
+          </Button>
+
+          <Select value={difficulty} onValueChange={(value: Difficulty) => handleDifficultyChange(value)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select difficulty" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="beginner">Beginner</SelectItem>
+              <SelectItem value="intermediate">Intermediate</SelectItem>
+              <SelectItem value="expert">Expert</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle>{demoQuiz.title} - {category}</CardTitle>
+            <CardTitle>{category} - {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</CardTitle>
             <QuizWidgets subject={category || ""} />
           </CardHeader>
           <CardContent className="space-y-6">
             <QuizQuestion
               currentQuestion={currentQuestion}
-              totalQuestions={demoQuiz.questions.length}
-              question={question}
+              totalQuestions={questions.length}
+              question={questions[currentQuestion]}
               selectedAnswer={selectedAnswer}
               showExplanation={showExplanation}
               onAnswerSelect={handleAnswerSelect}
@@ -172,10 +221,10 @@ const Quiz = () => {
             
             <QuizNavigation
               showExplanation={showExplanation}
-              isLastQuestion={isLastQuestion}
+              isLastQuestion={currentQuestion === questions.length - 1}
               onNextQuestion={handleNextQuestion}
               currentQuestion={currentQuestion}
-              totalQuestions={demoQuiz.questions.length}
+              totalQuestions={questions.length}
               onQuestionSelect={handleQuestionSelect}
               questionStatuses={questionStatuses}
             />
