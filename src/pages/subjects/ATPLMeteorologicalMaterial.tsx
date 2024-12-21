@@ -70,6 +70,24 @@ const ATPLMeteorologicalMaterial = () => {
                       <li>SIGMET and AIRMET interpretation</li>
                     </ul>
                   </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">6. Adiabatics and Stability</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Dry Adiabatic Lapse Rate (DALR): 3°C/1000 ft</li>
+                      <li>Saturated Adiabatic Lapse Rate (SALR): ~1.5°C/1000 ft (varies with moisture)</li>
+                      <li>Stability conditions: Stable: SALR < DALR, Unstable: SALR > DALR</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">7. Advanced Icing Analysis</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Types: Rime (Milky, forms in stratiform clouds), Clear (Transparent, forms in cumuliform clouds)</li>
+                      <li>Temperature Range: +2°C to -20°C</li>
+                      <li>Impact on aircraft performance and safety</li>
+                    </ul>
+                  </div>
                 </section>
               </div>
 

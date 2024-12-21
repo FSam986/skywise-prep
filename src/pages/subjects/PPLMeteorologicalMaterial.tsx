@@ -35,13 +35,13 @@ const PPLMeteorologicalMaterial = () => {
                     <ul className="list-disc pl-6 space-y-1">
                       <li>Troposphere: Contains most weather phenomena, temperature decreases with altitude</li>
                       <li>Stratosphere: Temperature increases with altitude due to ozone</li>
-                      <li>Tropopause: Boundary between troposphere and stratosphere</li>
+                      <li>Tropopause: Boundary between troposphere and stratosphere, height varies with latitude (higher at equator)</li>
                     </ul>
                   </div>
 
                   <div>
                     <h2 className="text-2xl font-semibold mb-4">2. Pressure</h2>
-                    <p>Force exerted by air per unit area. Decreases with altitude.</p>
+                    <p>Definition: Force exerted by air per unit area. Decreases with altitude.</p>
                     <h3 className="text-xl mt-4 mb-2">Standard Values:</h3>
                     <ul className="list-disc pl-6 space-y-1">
                       <li>Mean Sea Level (MSL) Pressure: 1013.25 hPa</li>
@@ -50,28 +50,47 @@ const PPLMeteorologicalMaterial = () => {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">3. Temperature and Humidity</h2>
+                    <h2 className="text-2xl font-semibold mb-4">3. Density</h2>
+                    <p>Mass of air per unit volume.</p>
+                    <h3 className="text-xl mt-4 mb-2">Key Relationships:</h3>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Standard lapse rate: 2°C/1000 ft</li>
+                      <li>Density ∝ Pressure</li>
+                      <li>Density ∝ 1/Temperature</li>
+                      <li>Density decreases with altitude</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">4. Temperature</h2>
+                    <h3 className="text-xl mb-2">Lapse Rate:</h3>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Standard: 0.65°C/100 m (2°C/1000 ft)</li>
+                      <li>Isothermal in the stratosphere (-56.5°C between 11 km and 20 km)</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">5. Humidity</h2>
+                    <ul className="list-disc pl-6 space-y-1">
                       <li>Relative Humidity: Ratio of actual to maximum water vapor content</li>
                       <li>Dew Point: Temperature at which air becomes saturated</li>
+                      <li>Effect on Density: Increased humidity decreases density</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">4. Clouds and Precipitation</h2>
+                    <h2 className="text-2xl font-semibold mb-4">6. Clouds and Precipitation</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Low clouds: Stratus, Stratocumulus</li>
-                      <li>Middle clouds: Altostratus, Altocumulus</li>
-                      <li>High clouds: Cirrus, Cirrostratus</li>
+                      <li>Cloud Types: Low (e.g., Stratus), Middle (e.g., Altostratus), High (e.g., Cirrus)</li>
+                      <li>Precipitation Formation: Requires condensation nuclei and lifting mechanisms</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">5. Weather Reports</h2>
+                    <h2 className="text-2xl font-semibold mb-4">7. Weather Reports</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>METAR: Current weather observation</li>
-                      <li>TAF: Weather forecast</li>
+                      <li>METAR: Observed weather at an aerodrome</li>
+                      <li>TAF: Forecast weather for an aerodrome, valid for up to 24 or 30 hours</li>
                     </ul>
                   </div>
                 </section>

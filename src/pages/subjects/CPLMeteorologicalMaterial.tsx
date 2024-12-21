@@ -25,8 +25,13 @@ const CPLMeteorologicalMaterial = () => {
               <div className="prose prose-slate max-w-none">
                 <section className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">1. Advanced Atmospheric Concepts</h2>
-                    <h3 className="text-xl mb-2">Key Values:</h3>
+                    <h2 className="text-2xl font-semibold mb-4">1. The Atmosphere</h2>
+                    <h3 className="text-xl mb-2">Composition:</h3>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Nitrogen: 78.09%, Oxygen: 20.95%, Argon: 0.93%, Carbon Dioxide: 0.03%</li>
+                      <li>Trace gases include Neon, Helium, and Methane</li>
+                    </ul>
+                    <h3 className="text-xl mt-4 mb-2">Key Values:</h3>
                     <ul className="list-disc pl-6 space-y-1">
                       <li>Tropopause height: ~8 km (poles), ~16-18 km (equator)</li>
                       <li>Tropopause temperature: -40°C (poles), -75°C to -80°C (equator)</li>
@@ -76,6 +81,25 @@ const CPLMeteorologicalMaterial = () => {
                       <li>Rime ice: Milky, forms in stratiform clouds</li>
                       <li>Clear ice: Transparent, forms in cumuliform clouds</li>
                       <li>Temperature range: +2°C to -20°C</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">7. Winds</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Coriolis Effect: Deflects winds to the right in Northern Hemisphere</li>
+                      <li>Geostrophic Winds: Balance between Coriolis force and pressure gradient</li>
+                      <li>Jet Streams: High-altitude winds at the tropopause</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">8. Climatology</h2>
+                    <h3 className="text-xl mb-2">Air Masses:</h3>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Polar and Tropical masses</li>
+                      <li>Continental and Maritime influences</li>
+                      <li>Climate Zones: Tropical, Temperate, Polar</li>
                     </ul>
                   </div>
                 </section>
