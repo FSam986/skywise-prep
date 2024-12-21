@@ -1,4 +1,4 @@
-import { BookOpen, Cloud, Scale, Compass, Wrench, Brain, Radio, FileText } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
@@ -8,7 +8,7 @@ const materials = [
     title: "PPL Study Material",
     description: "Comprehensive study materials for PPL",
     icon: BookOpen,
-    path: "ppl-subjects",  // Updated to match the route in App.tsx
+    path: "ppl-subjects",
   },
   {
     title: "CPL Study Material",
