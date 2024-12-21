@@ -186,10 +186,10 @@ const Quiz = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1)} // Changed from navigate('/') to navigate(-1)
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Index
+            Back
           </Button>
 
           <Select value={difficulty} onValueChange={(value: Difficulty) => handleDifficultyChange(value)}>
