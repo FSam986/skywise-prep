@@ -21,6 +21,12 @@ const Login = () => {
 
     checkUser();
 
+    // Check for password reset hash in URL
+    const hash = window.location.hash;
+    if (hash && hash.includes('type=recovery')) {
+      console.log("Password reset flow detected");
+    }
+
     // Listen for auth state changes
     const {
       data: { subscription },
@@ -29,6 +35,10 @@ const Login = () => {
       if (event === 'SIGNED_IN' && session) {
         console.log("User signed in, redirecting to dashboard");
         navigate("/");
+      }
+      // Handle password recovery event
+      if (event === 'PASSWORD_RECOVERY') {
+        console.log("Password recovery event detected");
       }
     });
 
