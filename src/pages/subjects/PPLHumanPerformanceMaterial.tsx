@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, BookOpen } from "lucide-react";
+import { BackButton } from "@/components/BackButton";
 
 const PPLHumanPerformanceMaterial = () => {
   const navigate = useNavigate();
@@ -9,51 +9,42 @@ const PPLHumanPerformanceMaterial = () => {
   return (
     <div className="min-h-screen bg-muted py-12">
       <div className="container">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate(-1)}
-          className="mb-6"
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back
-        </Button>
+        <BackButton />
 
         <div className="space-y-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">PPL Human Performance</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Study material for human factors in aviation
+              Study material for understanding human factors in aviation
             </p>
           </div>
 
           <Card>
             <CardContent className="p-6">
               <div className="prose prose-slate max-w-none">
-                <h2 className="text-2xl font-semibold mb-4">Introduction to Human Factors</h2>
+                <h2 className="text-2xl font-semibold mb-4">Introduction to Human Performance</h2>
                 <p>
-                  Understanding human performance and limitations is crucial for safe flight operations.
-                  This section covers the essential aspects of human factors in aviation.
+                  Human performance is a critical aspect of aviation safety. This section covers the essential concepts related to human factors and their impact on flight operations.
                 </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Key Topics</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Basic human physiology</li>
-                  <li>Effects of altitude</li>
-                  <li>Vision and visual illusions</li>
-                  <li>Decision making processes</li>
+                  <li>Human capabilities and limitations</li>
+                  <li>Situational awareness</li>
+                  <li>Decision making in aviation</li>
                   <li>Stress and fatigue management</li>
-                  <li>Spatial disorientation</li>
+                  <li>Communication and teamwork</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Important Concepts</h3>
                 <p>
-                  Understanding these fundamental concepts is crucial for safe flight:
+                  Understanding these fundamental concepts is crucial for effective human performance in aviation:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Hypoxia and its effects</li>
-                  <li>Night vision adaptation</li>
-                  <li>Pilot fitness and health</li>
-                  <li>Risk management</li>
-                  <li>Communication and CRM</li>
+                  <li>Cognitive processes and their effects on performance</li>
+                  <li>Impact of environmental factors on human performance</li>
+                  <li>Human error and its prevention</li>
+                  <li>Training and its role in enhancing performance</li>
                 </ul>
               </div>
 

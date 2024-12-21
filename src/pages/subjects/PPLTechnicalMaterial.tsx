@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, BookOpen } from "lucide-react";
+import { BackButton } from "@/components/BackButton";
 
 const PPLTechnicalMaterial = () => {
   const navigate = useNavigate();
@@ -9,51 +10,43 @@ const PPLTechnicalMaterial = () => {
   return (
     <div className="min-h-screen bg-muted py-12">
       <div className="container">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate(-1)}
-          className="mb-6"
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back
-        </Button>
+        <BackButton />
 
         <div className="space-y-8">
           <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">PPL Aircraft Technical</h1>
+            <h1 className="text-4xl font-bold mb-4">PPL Technical</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Study material for aircraft systems and technical knowledge
+              Study material for technical principles and techniques
             </p>
           </div>
 
           <Card>
             <CardContent className="p-6">
               <div className="prose prose-slate max-w-none">
-                <h2 className="text-2xl font-semibold mb-4">Introduction to Aircraft Systems</h2>
+                <h2 className="text-2xl font-semibold mb-4">Introduction to Technical Principles</h2>
                 <p>
-                  Understanding aircraft systems is essential for safe operation.
-                  This section covers the fundamental technical aspects of aircraft.
+                  Understanding technical principles is essential for safe and efficient flight operations. 
+                  This section covers the fundamental concepts and techniques used in aviation.
                 </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Key Topics</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Powerplant systems</li>
-                  <li>Electrical systems</li>
-                  <li>Fuel systems</li>
-                  <li>Landing gear</li>
-                  <li>Flight instruments</li>
-                  <li>Aircraft structure</li>
+                  <li>Aircraft systems and components</li>
+                  <li>Performance calculations</li>
+                  <li>Weight and balance considerations</li>
+                  <li>Aircraft limitations and operating procedures</li>
+                  <li>Emergency procedures and safety protocols</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Important Concepts</h3>
                 <p>
-                  Master these technical concepts for safe aircraft operation:
+                  Mastering these concepts is crucial for successful technical operations:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Engine operation principles</li>
-                  <li>Aircraft systems maintenance</li>
-                  <li>Instrument interpretation</li>
-                  <li>Emergency procedures</li>
-                  <li>System failures and troubleshooting</li>
+                  <li>Understanding aircraft performance charts</li>
+                  <li>Weight and balance calculations</li>
+                  <li>Aircraft systems operation and limitations</li>
+                  <li>Emergency procedures and checklists</li>
                 </ul>
               </div>
 

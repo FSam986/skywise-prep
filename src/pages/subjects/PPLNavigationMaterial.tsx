@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, BookOpen } from "lucide-react";
+import { BackButton } from "@/components/BackButton";
 
 const PPLNavigationMaterial = () => {
   const navigate = useNavigate();
@@ -9,13 +9,7 @@ const PPLNavigationMaterial = () => {
   return (
     <div className="min-h-screen bg-muted py-12">
       <div className="container">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate(-1)}
-          className="mb-6"
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back
-        </Button>
+        <BackButton />
 
         <div className="space-y-8">
           <div className="text-center">

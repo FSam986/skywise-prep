@@ -1,7 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, BookOpen } from "lucide-react";
+import { BackButton } from "@/components/BackButton";
 
 const PPLAirLawMaterial = () => {
   const navigate = useNavigate();
@@ -9,51 +10,45 @@ const PPLAirLawMaterial = () => {
   return (
     <div className="min-h-screen bg-muted py-12">
       <div className="container">
-        <Button 
-          variant="ghost" 
-          onClick={() => navigate(-1)}
-          className="mb-6"
-        >
-          <ChevronLeft className="mr-2 h-4 w-4" /> Back
-        </Button>
+        <BackButton />
 
         <div className="space-y-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">PPL Air Law</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Study material for aviation regulations and procedures
+              Study material for understanding air law and regulations
             </p>
           </div>
 
           <Card>
             <CardContent className="p-6">
               <div className="prose prose-slate max-w-none">
-                <h2 className="text-2xl font-semibold mb-4">Introduction to Aviation Law</h2>
+                <h2 className="text-2xl font-semibold mb-4">Introduction to Air Law</h2>
                 <p>
-                  Understanding aviation regulations is crucial for safe and legal flight operations.
-                  This section covers the essential aspects of air law for private pilots.
+                  Air law encompasses the regulations and standards that govern aviation operations. 
+                  This section covers the essential laws and regulations that pilots must adhere to.
                 </p>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Key Topics</h3>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Rules of the air</li>
-                  <li>Airspace classification</li>
-                  <li>Flight rules (VFR/IFR)</li>
-                  <li>Pilot responsibilities</li>
-                  <li>Aircraft documentation</li>
-                  <li>Airport operations</li>
+                  <li>International aviation regulations</li>
+                  <li>National airspace system</li>
+                  <li>Flight rules and regulations</li>
+                  <li>Aircraft operation standards</li>
+                  <li>Licensing and certification requirements</li>
+                  <li>Safety and security regulations</li>
                 </ul>
 
                 <h3 className="text-xl font-semibold mt-6 mb-3">Important Concepts</h3>
                 <p>
-                  Master these fundamental legal concepts:
+                  Understanding these fundamental concepts is crucial for compliance and safety:
                 </p>
                 <ul className="list-disc pl-6 space-y-2">
-                  <li>Right of way rules</li>
-                  <li>Minimum safe altitudes</li>
-                  <li>Flight plan requirements</li>
+                  <li>Air traffic control procedures</li>
+                  <li>Flight planning regulations</li>
                   <li>Emergency procedures</li>
-                  <li>Pilot licensing requirements</li>
+                  <li>Aircraft maintenance requirements</li>
+                  <li>Legal responsibilities of pilots</li>
                 </ul>
               </div>
 
