@@ -4,6 +4,8 @@ import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AtmosphericStructure } from "@/components/meteorology/AtmosphericStructure";
+import { PrecipitationSection } from "@/components/meteorology/PrecipitationSection";
 
 const CPLMeteorologicalMaterial = () => {
   const navigate = useNavigate();
@@ -32,47 +34,8 @@ const CPLMeteorologicalMaterial = () => {
                 <CardContent className="p-6">
                   <div className="prose prose-slate max-w-none">
                     <section className="space-y-8">
-                      <div>
-                        <h2 className="text-2xl font-semibold mb-4">1. Advanced Atmospheric Structure</h2>
-                        <h3 className="text-xl mb-3">Composition and Layers:</h3>
-                        <ul className="list-disc pl-6 space-y-2">
-                          <li>
-                            <strong>Atmospheric Composition:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Nitrogen (78%) - Primary component, inert gas</li>
-                              <li>Oxygen (21%) - Essential for combustion and life</li>
-                              <li>Other gases (1%) - Argon, CO2, water vapor, etc.</li>
-                            </ul>
-                          </li>
-                          <li>
-                            <strong>Troposphere Characteristics:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Height varies from 8km (poles) to 18km (equator)</li>
-                              <li>Temperature decreases with height (-2°C/1000ft)</li>
-                              <li>Contains 75% of atmospheric mass</li>
-                              <li>Most weather phenomena occur here</li>
-                            </ul>
-                          </li>
-                          <li>
-                            <strong>Tropopause:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Boundary between troposphere and stratosphere</li>
-                              <li>Temperature remains constant with height</li>
-                              <li>Height varies with latitude and season</li>
-                            </ul>
-                          </li>
-                          <li>
-                            <strong>Stratosphere:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Extends to about 50km altitude</li>
-                              <li>Temperature increases with height</li>
-                              <li>Contains ozone layer</li>
-                              <li>Very stable, minimal turbulence</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-
+                      <AtmosphericStructure />
+                      <PrecipitationSection />
                       <div>
                         <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
                         <h3 className="text-xl mb-3">Pressure Calculations and Systems:</h3>
@@ -132,38 +95,6 @@ const CPLMeteorologicalMaterial = () => {
                               <li>Surface inversion - caused by ground cooling</li>
                               <li>Upper air inversion - caused by subsidence</li>
                               <li>Frontal inversion - associated with weather fronts</li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div>
-                        <h2 className="text-2xl font-semibold mb-4">4. Cloud Formation and Precipitation</h2>
-                        <ul className="list-disc pl-6 space-y-2">
-                          <li>
-                            <strong>Cloud Types:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>High clouds (above 20,000ft) - Cirrus, Cirrostratus, Cirrocumulus</li>
-                              <li>Medium clouds (6,500-20,000ft) - Altostratus, Altocumulus</li>
-                              <li>Low clouds (below 6,500ft) - Stratus, Stratocumulus, Nimbostratus</li>
-                              <li>Vertical development - Cumulus, Cumulonimbus</li>
-                            </ul>
-                          </li>
-                          <li>
-                            <strong>Precipitation Types:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Rain - liquid precipitation > 0.5mm</li>
-                              <li>Drizzle - liquid precipitation < 0.5mm</li>
-                              <li>Snow - frozen precipitation in crystalline form</li>
-                              <li>Hail - frozen precipitation in ball or irregular lumps</li>
-                            </ul>
-                          </li>
-                          <li>
-                            <strong>Thunderstorm Development:</strong>
-                            <ul className="list-circle pl-6 mt-1">
-                              <li>Cumulus stage - strong updrafts</li>
-                              <li>Mature stage - precipitation begins</li>
-                              <li>Dissipating stage - downdrafts dominate</li>
                             </ul>
                           </li>
                         </ul>
