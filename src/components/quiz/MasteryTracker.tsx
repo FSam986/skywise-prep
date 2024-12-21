@@ -1,8 +1,15 @@
-import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Plane, PlaneLanding, Target, Compass } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+interface TopicProgress {
+  topic: string;
+  completed: number;
+  total: number;
+  color: string;
+}
 
 interface MasteryTrackerProps {
   questionsCompleted: number;
@@ -18,36 +25,51 @@ export const MasteryTracker = ({
   const { category } = useParams();
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [level, setLevel] = useState("Ground School");
+  const [topicsProgress, setTopicsProgress] = useState<TopicProgress[]>([]);
   
-  // Calculate progress based on completed questions
+  // Calculate overall progress based on completed questions
   const progress = totalQuestions > 0 ? Math.min((questionsCompleted / totalQuestions) * 100, 100) : 0;
 
   useEffect(() => {
     const fetchTotalQuestions = async () => {
       if (!category) return;
 
-      // Get current user
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         console.error('No user found');
         return;
       }
 
-      // For now, we'll set a default total based on category
-      // In a real app, this would come from your questions database
-      let total = 10; // Default value
+      // For demonstration, we'll set up mock topic data
+      // In a real app, this would come from your database
+      let topics: TopicProgress[] = [];
       switch (category) {
         case 'ppl-navigation':
-          total = 20;
+          topics = [
+            { topic: 'Map Reading', completed: 3, total: 5, color: 'bg-blue-400' },
+            { topic: 'Flight Planning', completed: 2, total: 5, color: 'bg-blue-500' },
+            { topic: 'Weather', completed: 4, total: 5, color: 'bg-blue-600' },
+            { topic: 'Navigation Tools', completed: 1, total: 5, color: 'bg-blue-700' }
+          ];
           break;
         case 'ppl-principles':
-          total = 15;
+          topics = [
+            { topic: 'Aerodynamics', completed: 2, total: 4, color: 'bg-blue-400' },
+            { topic: 'Aircraft Systems', completed: 3, total: 4, color: 'bg-blue-500' },
+            { topic: 'Flight Controls', completed: 2, total: 4, color: 'bg-blue-600' },
+            { topic: 'Performance', completed: 1, total: 3, color: 'bg-blue-700' }
+          ];
           break;
-        // Add more categories as needed
         default:
-          total = 10;
+          topics = [
+            { topic: 'Basic Knowledge', completed: 2, total: 3, color: 'bg-blue-400' },
+            { topic: 'Advanced Topics', completed: 1, total: 4, color: 'bg-blue-500' },
+            { topic: 'Practical Skills', completed: 2, total: 3, color: 'bg-blue-600' }
+          ];
       }
       
+      setTopicsProgress(topics);
+      const total = topics.reduce((acc, topic) => acc + topic.total, 0);
       setTotalQuestions(total);
       console.log('Total questions set to:', total);
     };
@@ -92,13 +114,40 @@ export const MasteryTracker = ({
 
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
-          <span className="text-slate-600">Progress</span>
+          <span className="text-slate-600">Overall Progress</span>
           <span className="font-medium text-slate-800">{Math.round(progress)}%</span>
         </div>
-        <Progress 
-          value={progress} 
-          className="h-2 bg-slate-100"
-        />
+        <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
+          {topicsProgress.map((topic, index) => {
+            const topicWidth = (topic.total / totalQuestions) * 100;
+            const topicProgress = (topic.completed / topic.total) * 100;
+            return (
+              <div
+                key={topic.topic}
+                className={cn(
+                  "h-full transition-all",
+                  topic.color
+                )}
+                style={{
+                  width: `${topicWidth}%`,
+                  opacity: topicProgress / 100,
+                }}
+                title={`${topic.topic}: ${topic.completed}/${topic.total}`}
+              />
+            );
+          })}
+        </div>
+        <div className="flex flex-wrap gap-2 mt-2">
+          {topicsProgress.map((topic) => (
+            <div key={topic.topic} className="flex items-center gap-1 text-xs">
+              <div className={cn("w-2 h-2 rounded-full", topic.color)} />
+              <span className="text-slate-600">{topic.topic}</span>
+              <span className="text-slate-800 font-medium">
+                {topic.completed}/{topic.total}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
