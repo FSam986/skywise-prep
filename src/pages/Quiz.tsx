@@ -81,22 +81,6 @@ const Quiz = () => {
           averageTime: data.average_time || 0,
           streakDays: data.streak_days || 0
         });
-      } else {
-        // Create initial progress record
-        const { error: insertError } = await supabase
-          .from('quiz_progress')
-          .insert({
-            user_id: user.id,
-            category,
-            questions_completed: 0,
-            average_time: 0,
-            streak_days: 0
-          });
-
-        if (insertError) {
-          console.error('Error creating initial progress:', insertError);
-          toast.error('Failed to initialize progress');
-        }
       }
     };
 
@@ -118,7 +102,7 @@ const Quiz = () => {
       return;
     }
 
-    // Update progress in Supabase
+    // Update progress using upsert
     const { error } = await supabase
       .from('quiz_progress')
       .upsert({
@@ -127,6 +111,8 @@ const Quiz = () => {
         questions_completed: progress.questionsCompleted + 1,
         average_time: progress.averageTime,
         last_quiz_date: new Date().toISOString()
+      }, {
+        onConflict: 'user_id,category'
       });
 
     if (error) {
