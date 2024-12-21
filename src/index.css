@@ -30,17 +30,17 @@
 
   .dark {
     --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --foreground: 210 40% 98%; /* Lighter foreground for better visibility */
     --card: 217.2 32.6% 17.5%;
-    --card-foreground: 210 40% 98%;
+    --card-foreground: 210 40% 98%; /* Lighter card foreground */
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
+    --primary: 210 40% 98%; /* Lighter primary for better contrast */
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted-foreground: 215 20.2% 85.1%; /* Increased lightness for better readability */
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
@@ -58,5 +58,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground dark:text-white; /* Ensure headings are visible in dark mode */
   }
 }
