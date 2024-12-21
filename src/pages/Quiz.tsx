@@ -44,6 +44,9 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [questionStatuses, setQuestionStatuses] = useState<Array<'correct' | 'wrong' | 'unanswered' | null>>(
+    new Array(demoQuiz.questions.length).fill(null)
+  );
   const [progress, setProgress] = useState({
     questionsCompleted: 0,
     averageTime: 0,
@@ -87,9 +90,38 @@ const Quiz = () => {
     fetchProgress();
   }, [category]);
 
-  const handleAnswerSelect = (index: number) => {
+  const handleAnswerSelect = async (index: number) => {
     setSelectedAnswer(index);
     setShowExplanation(true);
+
+    const question = demoQuiz.questions[currentQuestion];
+    const status = index === question.correctAnswer ? 'correct' : 'wrong';
+    
+    const newStatuses = [...questionStatuses];
+    newStatuses[currentQuestion] = status;
+    setQuestionStatuses(newStatuses);
+
+    // Save attempt to database
+    if (category) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { error } = await supabase
+          .from('question_attempts')
+          .upsert({
+            user_id: user.id,
+            category,
+            question_id: question.id,
+            status
+          }, {
+            onConflict: 'user_id,category,question_id'
+          });
+
+        if (error) {
+          console.error('Error saving attempt:', error);
+          toast.error('Failed to save attempt');
+        }
+      }
+    }
   };
 
   const handleNextQuestion = async () => {
@@ -133,13 +165,22 @@ const Quiz = () => {
     );
   };
 
+  const handleQuestionSelect = (index: number) => {
+    if (!showExplanation || questionStatuses[currentQuestion] !== null) {
+      setCurrentQuestion(index);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+    } else {
+      toast.warning("Please answer the current question first");
+    }
+  };
+
   const question = demoQuiz.questions[currentQuestion];
   const isLastQuestion = currentQuestion === demoQuiz.questions.length - 1;
 
   return (
     <div className="min-h-screen bg-muted py-8 px-4">
       <div className="container max-w-6xl mx-auto space-y-6">
-        {/* Quiz Content */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle>{demoQuiz.title} - {category}</CardTitle>
@@ -159,11 +200,14 @@ const Quiz = () => {
               showExplanation={showExplanation}
               isLastQuestion={isLastQuestion}
               onNextQuestion={handleNextQuestion}
+              currentQuestion={currentQuestion}
+              totalQuestions={demoQuiz.questions.length}
+              onQuestionSelect={handleQuestionSelect}
+              questionStatuses={questionStatuses}
             />
           </CardContent>
         </Card>
 
-        {/* Mastery Tracker */}
         <div className="lg:max-w-md mx-auto">
           <MasteryTracker
             questionsCompleted={progress.questionsCompleted}
