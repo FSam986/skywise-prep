@@ -149,10 +149,10 @@ const Quiz = () => {
           variant="outline"
           size="sm"
           className="mb-4"
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/study-material')}
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Index
+          Back to Study Material
         </Button>
 
         <Card>
