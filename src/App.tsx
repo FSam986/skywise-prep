@@ -79,65 +79,77 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   return isAuthenticated ? children : <Navigate to="/login" />;
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <TooltipProvider>
-        <div className="fixed top-4 right-4 z-50">
-          <ThemeToggle />
-        </div>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            
-            {/* Protected Routes */}
-            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-            <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-            <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
-            <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
-            <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
-            <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
-            <Route path="/study-material" element={<ProtectedRoute><StudyMaterial /></ProtectedRoute>} />
-            <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
-            <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            
-            {/* PPL Study Material Routes */}
-            <Route path="/ppl-navigation-material" element={<ProtectedRoute><PPLNavigationMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-flight-planning-material" element={<ProtectedRoute><PPLFlightPlanningMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-meteorology-material" element={<ProtectedRoute><PPLMeteorologicalMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-human-performance-material" element={<ProtectedRoute><PPLHumanPerformanceMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-principles-material" element={<ProtectedRoute><PPLPrinciplesMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-technical-material" element={<ProtectedRoute><PPLTechnicalMaterial /></ProtectedRoute>} />
-            <Route path="/ppl-air-law-material" element={<ProtectedRoute><PPLAirLawMaterial /></ProtectedRoute>} />
-            
-            {/* CPL Study Material Routes */}
-            <Route path="/cpl-navigation-material" element={<ProtectedRoute><CPLNavigationMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-instruments-material" element={<ProtectedRoute><CPLInstrumentsMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-air-law-material" element={<ProtectedRoute><CPLAirLawMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-technical-material" element={<ProtectedRoute><CPLTechnicalMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-flight-planning-material" element={<ProtectedRoute><CPLFlightPlanningMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-meteorology-material" element={<ProtectedRoute><CPLMeteorologicalMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-radio-aids-material" element={<ProtectedRoute><CPLRadioAidsMaterial /></ProtectedRoute>} />
-            <Route path="/cpl-human-performance-material" element={<ProtectedRoute><CPLHumanPerformanceMaterial /></ProtectedRoute>} />
-            
-            {/* ATPL Study Material Routes */}
-            <Route path="/atpl-flight-planning-material" element={<ProtectedRoute><ATPLFlightPlanningMaterial /></ProtectedRoute>} />
-            <Route path="/atpl-atg-pof-material" element={<ProtectedRoute><ATPLATGPOFMaterial /></ProtectedRoute>} />
-            <Route path="/atpl-instruments-material" element={<ProtectedRoute><ATPLInstrumentsMaterial /></ProtectedRoute>} />
-            <Route path="/atpl-navigation-material" element={<ProtectedRoute><ATPLNavigationMaterial /></ProtectedRoute>} />
-            <Route path="/atpl-radio-aids-material" element={<ProtectedRoute><ATPLRadioAidsMaterial /></ProtectedRoute>} />
-            <Route path="/atpl-meteorology-material" element={<ProtectedRoute><ATPLMeteorologicalMaterial /></ProtectedRoute>} />
-            
-            {/* Ratings Study Material Routes */}
-            <Route path="/night-rating-material" element={<ProtectedRoute><NightRatingMaterial /></ProtectedRoute>} />
-            <Route path="/instrument-rating-material" element={<ProtectedRoute><InstrumentRatingMaterial /></ProtectedRoute>} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  // Initialize QueryClient inside the component
+  const [queryClient] = useState(() => new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: 1,
+        refetchOnWindowFocus: false,
+      },
+    },
+  }));
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <TooltipProvider>
+          <div className="fixed top-4 right-4 z-50">
+            <ThemeToggle />
+          </div>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              
+              {/* Protected Routes */}
+              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+              <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+              <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
+              <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
+              <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
+              <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
+              <Route path="/study-material" element={<ProtectedRoute><StudyMaterial /></ProtectedRoute>} />
+              <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              
+              {/* PPL Study Material Routes */}
+              <Route path="/ppl-navigation-material" element={<ProtectedRoute><PPLNavigationMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-flight-planning-material" element={<ProtectedRoute><PPLFlightPlanningMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-meteorology-material" element={<ProtectedRoute><PPLMeteorologicalMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-human-performance-material" element={<ProtectedRoute><PPLHumanPerformanceMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-principles-material" element={<ProtectedRoute><PPLPrinciplesMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-technical-material" element={<ProtectedRoute><PPLTechnicalMaterial /></ProtectedRoute>} />
+              <Route path="/ppl-air-law-material" element={<ProtectedRoute><PPLAirLawMaterial /></ProtectedRoute>} />
+              
+              {/* CPL Study Material Routes */}
+              <Route path="/cpl-navigation-material" element={<ProtectedRoute><CPLNavigationMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-instruments-material" element={<ProtectedRoute><CPLInstrumentsMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-air-law-material" element={<ProtectedRoute><CPLAirLawMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-technical-material" element={<ProtectedRoute><CPLTechnicalMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-flight-planning-material" element={<ProtectedRoute><CPLFlightPlanningMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-meteorology-material" element={<ProtectedRoute><CPLMeteorologicalMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-radio-aids-material" element={<ProtectedRoute><CPLRadioAidsMaterial /></ProtectedRoute>} />
+              <Route path="/cpl-human-performance-material" element={<ProtectedRoute><CPLHumanPerformanceMaterial /></ProtectedRoute>} />
+              
+              {/* ATPL Study Material Routes */}
+              <Route path="/atpl-flight-planning-material" element={<ProtectedRoute><ATPLFlightPlanningMaterial /></ProtectedRoute>} />
+              <Route path="/atpl-atg-pof-material" element={<ProtectedRoute><ATPLATGPOFMaterial /></ProtectedRoute>} />
+              <Route path="/atpl-instruments-material" element={<ProtectedRoute><ATPLInstrumentsMaterial /></ProtectedRoute>} />
+              <Route path="/atpl-navigation-material" element={<ProtectedRoute><ATPLNavigationMaterial /></ProtectedRoute>} />
+              <Route path="/atpl-radio-aids-material" element={<ProtectedRoute><ATPLRadioAidsMaterial /></ProtectedRoute>} />
+              <Route path="/atpl-meteorology-material" element={<ProtectedRoute><ATPLMeteorologicalMaterial /></ProtectedRoute>} />
+              
+              {/* Ratings Study Material Routes */}
+              <Route path="/night-rating-material" element={<ProtectedRoute><NightRatingMaterial /></ProtectedRoute>} />
+              <Route path="/instrument-rating-material" element={<ProtectedRoute><InstrumentRatingMaterial /></ProtectedRoute>} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;
