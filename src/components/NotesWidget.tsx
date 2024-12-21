@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Pen, Type, Ruler, Eraser, Highlighter } from "lucide-react";
-import { Canvas as FabricCanvas, Circle, Rect } from "fabric";
+import { fabric } from "fabric";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -22,7 +22,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
           .from('notes')
           .select('content')
           .eq('subject', subject)
-          .single();
+          .maybeSingle();
 
         if (error) throw error;
 
@@ -42,7 +42,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
   }, [canvas, subject]);
 
   const initializeCanvas = (canvasElement: HTMLCanvasElement) => {
-    const newCanvas = new FabricCanvas(canvasElement, {
+    const newCanvas = new fabric.Canvas(canvasElement, {
       width: 800,
       height: 600,
       backgroundColor: '#ffffff',
@@ -61,12 +61,19 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
     if (!canvas) return;
 
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast.error('You must be logged in to save notes');
+        return;
+      }
+
       const content = canvas.toJSON();
       const { error } = await supabase
         .from('notes')
         .upsert({
           subject,
           content,
+          user_id: user.id,
           updated_at: new Date().toISOString(),
         });
 
