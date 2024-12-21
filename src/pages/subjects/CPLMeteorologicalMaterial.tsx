@@ -35,7 +35,6 @@ const CPLMeteorologicalMaterial = () => {
                   <div className="prose prose-slate max-w-none">
                     <section className="space-y-8">
                       <AtmosphericStructure />
-                      <PrecipitationSection />
                       <div>
                         <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
                         <h3 className="text-xl mb-3">Pressure Calculations and Systems:</h3>
@@ -99,7 +98,7 @@ const CPLMeteorologicalMaterial = () => {
                           </li>
                         </ul>
                       </div>
-
+                      <PrecipitationSection />
                       <div>
                         <h2 className="text-2xl font-semibold mb-4">5. Visibility and Fog</h2>
                         <ul className="list-disc pl-6 space-y-2">
