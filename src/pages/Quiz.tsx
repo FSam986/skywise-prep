@@ -4,6 +4,8 @@ import { useQuestionAttempts } from "@/hooks/useQuestionAttempts";
 import { useQuizState } from "@/hooks/useQuizState";
 import { QuizHeader } from "@/components/quiz/QuizHeader";
 import { QuizContent } from "@/components/quiz/QuizContent";
+import { useState } from "react";
+import type { Difficulty } from "@/hooks/useQuizState";
 
 // Quiz questions data
 const generateQuizQuestions = (category: string | undefined, difficulty: 'beginner' | 'intermediate' | 'expert') => {
@@ -153,19 +155,20 @@ const generateQuizQuestions = (category: string | undefined, difficulty: 'beginn
 
 const Quiz = () => {
   const { category } = useParams();
-  const { progress, setProgress } = useQuizProgress(category, 'beginner');
+  const [difficulty, setDifficulty] = useState<Difficulty>('beginner');
+  
+  const { progress, setProgress } = useQuizProgress(category, difficulty);
   const { questionStatuses, setQuestionStatuses } = useQuestionAttempts(
     category,
     100,
     [],
-    'beginner'
+    difficulty
   );
 
   const {
     currentQuestion,
     selectedAnswer,
     showExplanation,
-    difficulty,
     handleAnswerSelect,
     handleNextQuestion,
     handleQuestionSelect,
@@ -180,9 +183,10 @@ const Quiz = () => {
         <QuizHeader
           category={category}
           difficulty={difficulty}
-          onDifficultyChange={(newDifficulty) => 
-            handleDifficultyChange(newDifficulty, setQuestionStatuses)
-          }
+          onDifficultyChange={(newDifficulty) => {
+            setDifficulty(newDifficulty);
+            handleDifficultyChange(newDifficulty, setQuestionStatuses);
+          }}
         />
 
         <QuizContent
