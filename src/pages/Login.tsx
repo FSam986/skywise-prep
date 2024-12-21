@@ -50,11 +50,17 @@ const Login = () => {
   // Determine the initial view based on URL parameters
   const getInitialView = () => {
     const hash = window.location.hash;
-    if (hash.includes('#access_token') && hash.includes('type=recovery')) {
+    if (hash && hash.includes('type=recovery')) {
       console.log("Showing update password view");
       return 'update_password';
     }
     return 'sign_in';
+  };
+
+  // Get the site URL for redirects
+  const getSiteUrl = () => {
+    // Use window.location.origin for local development and preview URLs
+    return window.location.origin;
   };
 
   return (
@@ -84,7 +90,7 @@ const Login = () => {
             }
           }}
           providers={['google']}
-          redirectTo={`${window.location.origin}/`}
+          redirectTo={getSiteUrl()}
           onlyThirdPartyProviders={false}
           view={getInitialView()}
           showLinks={true}
