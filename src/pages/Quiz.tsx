@@ -23,36 +23,81 @@ type Difficulty = 'beginner' | 'intermediate' | 'expert';
 
 // Demo quiz data - in a real app, this would come from an API
 const generateQuizQuestions = (difficulty: Difficulty) => {
-  const questions = [
-    {
-      id: 1,
-      difficulty: 'beginner',
-      question: "What does PPL stand for?",
-      options: [
-        "Personal Pilot License",
-        "Private Pilot License",
-        "Professional Pilot License",
-        "Primary Pilot License"
-      ],
-      correctAnswer: 1,
-      explanation: "PPL stands for Private Pilot License, which is the first step in becoming a licensed pilot."
-    },
-    {
-      id: 2,
-      difficulty: 'intermediate',
-      question: "What is the primary purpose of ailerons?",
-      options: [
-        "Control pitch",
-        "Control roll",
-        "Control yaw",
-        "Control speed"
-      ],
-      correctAnswer: 1,
-      explanation: "Ailerons are control surfaces that create roll by changing the lift on the wings."
-    }
-  ];
-
-  return questions.filter(q => q.difficulty === difficulty).slice(0, 100);
+  if (!category) return [];
+  
+  // CPL Meteorology specific questions
+  if (category === 'cpl-meteorology') {
+    return [
+      {
+        id: 1,
+        difficulty: 'beginner',
+        question: "What is the standard atmospheric pressure at sea level?",
+        options: [
+          "1023.25 hPa",
+          "1013.25 hPa",
+          "1003.25 hPa",
+          "993.25 hPa"
+        ],
+        correctAnswer: 1,
+        explanation: "The standard pressure at sea level is 1013.25 hPa / 29.92 inHg. This is covered in the 'Pressure Measurements' section of the study material."
+      },
+      {
+        id: 2,
+        difficulty: 'beginner',
+        question: "What is the primary composition of Earth's atmosphere?",
+        options: [
+          "Oxygen (78%), Nitrogen (21%), Other gases (1%)",
+          "Nitrogen (78%), Oxygen (21%), Other gases (1%)",
+          "Nitrogen (50%), Oxygen (50%)",
+          "Oxygen (90%), Other gases (10%)"
+        ],
+        correctAnswer: 1,
+        explanation: "As explained in the 'Atmospheric Composition' section, the atmosphere consists of Nitrogen (78%) as the primary component, Oxygen (21%), and other gases (1%) including Argon, CO2, and water vapor."
+      },
+      {
+        id: 3,
+        difficulty: 'intermediate',
+        question: "What is the Dry Adiabatic Lapse Rate (DALR)?",
+        options: [
+          "1.5°C/1000ft",
+          "2°C/1000ft",
+          "3°C/1000ft",
+          "4°C/1000ft"
+        ],
+        correctAnswer: 2,
+        explanation: "As covered in the 'Lapse Rates' section, the Dry Adiabatic Lapse Rate (DALR) is 3°C/1000ft."
+      },
+      {
+        id: 4,
+        difficulty: 'intermediate',
+        question: "Which type of fog forms on clear, calm nights?",
+        options: [
+          "Advection fog",
+          "Steam fog",
+          "Radiation fog",
+          "Frontal fog"
+        ],
+        correctAnswer: 2,
+        explanation: "According to the 'Types of Fog' section, Radiation fog forms on clear, calm nights when the ground cools rapidly."
+      },
+      {
+        id: 5,
+        difficulty: 'expert',
+        question: "What characterizes the tropopause?",
+        options: [
+          "Temperature increases with height",
+          "Temperature remains constant with height",
+          "Temperature decreases with height",
+          "Temperature varies randomly"
+        ],
+        correctAnswer: 1,
+        explanation: "As described in the 'Tropopause' section, the tropopause is characterized by temperature remaining constant with height, marking the boundary between troposphere and stratosphere."
+      }
+    ].filter(q => q.difficulty === difficulty);
+  }
+  
+  // Default questions for other categories can be added here
+  return [];
 };
 
 const Quiz = () => {
