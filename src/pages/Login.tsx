@@ -59,7 +59,6 @@ const Login = () => {
 
   // Get the site URL for redirects
   const getSiteUrl = () => {
-    // Use window.location.origin for local development and preview URLs
     return window.location.origin;
   };
 
