@@ -1,7 +1,12 @@
 import { Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
+import { CalculatorDisplay } from "./calculator/CalculatorDisplay";
+import { NumericKeypad } from "./calculator/NumericKeypad";
+import { FractionInput } from "./calculator/FractionInput";
+import { UnitConverter } from "./calculator/UnitConverter";
 
 export const CalculatorWidget = () => {
   const [display, setDisplay] = useState("0");
@@ -23,44 +28,6 @@ export const CalculatorWidget = () => {
   const handleOperation = (op: string) => {
     setFirstNumber(display);
     setOperation(op);
-    setNewNumber(true);
-  };
-
-  const handleScientific = (func: string) => {
-    const num = parseFloat(display);
-    let result = 0;
-    
-    switch (func) {
-      case 'sin':
-        result = isRadians ? Math.sin(num) : Math.sin(num * Math.PI / 180);
-        break;
-      case 'cos':
-        result = isRadians ? Math.cos(num) : Math.cos(num * Math.PI / 180);
-        break;
-      case 'tan':
-        result = isRadians ? Math.tan(num) : Math.tan(num * Math.PI / 180);
-        break;
-      case 'sqrt':
-        result = Math.sqrt(num);
-        break;
-      case 'log':
-        result = Math.log10(num);
-        break;
-      case 'ln':
-        result = Math.log(num);
-        break;
-      case 'exp':
-        result = Math.exp(num);
-        break;
-      case 'pow2':
-        result = Math.pow(num, 2);
-        break;
-      case 'pow3':
-        result = Math.pow(num, 3);
-        break;
-    }
-    
-    setDisplay(result.toString());
     setNewNumber(true);
   };
 
@@ -95,29 +62,20 @@ export const CalculatorWidget = () => {
     setNewNumber(true);
   };
 
-  const handleMemory = (action: string) => {
-    const currentNum = parseFloat(display);
-    switch (action) {
-      case 'M+':
-        setMemory(memory + currentNum);
-        break;
-      case 'M-':
-        setMemory(memory - currentNum);
-        break;
-      case 'MR':
-        setDisplay(memory.toString());
-        setNewNumber(true);
-        break;
-      case 'MC':
-        setMemory(0);
-        break;
-    }
-  };
-
   const clear = () => {
     setDisplay("0");
     setFirstNumber("");
     setOperation("");
+    setNewNumber(true);
+  };
+
+  const handleFractionResult = (value: number) => {
+    setDisplay(value.toString());
+    setNewNumber(true);
+  };
+
+  const handleConversionResult = (value: number) => {
+    setDisplay(value.toString());
     setNewNumber(true);
   };
 
@@ -130,84 +88,34 @@ export const CalculatorWidget = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Scientific Calculator</DialogTitle>
+          <DialogTitle>Calculator</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4">
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <div className="text-right text-sm text-gray-500 mb-1">
-              {memory !== 0 && `M = ${memory}`}
+        <Tabs defaultValue="calculator">
+          <TabsList className="grid w-full grid-cols-3">
+            <TabsTrigger value="calculator">Calculator</TabsTrigger>
+            <TabsTrigger value="fractions">Fractions</TabsTrigger>
+            <TabsTrigger value="units">Units</TabsTrigger>
+          </TabsList>
+          <TabsContent value="calculator">
+            <div className="grid gap-4">
+              <CalculatorDisplay display={display} memory={memory} />
+              <NumericKeypad
+                handleNumber={handleNumber}
+                handleOperation={handleOperation}
+                calculate={calculate}
+                clear={clear}
+              />
             </div>
-            <div className="text-right text-2xl">
-              {display}
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-5 gap-2">
-            <Button variant="outline" onClick={() => handleMemory('MC')}>MC</Button>
-            <Button variant="outline" onClick={() => handleMemory('MR')}>MR</Button>
-            <Button variant="outline" onClick={() => handleMemory('M+')}>M+</Button>
-            <Button variant="outline" onClick={() => handleMemory('M-')}>M-</Button>
-            <Button variant="secondary" onClick={() => setIsRadians(!isRadians)}>
-              {isRadians ? 'RAD' : 'DEG'}
-            </Button>
-
-            <Button variant="outline" onClick={() => handleScientific('sin')}>sin</Button>
-            <Button variant="outline" onClick={() => handleScientific('cos')}>cos</Button>
-            <Button variant="outline" onClick={() => handleScientific('tan')}>tan</Button>
-            <Button variant="outline" onClick={() => handleScientific('sqrt')}>√</Button>
-            <Button variant="outline" onClick={() => handleOperation('^')}>^</Button>
-
-            <Button variant="outline" onClick={() => handleScientific('log')}>log</Button>
-            <Button variant="outline" onClick={() => handleScientific('ln')}>ln</Button>
-            <Button variant="outline" onClick={() => handleScientific('exp')}>exp</Button>
-            <Button variant="outline" onClick={() => handleScientific('pow2')}>x²</Button>
-            <Button variant="outline" onClick={() => handleScientific('pow3')}>x³</Button>
-
-            {["7", "8", "9", "÷"].map((btn) => (
-              <Button
-                key={btn}
-                variant="outline"
-                onClick={() => btn === "÷" ? handleOperation(btn) : handleNumber(btn)}
-              >
-                {btn}
-              </Button>
-            ))}
-            <Button variant="outline" onClick={clear}>C</Button>
-
-            {["4", "5", "6", "×"].map((btn) => (
-              <Button
-                key={btn}
-                variant="outline"
-                onClick={() => btn === "×" ? handleOperation(btn) : handleNumber(btn)}
-              >
-                {btn}
-              </Button>
-            ))}
-            <Button variant="outline" onClick={() => setDisplay((prev) => (-parseFloat(prev)).toString())}>±</Button>
-
-            {["1", "2", "3", "-"].map((btn) => (
-              <Button
-                key={btn}
-                variant="outline"
-                onClick={() => btn === "-" ? handleOperation(btn) : handleNumber(btn)}
-              >
-                {btn}
-              </Button>
-            ))}
-            <Button variant="outline" onClick={() => handleNumber('.')}>.</Button>
-
-            {["0", "(", ")", "+"].map((btn) => (
-              <Button
-                key={btn}
-                variant="outline"
-                onClick={() => btn === "+" ? handleOperation(btn) : handleNumber(btn)}
-              >
-                {btn}
-              </Button>
-            ))}
-            <Button variant="secondary" onClick={calculate}>=</Button>
-          </div>
-        </div>
+          </TabsContent>
+          <TabsContent value="fractions">
+            <FractionInput onFractionSubmit={handleFractionResult} />
+            <CalculatorDisplay display={display} memory={memory} />
+          </TabsContent>
+          <TabsContent value="units">
+            <UnitConverter onConversion={handleConversionResult} />
+            <CalculatorDisplay display={display} memory={memory} />
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
