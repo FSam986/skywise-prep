@@ -8,13 +8,13 @@ const subjects = [
     title: "Night Rating",
     description: "Night flying certification preparation",
     icon: Moon,
-    path: "night-rating",
+    path: "night-rating-material",
   },
   {
     title: "Instrument Rating",
     description: "Instrument flight certification",
     icon: Compass,
-    path: "instrument-rating",
+    path: "instrument-rating-material",
   },
 ];
 
@@ -33,7 +33,7 @@ const Ratings = () => {
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${subject.path}`)}
+              onClick={() => navigate(`/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">

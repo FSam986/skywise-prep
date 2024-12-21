@@ -8,37 +8,37 @@ const subjects = [
     title: "ATPL Flight Planning",
     description: "Advanced flight planning and operations",
     icon: FileText,
-    path: "atpl-flight-planning",
+    path: "atpl-flight-planning-material",
   },
   {
     title: "ATPL ATG & POF",
     description: "Aircraft technical and principles of flight",
     icon: Scale,
-    path: "atpl-atg-pof",
+    path: "atpl-atg-pof-material",
   },
   {
     title: "ATPL Instruments & Electronics",
     description: "Complex aircraft systems",
     icon: Scale,
-    path: "atpl-instruments",
+    path: "atpl-instruments-material",
   },
   {
     title: "ATPL Navigation",
     description: "Advanced navigation systems",
     icon: Compass,
-    path: "atpl-navigation",
+    path: "atpl-navigation-material",
   },
   {
     title: "ATPL Radio Aids",
     description: "Advanced radio navigation",
     icon: Radio,
-    path: "atpl-radio-aids",
+    path: "atpl-radio-aids-material",
   },
   {
     title: "ATPL Meteorology",
     description: "Advanced weather systems",
     icon: Cloud,
-    path: "atpl-meteorology",
+    path: "atpl-meteorology-material",
   },
 ];
 
@@ -57,7 +57,7 @@ const ATPLSubjects = () => {
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${subject.path}`)}
+              onClick={() => navigate(`/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">

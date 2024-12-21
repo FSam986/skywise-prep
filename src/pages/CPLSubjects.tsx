@@ -8,49 +8,49 @@ const subjects = [
     title: "CPL General Navigation",
     description: "Advanced navigation techniques",
     icon: Compass,
-    path: "cpl-navigation",
+    path: "cpl-navigation-material",
   },
   {
     title: "CPL Instruments and Electronics",
     description: "Aircraft instrumentation systems",
     icon: Scale,
-    path: "cpl-instruments",
+    path: "cpl-instruments-material",
   },
   {
     title: "CPL Air Law",
     description: "Commercial aviation regulations",
     icon: BookOpen,
-    path: "cpl-air-law",
+    path: "cpl-air-law-material",
   },
   {
     title: "CPL Aircraft Technical and General",
     description: "Advanced aircraft systems",
     icon: Wrench,
-    path: "cpl-technical",
+    path: "cpl-technical-material",
   },
   {
     title: "CPL Flight Planning",
     description: "Advanced flight planning",
     icon: FileText,
-    path: "cpl-flight-planning",
+    path: "cpl-flight-planning-material",
   },
   {
     title: "CPL Meteorology",
     description: "Advanced weather systems",
     icon: Cloud,
-    path: "cpl-meteorology",
+    path: "cpl-meteorology-material",
   },
   {
     title: "CPL Radio Aids",
     description: "Radio navigation systems",
     icon: Radio,
-    path: "cpl-radio-aids",
+    path: "cpl-radio-aids-material",
   },
   {
     title: "CPL Human Performance",
     description: "Advanced human factors",
     icon: Brain,
-    path: "cpl-human-performance",
+    path: "cpl-human-performance-material",
   },
 ];
 
@@ -69,7 +69,7 @@ const CPLSubjects = () => {
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${subject.path}`)}
+              onClick={() => navigate(`/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">

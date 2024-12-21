@@ -20,7 +20,7 @@ import StudyMaterial from "./pages/StudyMaterial";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 
-// PPL Study Material pages
+// Study Material pages
 import PPLNavigationMaterial from "./pages/subjects/PPLNavigationMaterial";
 import PPLFlightPlanningMaterial from "./pages/subjects/PPLFlightPlanningMaterial";
 import PPLMeteorologicalMaterial from "./pages/subjects/PPLMeteorologicalMaterial";
@@ -28,6 +28,28 @@ import PPLHumanPerformanceMaterial from "./pages/subjects/PPLHumanPerformanceMat
 import PPLPrinciplesMaterial from "./pages/subjects/PPLPrinciplesMaterial";
 import PPLTechnicalMaterial from "./pages/subjects/PPLTechnicalMaterial";
 import PPLAirLawMaterial from "./pages/subjects/PPLAirLawMaterial";
+
+// New study material pages for CPL
+import CPLNavigationMaterial from "./pages/subjects/CPLNavigationMaterial";
+import CPLInstrumentsMaterial from "./pages/subjects/CPLInstrumentsMaterial";
+import CPLAirLawMaterial from "./pages/subjects/CPLAirLawMaterial";
+import CPLTechnicalMaterial from "./pages/subjects/CPLTechnicalMaterial";
+import CPLFlightPlanningMaterial from "./pages/subjects/CPLFlightPlanningMaterial";
+import CPLMeteorologicalMaterial from "./pages/subjects/CPLMeteorologicalMaterial";
+import CPLRadioAidsMaterial from "./pages/subjects/CPLRadioAidsMaterial";
+import CPLHumanPerformanceMaterial from "./pages/subjects/CPLHumanPerformanceMaterial";
+
+// New study material pages for ATPL
+import ATPLFlightPlanningMaterial from "./pages/subjects/ATPLFlightPlanningMaterial";
+import ATPLATGPOFMaterial from "./pages/subjects/ATPLATGPOFMaterial";
+import ATPLInstrumentsMaterial from "./pages/subjects/ATPLInstrumentsMaterial";
+import ATPLNavigationMaterial from "./pages/subjects/ATPLNavigationMaterial";
+import ATPLRadioAidsMaterial from "./pages/subjects/ATPLRadioAidsMaterial";
+import ATPLMeteorologicalMaterial from "./pages/subjects/ATPLMeteorologicalMaterial";
+
+// New study material pages for Ratings
+import NightRatingMaterial from "./pages/subjects/NightRatingMaterial";
+import InstrumentRatingMaterial from "./pages/subjects/InstrumentRatingMaterial";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +111,28 @@ const App = () => (
             <Route path="/ppl-principles-material" element={<ProtectedRoute><PPLPrinciplesMaterial /></ProtectedRoute>} />
             <Route path="/ppl-technical-material" element={<ProtectedRoute><PPLTechnicalMaterial /></ProtectedRoute>} />
             <Route path="/ppl-air-law-material" element={<ProtectedRoute><PPLAirLawMaterial /></ProtectedRoute>} />
+            
+            {/* CPL Study Material Routes */}
+            <Route path="/cpl-navigation-material" element={<ProtectedRoute><CPLNavigationMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-instruments-material" element={<ProtectedRoute><CPLInstrumentsMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-air-law-material" element={<ProtectedRoute><CPLAirLawMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-technical-material" element={<ProtectedRoute><CPLTechnicalMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-flight-planning-material" element={<ProtectedRoute><CPLFlightPlanningMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-meteorology-material" element={<ProtectedRoute><CPLMeteorologicalMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-radio-aids-material" element={<ProtectedRoute><CPLRadioAidsMaterial /></ProtectedRoute>} />
+            <Route path="/cpl-human-performance-material" element={<ProtectedRoute><CPLHumanPerformanceMaterial /></ProtectedRoute>} />
+            
+            {/* ATPL Study Material Routes */}
+            <Route path="/atpl-flight-planning-material" element={<ProtectedRoute><ATPLFlightPlanningMaterial /></ProtectedRoute>} />
+            <Route path="/atpl-atg-pof-material" element={<ProtectedRoute><ATPLATGPOFMaterial /></ProtectedRoute>} />
+            <Route path="/atpl-instruments-material" element={<ProtectedRoute><ATPLInstrumentsMaterial /></ProtectedRoute>} />
+            <Route path="/atpl-navigation-material" element={<ProtectedRoute><ATPLNavigationMaterial /></ProtectedRoute>} />
+            <Route path="/atpl-radio-aids-material" element={<ProtectedRoute><ATPLRadioAidsMaterial /></ProtectedRoute>} />
+            <Route path="/atpl-meteorology-material" element={<ProtectedRoute><ATPLMeteorologicalMaterial /></ProtectedRoute>} />
+            
+            {/* Ratings Study Material Routes */}
+            <Route path="/night-rating-material" element={<ProtectedRoute><NightRatingMaterial /></ProtectedRoute>} />
+            <Route path="/instrument-rating-material" element={<ProtectedRoute><InstrumentRatingMaterial /></ProtectedRoute>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
