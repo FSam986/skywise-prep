@@ -7,6 +7,7 @@ import { CalculatorDisplay } from "./calculator/CalculatorDisplay";
 import { NumericKeypad } from "./calculator/NumericKeypad";
 import { FractionInput } from "./calculator/FractionInput";
 import { UnitConverter } from "./calculator/UnitConverter";
+import { ScientificKeypad } from "./calculator/ScientificKeypad";
 
 export const CalculatorWidget = () => {
   const [display, setDisplay] = useState("0");
@@ -15,6 +16,7 @@ export const CalculatorWidget = () => {
   const [newNumber, setNewNumber] = useState(true);
   const [memory, setMemory] = useState(0);
   const [isRadians, setIsRadians] = useState(false);
+  const [showScientific, setShowScientific] = useState(false);
 
   const handleNumber = (num: string) => {
     if (newNumber) {
@@ -62,11 +64,56 @@ export const CalculatorWidget = () => {
     setNewNumber(true);
   };
 
+  const handleScientificOperation = (operation: string) => {
+    const num = parseFloat(display);
+    let result = 0;
+
+    switch (operation) {
+      case "sin":
+        result = isRadians ? Math.sin(num) : Math.sin((num * Math.PI) / 180);
+        break;
+      case "cos":
+        result = isRadians ? Math.cos(num) : Math.cos((num * Math.PI) / 180);
+        break;
+      case "tan":
+        result = isRadians ? Math.tan(num) : Math.tan((num * Math.PI) / 180);
+        break;
+      case "log":
+        result = Math.log10(num);
+        break;
+      case "ln":
+        result = Math.log(num);
+        break;
+      case "sqrt":
+        result = Math.sqrt(num);
+        break;
+      case "square":
+        result = num * num;
+        break;
+      case "1/x":
+        result = 1 / num;
+        break;
+      case "π":
+        result = Math.PI;
+        break;
+      case "e":
+        result = Math.E;
+        break;
+    }
+
+    setDisplay(result.toString());
+    setNewNumber(true);
+  };
+
   const clear = () => {
     setDisplay("0");
     setFirstNumber("");
     setOperation("");
     setNewNumber(true);
+  };
+
+  const toggleAngleUnit = () => {
+    setIsRadians(!isRadians);
   };
 
   const handleFractionResult = (value: number) => {
@@ -82,17 +129,18 @@ export const CalculatorWidget = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" className="bg-background hover:bg-muted">
           <Calculator className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] bg-background text-foreground">
         <DialogHeader>
           <DialogTitle>Calculator</DialogTitle>
         </DialogHeader>
-        <Tabs defaultValue="calculator">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="calculator">Calculator</TabsTrigger>
+        <Tabs defaultValue="calculator" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="calculator">Basic</TabsTrigger>
+            <TabsTrigger value="scientific">Scientific</TabsTrigger>
             <TabsTrigger value="fractions">Fractions</TabsTrigger>
             <TabsTrigger value="units">Units</TabsTrigger>
           </TabsList>
@@ -104,6 +152,20 @@ export const CalculatorWidget = () => {
                 handleOperation={handleOperation}
                 calculate={calculate}
                 clear={clear}
+              />
+            </div>
+          </TabsContent>
+          <TabsContent value="scientific">
+            <div className="grid gap-4">
+              <CalculatorDisplay 
+                display={display} 
+                memory={memory} 
+                angleUnit={isRadians ? "RAD" : "DEG"} 
+              />
+              <ScientificKeypad
+                handleOperation={handleScientificOperation}
+                toggleAngleUnit={toggleAngleUnit}
+                isRadians={isRadians}
               />
             </div>
           </TabsContent>
