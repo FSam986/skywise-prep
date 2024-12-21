@@ -11,31 +11,38 @@ interface NotesWidgetProps {
 
 export const NotesWidget = ({ subject }: NotesWidgetProps) => {
   const [activeColor, setActiveColor] = useState("#000000");
-  const [activeTool, setActiveTool] = useState<"pen" | "eraser" | "highlighter">("pen");
+  const [activeTool, setActiveTool] = useState<"pen" | "eraser" | "highlighter" | "text">("pen");
   
   const {
     canvas,
     isErasing,
     setIsErasing,
     initializeCanvas,
+    addText,
+    exportCanvas,
   } = useCanvas(subject);
 
   const handleToolChange = (tool: typeof activeTool) => {
     if (!canvas) return;
 
     setActiveTool(tool);
+    
+    if (tool === 'text') {
+      canvas.isDrawingMode = false;
+      addText();
+      return;
+    }
+    
     setIsErasing(tool === 'eraser');
+    canvas.isDrawingMode = true;
     
     if (tool === 'eraser') {
-      canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.width = 20;
       canvas.freeDrawingBrush.color = '#ffffff';
     } else if (tool === 'highlighter') {
-      canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.color = 'rgba(255, 255, 0, 0.3)';
       canvas.freeDrawingBrush.width = 20;
     } else {
-      canvas.isDrawingMode = true;
       canvas.freeDrawingBrush.color = activeColor;
       canvas.freeDrawingBrush.width = 2;
     }
@@ -58,6 +65,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
             onToolChange={handleToolChange}
             activeColor={activeColor}
             onColorChange={setActiveColor}
+            onExport={exportCanvas}
           />
           <div className="border rounded-lg overflow-hidden">
             <canvas

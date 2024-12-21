@@ -1,11 +1,18 @@
 import { Button } from "@/components/ui/button";
-import { Pen, Eraser, Highlighter } from "lucide-react";
+import { Pen, Eraser, Highlighter, Type, Download } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface CanvasToolsProps {
-  activeTool: "pen" | "eraser" | "highlighter";
-  onToolChange: (tool: "pen" | "eraser" | "highlighter") => void;
+  activeTool: "pen" | "eraser" | "highlighter" | "text";
+  onToolChange: (tool: "pen" | "eraser" | "highlighter" | "text") => void;
   activeColor: string;
   onColorChange: (color: string) => void;
+  onExport: (type: "pdf" | "png") => void;
 }
 
 export const CanvasTools = ({
@@ -13,9 +20,10 @@ export const CanvasTools = ({
   onToolChange,
   activeColor,
   onColorChange,
+  onExport,
 }: CanvasToolsProps) => {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 items-center">
       <Button
         variant={activeTool === 'pen' ? 'default' : 'outline'}
         size="icon"
@@ -37,12 +45,34 @@ export const CanvasTools = ({
       >
         <Highlighter className="h-4 w-4" />
       </Button>
+      <Button
+        variant={activeTool === 'text' ? 'default' : 'outline'}
+        size="icon"
+        onClick={() => onToolChange('text')}
+      >
+        <Type className="h-4 w-4" />
+      </Button>
       <input
         type="color"
         value={activeColor}
         onChange={(e) => onColorChange(e.target.value)}
         className="w-8 h-8 rounded cursor-pointer"
       />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="icon">
+            <Download className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => onExport('png')}>
+            Export as PNG
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => onExport('pdf')}>
+            Export as PDF
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

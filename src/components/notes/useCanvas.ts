@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { fabric } from 'fabric';
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { jsPDF } from 'jspdf';
 
 export const useCanvas = (subject: string) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
@@ -57,6 +58,59 @@ export const useCanvas = (subject: string) => {
     }
   };
 
+  const addText = () => {
+    if (!canvas) return;
+    
+    const text = new fabric.IText('Click to edit', {
+      left: 100,
+      top: 100,
+      fontFamily: 'Arial',
+      fontSize: 20,
+      fill: canvas.freeDrawingBrush.color,
+    });
+    
+    canvas.add(text);
+    canvas.setActiveObject(text);
+    canvas.renderAll();
+    saveNotes();
+  };
+
+  const exportCanvas = async (type: 'pdf' | 'png') => {
+    if (!canvas) return;
+
+    try {
+      if (type === 'png') {
+        const dataUrl = canvas.toDataURL({
+          format: 'png',
+          quality: 1
+        });
+        const link = document.createElement('a');
+        link.download = `${subject}-notes.png`;
+        link.href = dataUrl;
+        link.click();
+        toast.success('Notes exported as PNG');
+      } else {
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'px',
+          format: [canvas.width || 800, canvas.height || 600]
+        });
+        
+        const dataUrl = canvas.toDataURL({
+          format: 'png',
+          quality: 1
+        });
+        
+        pdf.addImage(dataUrl, 'PNG', 0, 0);
+        pdf.save(`${subject}-notes.pdf`);
+        toast.success('Notes exported as PDF');
+      }
+    } catch (error) {
+      console.error('Error exporting notes:', error);
+      toast.error('Failed to export notes');
+    }
+  };
+
   const initializeCanvas = (canvasElement: HTMLCanvasElement) => {
     const newCanvas = new fabric.Canvas(canvasElement, {
       width: 800,
@@ -103,5 +157,7 @@ export const useCanvas = (subject: string) => {
     setIsErasing,
     initializeCanvas,
     saveNotes,
+    addText,
+    exportCanvas,
   };
 };
