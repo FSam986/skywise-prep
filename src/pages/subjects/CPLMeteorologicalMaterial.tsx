@@ -31,107 +31,337 @@ const CPLMeteorologicalMaterial = () => {
               <Card>
                 <CardContent className="p-6">
                   <div className="prose prose-slate max-w-none">
-                    <section className="space-y-6">
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">1. Advanced Atmospheric Structure</h2>
-                    <h3 className="text-xl mb-2">Composition and Layers:</h3>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Detailed composition of atmosphere</li>
-                      <li>Troposphere characteristics and phenomena</li>
-                      <li>Tropopause variations with latitude</li>
-                      <li>Stratosphere and its impact on aviation</li>
-                    </ul>
-                  </div>
+                    <section className="space-y-8">
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">1. Advanced Atmospheric Structure</h2>
+                        <h3 className="text-xl mb-3">Composition and Layers:</h3>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Atmospheric Composition:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Nitrogen (78%) - Primary component, inert gas</li>
+                              <li>Oxygen (21%) - Essential for combustion and life</li>
+                              <li>Other gases (1%) - Argon, CO2, water vapor, etc.</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Troposphere Characteristics:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Height varies from 8km (poles) to 18km (equator)</li>
+                              <li>Temperature decreases with height (-2°C/1000ft)</li>
+                              <li>Contains 75% of atmospheric mass</li>
+                              <li>Most weather phenomena occur here</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Tropopause:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Boundary between troposphere and stratosphere</li>
+                              <li>Temperature remains constant with height</li>
+                              <li>Height varies with latitude and season</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Stratosphere:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Extends to about 50km altitude</li>
+                              <li>Temperature increases with height</li>
+                              <li>Contains ozone layer</li>
+                              <li>Very stable, minimal turbulence</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
-                    <h3 className="text-xl mb-2">Pressure Calculations:</h3>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>QNH, QFE, and QFF relationships</li>
-                      <li>Pressure altitude calculations</li>
-                      <li>Pressure system movements and effects</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
+                        <h3 className="text-xl mb-3">Pressure Calculations and Systems:</h3>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Pressure Measurements:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>QNH - Pressure adjusted to sea level</li>
+                              <li>QFE - Actual pressure at aerodrome level</li>
+                              <li>QFF - Sea level pressure at station location</li>
+                              <li>Standard pressure - 1013.25 hPa / 29.92 inHg</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Pressure Calculations:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Pressure decreases approximately 1 hPa per 30 feet</li>
+                              <li>Pressure altitude = indicated altitude when set to 1013.25</li>
+                              <li>Density altitude = pressure altitude corrected for temperature</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Pressure Systems:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>High pressure (anticyclones) - clockwise flow (NH)</li>
+                              <li>Low pressure (depressions) - counterclockwise flow (NH)</li>
+                              <li>Col - neutral area between pressure systems</li>
+                              <li>Trough - elongated area of low pressure</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">3. Temperature and Humidity</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Temperature/Dew point relationship</li>
-                      <li>Lapse rates and inversions</li>
-                      <li>Effects on aircraft performance</li>
-                      <li>Humidity measurements and calculations</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">3. Temperature and Humidity</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Temperature Relationships:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Dew point - temperature at which condensation occurs</li>
+                              <li>Frost point - temperature at which sublimation occurs</li>
+                              <li>Relative humidity - percentage of moisture content</li>
+                              <li>Absolute humidity - actual water vapor content</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Lapse Rates:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>DALR (Dry Adiabatic Lapse Rate) - 3°C/1000ft</li>
+                              <li>SALR (Saturated Adiabatic Lapse Rate) - 1.5°C/1000ft</li>
+                              <li>ELR (Environmental Lapse Rate) - actual measured rate</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Temperature Inversions:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Surface inversion - caused by ground cooling</li>
+                              <li>Upper air inversion - caused by subsidence</li>
+                              <li>Frontal inversion - associated with weather fronts</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">4. Cloud Formation and Precipitation</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Cloud types and associated weather</li>
-                      <li>Precipitation processes</li>
-                      <li>Thunderstorm development stages</li>
-                      <li>Associated hazards to aviation</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">4. Cloud Formation and Precipitation</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Cloud Types:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>High clouds (above 20,000ft) - Cirrus, Cirrostratus, Cirrocumulus</li>
+                              <li>Medium clouds (6,500-20,000ft) - Altostratus, Altocumulus</li>
+                              <li>Low clouds (below 6,500ft) - Stratus, Stratocumulus, Nimbostratus</li>
+                              <li>Vertical development - Cumulus, Cumulonimbus</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Precipitation Types:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Rain - liquid precipitation > 0.5mm</li>
+                              <li>Drizzle - liquid precipitation < 0.5mm</li>
+                              <li>Snow - frozen precipitation in crystalline form</li>
+                              <li>Hail - frozen precipitation in ball or irregular lumps</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Thunderstorm Development:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Cumulus stage - strong updrafts</li>
+                              <li>Mature stage - precipitation begins</li>
+                              <li>Dissipating stage - downdrafts dominate</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">5. Visibility and Fog</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Types of fog and formation conditions</li>
-                      <li>Visibility measurement methods</li>
-                      <li>RVR and its significance</li>
-                      <li>Effects on commercial operations</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">5. Visibility and Fog</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Types of Fog:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Radiation fog - forms on clear, calm nights</li>
+                              <li>Advection fog - forms when warm air moves over cold surface</li>
+                              <li>Steam fog - forms when cold air moves over warm water</li>
+                              <li>Frontal fog - forms near weather fronts</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Visibility Measurements:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Meteorological visibility - horizontal visibility</li>
+                              <li>RVR (Runway Visual Range) - slant visibility for landing</li>
+                              <li>Flight visibility - visibility from cockpit</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Factors Affecting Visibility:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Precipitation intensity and type</li>
+                              <li>Atmospheric pollution and haze</li>
+                              <li>Time of day and sun position</li>
+                              <li>Cloud base height and coverage</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">6. Wind Systems</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Global circulation patterns</li>
-                      <li>Local wind effects and terrain influence</li>
-                      <li>Wind shear and microburst recognition</li>
-                      <li>Jet streams and their impact</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">6. Wind Systems</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Global Circulation:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Hadley cell (0-30° latitude)</li>
+                              <li>Ferrel cell (30-60° latitude)</li>
+                              <li>Polar cell (60-90° latitude)</li>
+                              <li>Effect of Coriolis force</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Local Winds:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Sea breeze - daytime onshore flow</li>
+                              <li>Land breeze - nighttime offshore flow</li>
+                              <li>Valley breeze - upslope daytime flow</li>
+                              <li>Mountain breeze - downslope nighttime flow</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Wind Shear:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Vertical wind shear - change with height</li>
+                              <li>Horizontal wind shear - change with distance</li>
+                              <li>Low-level wind shear - below 2000ft</li>
+                              <li>Microburst - intense downdraft</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">7. Air Masses and Fronts</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Air mass classification and characteristics</li>
-                      <li>Frontal types and associated weather</li>
-                      <li>Frontal movement prediction</li>
-                      <li>Flight planning considerations</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">7. Air Masses and Fronts</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Air Mass Classification:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Maritime Tropical (mT) - warm and moist</li>
+                              <li>Continental Tropical (cT) - hot and dry</li>
+                              <li>Maritime Polar (mP) - cool and moist</li>
+                              <li>Continental Polar (cP) - cold and dry</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Frontal Types:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Warm front - warm air replacing cold air</li>
+                              <li>Cold front - cold air replacing warm air</li>
+                              <li>Occluded front - cold front overtaking warm front</li>
+                              <li>Stationary front - no movement of air masses</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Associated Weather:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Warm front - widespread precipitation, poor visibility</li>
+                              <li>Cold front - heavy precipitation, thunderstorms</li>
+                              <li>Occluded front - mixed characteristics</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">8. Weather Charts and Forecasts</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Surface analysis charts</li>
-                      <li>Upper air charts interpretation</li>
-                      <li>METAR and TAF decoding</li>
-                      <li>SIGMET and AIRMET interpretation</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">8. Weather Charts and Forecasts</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Surface Analysis Charts:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Isobars - lines of equal pressure</li>
+                              <li>Frontal systems and their movement</li>
+                              <li>Pressure centers and values</li>
+                              <li>Station plots and weather symbols</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Upper Air Charts:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Constant pressure charts (850, 700, 500 hPa)</li>
+                              <li>Wind direction and speed</li>
+                              <li>Temperature and humidity data</li>
+                              <li>Height contours</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Aviation Weather Reports:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>METAR - current weather observation</li>
+                              <li>TAF - terminal aerodrome forecast</li>
+                              <li>SIGMET - significant meteorological information</li>
+                              <li>AIRMET - airmen's meteorological information</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">9. Icing Conditions</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Types of airframe icing</li>
-                      <li>Carburetor and engine icing</li>
-                      <li>Anti-icing and de-icing procedures</li>
-                      <li>Icing intensity classifications</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">9. Icing Conditions</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Types of Airframe Icing:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Clear ice - transparent, heavy, hard to remove</li>
+                              <li>Rime ice - opaque, rough, brittle</li>
+                              <li>Mixed ice - combination of clear and rime</li>
+                              <li>Frost - crystalline deposit</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Engine Icing:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Carburetor icing - temperature/humidity dependent</li>
+                              <li>Impact ice - direct contact with supercooled water</li>
+                              <li>Inlet icing - affects engine performance</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Anti-icing Systems:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Thermal systems - hot air or electrical heating</li>
+                              <li>Chemical systems - fluid application</li>
+                              <li>Mechanical systems - boots and wipers</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
 
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">10. Hazardous Weather</h2>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Thunderstorm avoidance</li>
-                      <li>Turbulence types and causes</li>
-                      <li>Mountain wave phenomena</li>
-                      <li>Tropical weather systems</li>
-                    </ul>
-                  </div>
+                      <div>
+                        <h2 className="text-2xl font-semibold mb-4">10. Hazardous Weather</h2>
+                        <ul className="list-disc pl-6 space-y-2">
+                          <li>
+                            <strong>Thunderstorm Hazards:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Severe turbulence and wind shear</li>
+                              <li>Lightning strikes and static electricity</li>
+                              <li>Heavy precipitation and hail</li>
+                              <li>Icing conditions above freezing level</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Turbulence Types:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Mechanical - terrain-induced</li>
+                              <li>Thermal - heat-induced vertical motion</li>
+                              <li>Wake turbulence - aircraft-induced</li>
+                              <li>Clear air turbulence (CAT)</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <strong>Mountain Wave Phenomena:</strong>
+                            <ul className="list-circle pl-6 mt-1">
+                              <li>Formation conditions and characteristics</li>
+                              <li>Associated cloud formations</li>
+                              <li>Turbulence intensity and location</li>
+                              <li>Avoidance techniques</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
                     </section>
                   </div>
                 </CardContent>
