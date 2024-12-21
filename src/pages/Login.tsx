@@ -10,13 +10,29 @@ const Login = () => {
 
   useEffect(() => {
     // Check if user is already logged in
-    supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth state changed:", event);
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log("Current session:", session);
+      if (session) {
+        console.log("User is already logged in, redirecting to dashboard");
+        navigate("/");
+      }
+    };
+
+    checkUser();
+
+    // Listen for auth state changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("Auth state changed:", event, session);
       if (session) {
         console.log("User is logged in, redirecting to dashboard");
         navigate("/");
       }
     });
+
+    return () => subscription.unsubscribe();
   }, [navigate]);
 
   return (
@@ -46,9 +62,8 @@ const Login = () => {
             }
           }}
           providers={['google']}
-          redirectTo={window.location.origin}
-          view="sign_in"
-          showLinks={true}
+          redirectTo={`${window.location.origin}/`}
+          onlyThirdPartyProviders={false}
         />
       </div>
     </div>
