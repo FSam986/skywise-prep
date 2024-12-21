@@ -21,82 +21,84 @@ import {
 
 type Difficulty = 'beginner' | 'intermediate' | 'expert';
 
-// Demo quiz data - in a real app, this would come from an API
-const generateQuizQuestions = (difficulty: Difficulty) => {
+// Quiz questions data
+const generateQuizQuestions = (category: string | undefined, difficulty: Difficulty) => {
   if (!category) return [];
   
   // CPL Meteorology specific questions
   if (category === 'cpl-meteorology') {
-    return [
+    const questions = [
       {
         id: 1,
         difficulty: 'beginner',
-        question: "What is the standard atmospheric pressure at sea level?",
+        question: "What is the primary gas in the Earth's atmosphere by volume?",
         options: [
-          "1023.25 hPa",
-          "1013.25 hPa",
-          "1003.25 hPa",
-          "993.25 hPa"
+          "Oxygen",
+          "Nitrogen",
+          "Argon",
+          "Carbon dioxide"
         ],
         correctAnswer: 1,
-        explanation: "The standard pressure at sea level is 1013.25 hPa / 29.92 inHg. This is covered in the 'Pressure Measurements' section of the study material."
+        explanation: "As covered in the Atmospheric Composition section, Nitrogen makes up 78% of the atmosphere by volume, making it the primary gas."
       },
       {
         id: 2,
         difficulty: 'beginner',
-        question: "What is the primary composition of Earth's atmosphere?",
+        question: "At what height does the tropopause typically occur at the equator?",
         options: [
-          "Oxygen (78%), Nitrogen (21%), Other gases (1%)",
-          "Nitrogen (78%), Oxygen (21%), Other gases (1%)",
-          "Nitrogen (50%), Oxygen (50%)",
-          "Oxygen (90%), Other gases (10%)"
+          "8-10 km",
+          "11-13 km",
+          "16-18 km",
+          "20-22 km"
         ],
-        correctAnswer: 1,
-        explanation: "As explained in the 'Atmospheric Composition' section, the atmosphere consists of Nitrogen (78%) as the primary component, Oxygen (21%), and other gases (1%) including Argon, CO2, and water vapor."
+        correctAnswer: 2,
+        explanation: "The tropopause height varies with latitude, and at the equator it typically occurs at 16-18 km as explained in the Troposphere Characteristics section."
       },
       {
         id: 3,
         difficulty: 'intermediate',
-        question: "What is the Dry Adiabatic Lapse Rate (DALR)?",
+        question: "What is the standard atmospheric pressure at sea level in the ISA?",
         options: [
-          "1.5°C/1000ft",
-          "2°C/1000ft",
-          "3°C/1000ft",
-          "4°C/1000ft"
+          "1000 hPa",
+          "1013.25 hPa",
+          "1020 hPa",
+          "760 hPa"
         ],
-        correctAnswer: 2,
-        explanation: "As covered in the 'Lapse Rates' section, the Dry Adiabatic Lapse Rate (DALR) is 3°C/1000ft."
+        correctAnswer: 1,
+        explanation: "The standard atmospheric pressure at sea level in the International Standard Atmosphere (ISA) is 1013.25 hPa, as covered in the Pressure Measurements section."
       },
       {
         id: 4,
         difficulty: 'intermediate',
-        question: "Which type of fog forms on clear, calm nights?",
+        question: "What happens to air density as altitude increases?",
         options: [
-          "Advection fog",
-          "Steam fog",
-          "Radiation fog",
-          "Frontal fog"
+          "Increases",
+          "Decreases",
+          "Remains constant",
+          "Varies unpredictably"
         ],
-        correctAnswer: 2,
-        explanation: "According to the 'Types of Fog' section, Radiation fog forms on clear, calm nights when the ground cools rapidly."
+        correctAnswer: 1,
+        explanation: "Air density decreases with increasing altitude due to decreasing pressure and temperature, as explained in the Atmospheric Structure section."
       },
       {
         id: 5,
         difficulty: 'expert',
-        question: "What characterizes the tropopause?",
+        question: "What is the Dry Adiabatic Lapse Rate (DALR)?",
         options: [
-          "Temperature increases with height",
-          "Temperature remains constant with height",
-          "Temperature decreases with height",
-          "Temperature varies randomly"
+          "1°C/100 m",
+          "0.65°C/100 m",
+          "0.98°C/100 m",
+          "3°C/1000 ft"
         ],
-        correctAnswer: 1,
-        explanation: "As described in the 'Tropopause' section, the tropopause is characterized by temperature remaining constant with height, marking the boundary between troposphere and stratosphere."
+        correctAnswer: 3,
+        explanation: "The Dry Adiabatic Lapse Rate (DALR) is 3°C/1000ft, as covered in the Temperature and Humidity section under Lapse Rates."
       }
-    ].filter(q => q.difficulty === difficulty);
+    ];
+    
+    return questions.filter(q => q.difficulty === difficulty);
   }
   
-  // Default questions for other categories can be added here
+  // Default questions for other categories
   return [];
 };
 
@@ -108,7 +110,7 @@ const Quiz = () => {
   const [showExplanation, setShowExplanation] = useState(false);
   const [difficulty, setDifficulty] = useState<Difficulty>('beginner');
   
-  const questions = generateQuizQuestions(difficulty);
+  const questions = generateQuizQuestions(category, difficulty);
   
   const { progress, setProgress } = useQuizProgress(category, difficulty);
   const { questionStatuses, setQuestionStatuses } = useQuestionAttempts(
