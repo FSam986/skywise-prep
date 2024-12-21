@@ -20,6 +20,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
     initializeCanvas,
     addText,
     exportCanvas,
+    clearCanvas,
   } = useCanvas(subject);
 
   const handleToolChange = (tool: typeof activeTool) => {
@@ -66,6 +67,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
             activeColor={activeColor}
             onColorChange={setActiveColor}
             onExport={exportCanvas}
+            onClear={clearCanvas}
           />
           <div className="border rounded-lg overflow-hidden">
             <canvas

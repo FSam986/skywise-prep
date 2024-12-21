@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Pen, Eraser, Highlighter, Type, Download } from "lucide-react";
+import { Pen, Eraser, Highlighter, Type, Download, Trash2 } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +13,7 @@ interface CanvasToolsProps {
   activeColor: string;
   onColorChange: (color: string) => void;
   onExport: (type: "pdf" | "png") => void;
+  onClear: () => void;
 }
 
 export const CanvasTools = ({
@@ -21,6 +22,7 @@ export const CanvasTools = ({
   activeColor,
   onColorChange,
   onExport,
+  onClear,
 }: CanvasToolsProps) => {
   return (
     <div className="flex gap-2 items-center">
@@ -58,6 +60,14 @@ export const CanvasTools = ({
         onChange={(e) => onColorChange(e.target.value)}
         className="w-8 h-8 rounded cursor-pointer"
       />
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={onClear}
+        className="text-destructive hover:bg-destructive hover:text-destructive-foreground"
+      >
+        <Trash2 className="h-4 w-4" />
+      </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button 

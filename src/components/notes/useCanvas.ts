@@ -59,6 +59,15 @@ export const useCanvas = (subject: string) => {
     }
   };
 
+  const clearCanvas = () => {
+    if (!canvas) return;
+    canvas.clear();
+    canvas.backgroundColor = '#ffffff';
+    canvas.renderAll();
+    toast.success('Canvas cleared');
+    saveNotes();
+  };
+
   const addText = () => {
     if (!canvas) return;
     const text = addTextToCanvas(canvas, canvas.freeDrawingBrush.color);
@@ -123,5 +132,6 @@ export const useCanvas = (subject: string) => {
     saveNotes,
     addText,
     exportCanvas,
+    clearCanvas,
   };
 };
