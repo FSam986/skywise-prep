@@ -21,6 +21,7 @@ import ATPLStudyMaterial from "./pages/ATPLStudyMaterial";
 import RatingsMaterial from "./pages/RatingsMaterial";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
+import PPLNavigationMaterial from "./pages/subjects/PPLNavigationMaterial";
 
 const queryClient = new QueryClient();
 
@@ -119,34 +120,10 @@ const App = () => (
               }
             />
             <Route
-              path="/ppl-study-material"
+              path="/ppl-navigation-material"
               element={
                 <ProtectedRoute>
-                  <PPLStudyMaterial />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/cpl-study-material"
-              element={
-                <ProtectedRoute>
-                  <CPLStudyMaterial />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/atpl-study-material"
-              element={
-                <ProtectedRoute>
-                  <ATPLStudyMaterial />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/ratings-material"
-              element={
-                <ProtectedRoute>
-                  <RatingsMaterial />
+                  <PPLNavigationMaterial />
                 </ProtectedRoute>
               }
             />

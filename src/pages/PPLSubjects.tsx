@@ -7,43 +7,43 @@ const subjects = [
     title: "PPL Navigation",
     description: "Basic navigation principles and techniques",
     icon: Compass,
-    path: "ppl-navigation",
+    path: "ppl-navigation-material",
   },
   {
     title: "PPL Flight Planning (A)",
     description: "Flight planning fundamentals",
     icon: FileText,
-    path: "ppl-flight-planning",
+    path: "ppl-flight-planning-material",
   },
   {
     title: "PPL Meteorology",
     description: "Weather patterns and meteorological principles",
     icon: Cloud,
-    path: "ppl-meteorology",
+    path: "ppl-meteorology-material",
   },
   {
     title: "PPL Human Performance",
     description: "Human factors in aviation",
     icon: Brain,
-    path: "ppl-human-performance",
+    path: "ppl-human-performance-material",
   },
   {
     title: "PPL Principles of Flight (A)",
     description: "Basic aerodynamics and flight principles",
     icon: Plane,
-    path: "ppl-principles",
+    path: "ppl-principles-material",
   },
   {
     title: "PPL Aircraft Technical and General (A)",
     description: "Aircraft systems and technical knowledge",
     icon: Wrench,
-    path: "ppl-technical",
+    path: "ppl-technical-material",
   },
   {
     title: "PPL Air Law",
     description: "Aviation regulations and procedures",
     icon: BookOpen,
-    path: "ppl-air-law",
+    path: "ppl-air-law-material",
   },
 ];
 
@@ -59,7 +59,7 @@ const PPLSubjects = () => {
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${subject.path}`)}
+              onClick={() => navigate(`/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">
