@@ -64,19 +64,13 @@ export const useCanvas = (subject: string) => {
       backgroundColor: '#ffffff',
       isDrawingMode: true,
     });
-
-    // Enable touch events
-    newCanvas.enablePointerEvents();
     
-    // Configure iPad Pencil settings
+    // Configure touch and pointer events
+    newCanvas.upperCanvasEl.style.touchAction = 'none';
+    newCanvas.upperCanvasEl.style.userSelect = 'none';
+    
+    // Set pressure sensitivity for Apple Pencil
     if (window.PointerEvent) {
-      newCanvas.upperCanvasEl.style.touchAction = 'none';
-      newCanvas.upperCanvasEl.style.userSelect = 'none';
-      
-      // Set pressure sensitivity for Apple Pencil
-      newCanvas.freeDrawingBrush.pressureMax = 1;
-      newCanvas.freeDrawingBrush.pressureMin = 0;
-      
       newCanvas.on('pointer:down', (e) => {
         if (e.pointer?.pressure !== undefined) {
           const pressure = e.pointer.pressure;
