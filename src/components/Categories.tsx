@@ -1,4 +1,4 @@
-import { Compass, Globe, Navigation, Plane, BookOpen } from "lucide-react";
+import { Compass, Globe, Navigation, Plane } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { useNavigate } from "react-router-dom";
 
@@ -26,12 +26,6 @@ const categories = [
     description: "Study additional pilot ratings",
     icon: Compass,
     path: "ratings",
-  },
-  {
-    title: "Study Material",
-    description: "Access comprehensive study notes and detailed explanations for all aviation subjects",
-    icon: BookOpen,
-    path: "study-material",
   },
 ];
 
