@@ -32,10 +32,12 @@ const Login = () => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       console.log("Auth state changed on login page:", event, session);
+      
       if (event === 'SIGNED_IN' && session) {
         console.log("User signed in, redirecting to dashboard");
         navigate("/");
       }
+      
       // Handle password recovery event
       if (event === 'PASSWORD_RECOVERY') {
         console.log("Password recovery event detected");
@@ -44,6 +46,16 @@ const Login = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Determine the initial view based on URL parameters
+  const getInitialView = () => {
+    const hash = window.location.hash;
+    if (hash.includes('#access_token') && hash.includes('type=recovery')) {
+      console.log("Showing update password view");
+      return 'update_password';
+    }
+    return 'sign_in';
+  };
 
   return (
     <div className="min-h-screen bg-primary dark:bg-gray-900 flex flex-col items-center justify-center p-4">
@@ -74,7 +86,7 @@ const Login = () => {
           providers={['google']}
           redirectTo={`${window.location.origin}/`}
           onlyThirdPartyProviders={false}
-          view={window.location.hash.includes('type=recovery') ? 'update_password' : 'sign_in'}
+          view={getInitialView()}
           showLinks={true}
           magicLink={true}
         />
