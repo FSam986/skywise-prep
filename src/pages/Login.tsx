@@ -12,7 +12,7 @@ const Login = () => {
     // Check if user is already logged in
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      console.log("Current session:", session);
+      console.log("Current session on login page:", session);
       if (session) {
         console.log("User is already logged in, redirecting to dashboard");
         navigate("/");
@@ -25,9 +25,9 @@ const Login = () => {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log("Auth state changed:", event, session);
-      if (session) {
-        console.log("User is logged in, redirecting to dashboard");
+      console.log("Auth state changed on login page:", event, session);
+      if (event === 'SIGNED_IN' && session) {
+        console.log("User signed in, redirecting to dashboard");
         navigate("/");
       }
     });
