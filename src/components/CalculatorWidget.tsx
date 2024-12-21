@@ -133,18 +133,38 @@ export const CalculatorWidget = () => {
           <Calculator className="h-4 w-4" />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-background text-foreground">
+      <DialogContent className="sm:max-w-[425px] bg-background">
         <DialogHeader>
-          <DialogTitle>Calculator</DialogTitle>
+          <DialogTitle className="text-foreground">Calculator</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="calculator" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="calculator">Basic</TabsTrigger>
-            <TabsTrigger value="scientific">Scientific</TabsTrigger>
-            <TabsTrigger value="fractions">Fractions</TabsTrigger>
-            <TabsTrigger value="units">Units</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-4 bg-muted">
+            <TabsTrigger 
+              value="calculator"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+            >
+              Basic
+            </TabsTrigger>
+            <TabsTrigger 
+              value="scientific"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+            >
+              Scientific
+            </TabsTrigger>
+            <TabsTrigger 
+              value="fractions"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+            >
+              Fractions
+            </TabsTrigger>
+            <TabsTrigger 
+              value="units"
+              className="data-[state=active]:bg-background data-[state=active]:text-foreground"
+            >
+              Units
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="calculator">
+          <TabsContent value="calculator" className="mt-4">
             <div className="grid gap-4">
               <CalculatorDisplay display={display} memory={memory} />
               <NumericKeypad
@@ -155,7 +175,7 @@ export const CalculatorWidget = () => {
               />
             </div>
           </TabsContent>
-          <TabsContent value="scientific">
+          <TabsContent value="scientific" className="mt-4">
             <div className="grid gap-4">
               <CalculatorDisplay 
                 display={display} 
@@ -169,11 +189,11 @@ export const CalculatorWidget = () => {
               />
             </div>
           </TabsContent>
-          <TabsContent value="fractions">
+          <TabsContent value="fractions" className="mt-4">
             <FractionInput onFractionSubmit={handleFractionResult} />
             <CalculatorDisplay display={display} memory={memory} />
           </TabsContent>
-          <TabsContent value="units">
+          <TabsContent value="units" className="mt-4">
             <UnitConverter onConversion={handleConversionResult} />
             <CalculatorDisplay display={display} memory={memory} />
           </TabsContent>
