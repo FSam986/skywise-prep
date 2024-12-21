@@ -4,15 +4,26 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { PlaneTakeoff } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     // Check if user is already logged in
     const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error } = await supabase.auth.getSession();
       console.log("Current session on login page:", session);
+      if (error) {
+        console.error("Error checking session:", error);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to check authentication status"
+        });
+        return;
+      }
       if (session) {
         console.log("User is already logged in, redirecting to dashboard");
         navigate("/");
@@ -35,17 +46,26 @@ const Login = () => {
       
       if (event === 'SIGNED_IN' && session) {
         console.log("User signed in, redirecting to dashboard");
+        toast({
+          title: "Success",
+          description: "Successfully signed in"
+        });
         navigate("/");
-      }
-      
-      // Handle password recovery event
-      if (event === 'PASSWORD_RECOVERY') {
+      } else if (event === 'SIGNED_OUT') {
+        console.log("User signed out");
+        toast({
+          title: "Signed out",
+          description: "You have been signed out"
+        });
+      } else if (event === 'USER_UPDATED') {
+        console.log("User profile updated");
+      } else if (event === 'PASSWORD_RECOVERY') {
         console.log("Password recovery event detected");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, toast]);
 
   // Determine the initial view based on URL parameters
   const getInitialView = () => {
@@ -59,6 +79,7 @@ const Login = () => {
 
   // Get the site URL for redirects
   const getSiteUrl = () => {
+    console.log("Getting site URL:", window.location.origin);
     return window.location.origin;
   };
 
