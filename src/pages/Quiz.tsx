@@ -6,6 +6,7 @@ import { QuizQuestion } from "@/components/quiz/QuizQuestion";
 import { QuizNavigation } from "@/components/quiz/QuizNavigation";
 import { MasteryTracker } from "@/components/quiz/MasteryTracker";
 import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 // Demo quiz data - in a real app, this would come from an API
 const demoQuiz = {
@@ -52,15 +53,25 @@ const Quiz = () => {
   useEffect(() => {
     const fetchProgress = async () => {
       if (!category) return;
-      
+
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        console.error('No user found');
+        return;
+      }
+
+      // Try to get existing progress
       const { data, error } = await supabase
         .from('quiz_progress')
         .select('*')
         .eq('category', category)
-        .single();
+        .eq('user_id', user.id)
+        .maybeSingle();
 
       if (error) {
         console.error('Error fetching progress:', error);
+        toast.error('Failed to load progress');
         return;
       }
 
@@ -70,6 +81,22 @@ const Quiz = () => {
           averageTime: data.average_time || 0,
           streakDays: data.streak_days || 0
         });
+      } else {
+        // Create initial progress record
+        const { error: insertError } = await supabase
+          .from('quiz_progress')
+          .insert({
+            user_id: user.id,
+            category,
+            questions_completed: 0,
+            average_time: 0,
+            streak_days: 0
+          });
+
+        if (insertError) {
+          console.error('Error creating initial progress:', insertError);
+          toast.error('Failed to initialize progress');
+        }
       }
     };
 
@@ -84,23 +111,33 @@ const Quiz = () => {
   const handleNextQuestion = async () => {
     if (!category) return;
 
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      console.error('No user found');
+      return;
+    }
+
     // Update progress in Supabase
     const { error } = await supabase
       .from('quiz_progress')
       .upsert({
+        user_id: user.id,
         category,
         questions_completed: progress.questionsCompleted + 1,
-        average_time: progress.averageTime, // You might want to update this based on actual time tracking
+        average_time: progress.averageTime,
         last_quiz_date: new Date().toISOString()
       });
 
     if (error) {
       console.error('Error updating progress:', error);
+      toast.error('Failed to update progress');
     } else {
       setProgress(prev => ({
         ...prev,
         questionsCompleted: prev.questionsCompleted + 1
       }));
+      toast.success('Progress updated');
     }
 
     setSelectedAnswer(null);
