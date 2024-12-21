@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { NotesWidget } from "@/components/NotesWidget";
+import { CalculatorWidget } from "@/components/CalculatorWidget";
+import { FlightComputerWidget } from "@/components/FlightComputerWidget";
 
 // Demo quiz data
 const demoQuiz = {
@@ -58,6 +61,11 @@ const Quiz = () => {
   return (
     <div className="min-h-screen bg-muted py-12 px-4">
       <div className="container max-w-3xl mx-auto">
+        <div className="flex justify-end gap-2 mb-4">
+          <NotesWidget subject={category || ""} />
+          <CalculatorWidget />
+          <FlightComputerWidget />
+        </div>
         <Card className="mb-8">
           <CardHeader>
             <CardTitle>{demoQuiz.title} - {category}</CardTitle>
