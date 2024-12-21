@@ -137,37 +137,43 @@ const Quiz = () => {
   const isLastQuestion = currentQuestion === demoQuiz.questions.length - 1;
 
   return (
-    <div className="min-h-screen bg-muted py-12 px-4">
-      <div className="container max-w-3xl mx-auto">
-        <div className="space-y-6">
-          <MasteryTracker
-            questionsCompleted={progress.questionsCompleted}
-            averageTime={progress.averageTime}
-            streakDays={progress.streakDays}
-          />
+    <div className="min-h-screen bg-muted py-8 px-4">
+      <div className="container max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Mastery Tracker - Takes up 4 columns on large screens */}
+          <div className="lg:col-span-4">
+            <MasteryTracker
+              questionsCompleted={progress.questionsCompleted}
+              averageTime={progress.averageTime}
+              streakDays={progress.streakDays}
+            />
+          </div>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle>{demoQuiz.title} - {category}</CardTitle>
-              <QuizWidgets subject={category || ""} />
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <QuizQuestion
-                currentQuestion={currentQuestion}
-                totalQuestions={demoQuiz.questions.length}
-                question={question}
-                selectedAnswer={selectedAnswer}
-                showExplanation={showExplanation}
-                onAnswerSelect={handleAnswerSelect}
-              />
-              
-              <QuizNavigation
-                showExplanation={showExplanation}
-                isLastQuestion={isLastQuestion}
-                onNextQuestion={handleNextQuestion}
-              />
-            </CardContent>
-          </Card>
+          {/* Quiz Content - Takes up 8 columns on large screens */}
+          <div className="lg:col-span-8">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle>{demoQuiz.title} - {category}</CardTitle>
+                <QuizWidgets subject={category || ""} />
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <QuizQuestion
+                  currentQuestion={currentQuestion}
+                  totalQuestions={demoQuiz.questions.length}
+                  question={question}
+                  selectedAnswer={selectedAnswer}
+                  showExplanation={showExplanation}
+                  onAnswerSelect={handleAnswerSelect}
+                />
+                
+                <QuizNavigation
+                  showExplanation={showExplanation}
+                  isLastQuestion={isLastQuestion}
+                  onNextQuestion={handleNextQuestion}
+                />
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
