@@ -14,6 +14,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [activeColor, setActiveColor] = useState("#000000");
   const [activeTool, setActiveTool] = useState<"pen" | "text" | "ruler" | "eraser" | "highlighter">("pen");
+  const [isErasing, setIsErasing] = useState(false);
 
   useEffect(() => {
     const loadNotes = async () => {
@@ -46,10 +47,34 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
       width: 800,
       height: 600,
       backgroundColor: '#ffffff',
+      isDrawingMode: true,
     });
 
     newCanvas.freeDrawingBrush.color = activeColor;
     newCanvas.freeDrawingBrush.width = 2;
+
+    // Setup eraser mode event handlers
+    newCanvas.on('mouse:down', (event) => {
+      if (isErasing && event.target) {
+        newCanvas.remove(event.target);
+        saveNotes();
+      }
+    });
+
+    newCanvas.on('mouse:move', (event) => {
+      if (isErasing) {
+        const pointer = newCanvas.getPointer(event.e);
+        const objects = newCanvas.getObjects();
+        
+        objects.forEach((obj) => {
+          if (obj.containsPoint(pointer)) {
+            newCanvas.remove(obj);
+            saveNotes();
+          }
+        });
+      }
+    });
+
     setCanvas(newCanvas);
 
     // Auto-save when canvas is modified
@@ -89,18 +114,27 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
     if (!canvas) return;
 
     setActiveTool(tool);
-    canvas.isDrawingMode = tool === 'pen' || tool === 'highlighter';
-
-    if (tool === 'highlighter') {
-      canvas.freeDrawingBrush.color = 'rgba(255, 255, 0, 0.3)';
-      canvas.freeDrawingBrush.width = 20;
-    } else if (tool === 'pen') {
-      canvas.freeDrawingBrush.color = activeColor;
-      canvas.freeDrawingBrush.width = 2;
-    } else if (tool === 'eraser') {
-      // Implement eraser functionality
-      canvas.freeDrawingBrush.color = '#ffffff';
-      canvas.freeDrawingBrush.width = 20;
+    setIsErasing(tool === 'eraser');
+    
+    // Update canvas mode based on tool
+    if (tool === 'eraser') {
+      canvas.isDrawingMode = false;
+      canvas.selection = true;
+      canvas.defaultCursor = 'crosshair';
+      canvas.hoverCursor = 'crosshair';
+    } else {
+      canvas.isDrawingMode = tool === 'pen' || tool === 'highlighter';
+      canvas.selection = tool === 'text' || tool === 'ruler';
+      canvas.defaultCursor = 'default';
+      canvas.hoverCursor = 'default';
+      
+      if (tool === 'highlighter') {
+        canvas.freeDrawingBrush.color = 'rgba(255, 255, 0, 0.3)';
+        canvas.freeDrawingBrush.width = 20;
+      } else if (tool === 'pen') {
+        canvas.freeDrawingBrush.color = activeColor;
+        canvas.freeDrawingBrush.width = 2;
+      }
     }
   };
 
