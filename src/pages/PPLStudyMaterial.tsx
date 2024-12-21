@@ -1,6 +1,7 @@
 import { BookOpen, Cloud, Scale, Compass, Wrench, Brain, FileText, Plane } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { NotesWidget } from "@/components/NotesWidget";
 
 const subjects = [
   {
@@ -58,9 +59,12 @@ const PPLStudyMaterial = () => {
           {subjects.map((subject) => (
             <Card 
               key={subject.title} 
-              className="hover:shadow-lg transition-shadow cursor-pointer"
+              className="hover:shadow-lg transition-shadow cursor-pointer relative"
               onClick={() => navigate(`/quiz/${subject.path}`)}
             >
+              <div className="absolute top-4 right-4 z-10" onClick={(e) => e.stopPropagation()}>
+                <NotesWidget subject={subject.title} />
+              </div>
               <CardHeader>
                 <div className="flex justify-center mb-4">
                   <subject.icon className="h-8 w-8 text-secondary" />
