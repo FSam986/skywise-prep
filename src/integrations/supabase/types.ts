@@ -57,6 +57,45 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_progress: {
+        Row: {
+          average_time: number | null
+          category: string
+          created_at: string | null
+          id: string
+          last_quiz_date: string | null
+          questions_completed: number | null
+          streak_days: number | null
+          total_questions: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          average_time?: number | null
+          category: string
+          created_at?: string | null
+          id?: string
+          last_quiz_date?: string | null
+          questions_completed?: number | null
+          streak_days?: number | null
+          total_questions?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          average_time?: number | null
+          category?: string
+          created_at?: string | null
+          id?: string
+          last_quiz_date?: string | null
+          questions_completed?: number | null
+          streak_days?: number | null
+          total_questions?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
