@@ -65,37 +65,36 @@ export const useCanvas = (subject: string) => {
       isDrawingMode: true,
     });
 
-    // Enhanced eraser functionality
-    let isMouseDown = false;
-
-    newCanvas.on('mouse:down', () => {
-      isMouseDown = true;
-    });
-
-    newCanvas.on('mouse:up', () => {
-      isMouseDown = false;
-    });
-
-    newCanvas.on('mouse:move', (event) => {
-      if (isErasing && isMouseDown) {
-        const pointer = newCanvas.getPointer(event.e);
-        const objects = newCanvas.getObjects();
-        
-        objects.forEach((obj) => {
-          if (obj.containsPoint(pointer)) {
-            newCanvas.remove(obj);
-            newCanvas.renderAll();
-            saveNotes();
+    // Enable touch events
+    newCanvas.enablePointerEvents();
+    
+    // Configure iPad Pencil settings
+    if (window.PointerEvent) {
+      newCanvas.upperCanvasEl.style.touchAction = 'none';
+      newCanvas.upperCanvasEl.style.userSelect = 'none';
+      
+      // Set pressure sensitivity for Apple Pencil
+      newCanvas.freeDrawingBrush.pressureMax = 1;
+      newCanvas.freeDrawingBrush.pressureMin = 0;
+      
+      newCanvas.on('pointer:down', (e) => {
+        if (e.pointer?.pressure !== undefined) {
+          const pressure = e.pointer.pressure;
+          if (isErasing) {
+            newCanvas.freeDrawingBrush.width = pressure * 30;
+          } else {
+            newCanvas.freeDrawingBrush.width = pressure * 5;
           }
-        });
-      }
-    });
+        }
+      });
+    }
+
+    // Auto-save when canvas is modified
+    newCanvas.on('object:added', saveNotes);
+    newCanvas.on('object:modified', saveNotes);
+    newCanvas.on('object:removed', saveNotes);
 
     setCanvas(newCanvas);
-    
-    // Auto-save when canvas is modified
-    newCanvas.on('object:modified', saveNotes);
-    newCanvas.on('object:added', saveNotes);
   };
 
   useEffect(() => {

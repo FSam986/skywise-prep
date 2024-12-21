@@ -11,7 +11,7 @@ interface NotesWidgetProps {
 
 export const NotesWidget = ({ subject }: NotesWidgetProps) => {
   const [activeColor, setActiveColor] = useState("#000000");
-  const [activeTool, setActiveTool] = useState<"pen" | "text" | "ruler" | "eraser" | "highlighter">("pen");
+  const [activeTool, setActiveTool] = useState<"pen" | "eraser" | "highlighter">("pen");
   
   const {
     canvas,
@@ -26,25 +26,18 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
     setActiveTool(tool);
     setIsErasing(tool === 'eraser');
     
-    // Update canvas mode based on tool
     if (tool === 'eraser') {
-      canvas.isDrawingMode = false;
-      canvas.selection = true;
-      canvas.defaultCursor = 'crosshair';
-      canvas.hoverCursor = 'crosshair';
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.width = 20;
+      canvas.freeDrawingBrush.color = '#ffffff';
+    } else if (tool === 'highlighter') {
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.color = 'rgba(255, 255, 0, 0.3)';
+      canvas.freeDrawingBrush.width = 20;
     } else {
-      canvas.isDrawingMode = tool === 'pen' || tool === 'highlighter';
-      canvas.selection = tool === 'text' || tool === 'ruler';
-      canvas.defaultCursor = 'default';
-      canvas.hoverCursor = 'default';
-      
-      if (tool === 'highlighter') {
-        canvas.freeDrawingBrush.color = 'rgba(255, 255, 0, 0.3)';
-        canvas.freeDrawingBrush.width = 20;
-      } else if (tool === 'pen') {
-        canvas.freeDrawingBrush.color = activeColor;
-        canvas.freeDrawingBrush.width = 2;
-      }
+      canvas.isDrawingMode = true;
+      canvas.freeDrawingBrush.color = activeColor;
+      canvas.freeDrawingBrush.width = 2;
     }
   };
 
@@ -73,6 +66,7 @@ export const NotesWidget = ({ subject }: NotesWidgetProps) => {
                   initializeCanvas(canvasElement);
                 }
               }}
+              style={{ touchAction: 'none' }}
             />
           </div>
         </div>

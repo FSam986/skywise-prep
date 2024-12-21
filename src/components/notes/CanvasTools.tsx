@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Pen, Type, Ruler, Eraser, Highlighter } from "lucide-react";
+import { Pen, Eraser, Highlighter } from "lucide-react";
 
 interface CanvasToolsProps {
-  activeTool: "pen" | "text" | "ruler" | "eraser" | "highlighter";
-  onToolChange: (tool: "pen" | "text" | "ruler" | "eraser" | "highlighter") => void;
+  activeTool: "pen" | "eraser" | "highlighter";
+  onToolChange: (tool: "pen" | "eraser" | "highlighter") => void;
   activeColor: string;
   onColorChange: (color: string) => void;
 }
@@ -22,20 +22,6 @@ export const CanvasTools = ({
         onClick={() => onToolChange('pen')}
       >
         <Pen className="h-4 w-4" />
-      </Button>
-      <Button
-        variant={activeTool === 'text' ? 'default' : 'outline'}
-        size="icon"
-        onClick={() => onToolChange('text')}
-      >
-        <Type className="h-4 w-4" />
-      </Button>
-      <Button
-        variant={activeTool === 'ruler' ? 'default' : 'outline'}
-        size="icon"
-        onClick={() => onToolChange('ruler')}
-      >
-        <Ruler className="h-4 w-4" />
       </Button>
       <Button
         variant={activeTool === 'eraser' ? 'default' : 'outline'}
