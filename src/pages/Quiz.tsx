@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { QuizWidgets } from "@/components/widgets/QuizWidgets";
@@ -7,6 +7,8 @@ import { QuizNavigation } from "@/components/quiz/QuizNavigation";
 import { MasteryTracker } from "@/components/quiz/MasteryTracker";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useQuizProgress } from "@/hooks/useQuizProgress";
+import { useQuestionAttempts } from "@/hooks/useQuestionAttempts";
 
 // Demo quiz data - in a real app, this would come from an API
 const demoQuiz = {
@@ -44,77 +46,13 @@ const Quiz = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
-  const [questionStatuses, setQuestionStatuses] = useState<Array<'correct' | 'wrong' | 'unanswered' | null>>(
-    new Array(demoQuiz.questions.length).fill(null)
+  
+  const { progress, setProgress } = useQuizProgress(category);
+  const { questionStatuses, setQuestionStatuses } = useQuestionAttempts(
+    category,
+    demoQuiz.questions.length,
+    demoQuiz.questions
   );
-  const [progress, setProgress] = useState({
-    questionsCompleted: 0,
-    averageTime: 0,
-    streakDays: 0
-  });
-
-  useEffect(() => {
-    const fetchProgress = async () => {
-      if (!category) return;
-
-      // Get current user
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        console.error('No user found');
-        return;
-      }
-
-      // Try to get existing progress
-      const { data: progressData, error: progressError } = await supabase
-        .from('quiz_progress')
-        .select('*')
-        .eq('category', category)
-        .eq('user_id', user.id)
-        .maybeSingle();
-
-      if (progressError) {
-        console.error('Error fetching progress:', progressError);
-        toast.error('Failed to load progress');
-        return;
-      }
-
-      // Fetch question attempts
-      const { data: attemptsData, error: attemptsError } = await supabase
-        .from('question_attempts')
-        .select('*')
-        .eq('category', category)
-        .eq('user_id', user.id);
-
-      if (attemptsError) {
-        console.error('Error fetching attempts:', attemptsError);
-        toast.error('Failed to load attempts');
-        return;
-      }
-
-      // Update progress state
-      if (progressData) {
-        setProgress({
-          questionsCompleted: progressData.questions_completed || 0,
-          averageTime: progressData.average_time || 0,
-          streakDays: progressData.streak_days || 0
-        });
-      }
-
-      // Update question statuses based on attempts
-      if (attemptsData) {
-        const newStatuses = [...questionStatuses];
-        attemptsData.forEach(attempt => {
-          const questionIndex = demoQuiz.questions.findIndex(q => q.id === attempt.question_id);
-          if (questionIndex !== -1) {
-            newStatuses[questionIndex] = attempt.status as 'correct' | 'wrong' | 'unanswered';
-          }
-        });
-        setQuestionStatuses(newStatuses);
-      }
-    };
-
-    fetchProgress();
-  }, [category]);
 
   const handleAnswerSelect = async (index: number) => {
     setSelectedAnswer(index);
@@ -127,7 +65,6 @@ const Quiz = () => {
     newStatuses[currentQuestion] = status;
     setQuestionStatuses(newStatuses);
 
-    // Save attempt to database
     if (category) {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
@@ -153,14 +90,12 @@ const Quiz = () => {
   const handleNextQuestion = async () => {
     if (!category) return;
 
-    // Get current user
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       console.error('No user found');
       return;
     }
 
-    // Update progress using upsert
     const { error } = await supabase
       .from('quiz_progress')
       .upsert({
