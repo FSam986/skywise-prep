@@ -5,25 +5,25 @@ import { useNavigate } from "react-router-dom";
 const categories = [
   {
     title: "PPL Training",
-    description: "Practice PPL subjects with interactive quizzes",
+    description: "Study and practice PPL subjects",
     icon: Plane,
     path: "ppl-subjects",
   },
   {
     title: "CPL Training",
-    description: "Test your CPL knowledge with comprehensive quizzes",
+    description: "Study and practice CPL subjects",
     icon: Navigation,
     path: "cpl-subjects",
   },
   {
     title: "ATPL Training",
-    description: "Challenge yourself with ATPL level quizzes",
+    description: "Study and practice ATPL subjects",
     icon: Globe,
     path: "atpl-subjects",
   },
   {
     title: "Ratings",
-    description: "Test your knowledge on additional pilot ratings",
+    description: "Study additional pilot ratings",
     icon: Compass,
     path: "ratings",
   },

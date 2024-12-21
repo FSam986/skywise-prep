@@ -5,49 +5,49 @@ import { useNavigate } from "react-router-dom";
 const subjects = [
   {
     title: "CPL General Navigation",
-    description: "Advanced navigation techniques",
+    description: "Study advanced navigation techniques",
     icon: Compass,
     path: "cpl-navigation-material",
   },
   {
     title: "CPL Instruments and Electronics",
-    description: "Aircraft instrumentation systems",
+    description: "Learn about aircraft instrumentation systems",
     icon: Scale,
     path: "cpl-instruments-material",
   },
   {
     title: "CPL Air Law",
-    description: "Commercial aviation regulations",
+    description: "Study commercial aviation regulations",
     icon: BookOpen,
     path: "cpl-air-law-material",
   },
   {
     title: "CPL Aircraft Technical and General",
-    description: "Advanced aircraft systems",
+    description: "Learn about advanced aircraft systems",
     icon: Wrench,
     path: "cpl-technical-material",
   },
   {
     title: "CPL Flight Planning",
-    description: "Advanced flight planning",
+    description: "Study advanced flight planning",
     icon: FileText,
     path: "cpl-flight-planning-material",
   },
   {
     title: "CPL Meteorology",
-    description: "Advanced weather systems",
+    description: "Learn about advanced weather systems",
     icon: Cloud,
     path: "cpl-meteorology-material",
   },
   {
     title: "CPL Radio Aids",
-    description: "Radio navigation systems",
+    description: "Study radio navigation systems",
     icon: Radio,
     path: "cpl-radio-aids-material",
   },
   {
     title: "CPL Human Performance",
-    description: "Advanced human factors",
+    description: "Learn about advanced human factors",
     icon: Brain,
     path: "cpl-human-performance-material",
   },
@@ -65,7 +65,7 @@ const CPLStudyMaterial = () => {
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/quiz/${subject.path}`)}
+              onClick={() => navigate(`/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">
