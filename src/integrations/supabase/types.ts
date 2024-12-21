@@ -52,8 +52,35 @@ export type Database = {
         Update: {
           avatar_url?: string | null
           created_at?: string
-          id?: string
+          id: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      question_attempts: {
+        Row: {
+          id: string
+          user_id: string
+          category: string
+          question_id: number
+          status: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          category: string
+          question_id: number
+          status: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          category?: string
+          question_id?: number
+          status?: string
+          created_at?: string
         }
         Relationships: []
       }
@@ -121,7 +148,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
@@ -175,10 +202,10 @@ export type TablesUpdate<
     : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
     ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-        Update: infer U
-      }
-      ? U
-      : never
+      Update: infer U
+    }
+    ? U
+    : never
     : never
 
 export type Enums<

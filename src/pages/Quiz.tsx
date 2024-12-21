@@ -65,25 +65,51 @@ const Quiz = () => {
       }
 
       // Try to get existing progress
-      const { data, error } = await supabase
+      const { data: progressData, error: progressError } = await supabase
         .from('quiz_progress')
         .select('*')
         .eq('category', category)
         .eq('user_id', user.id)
         .maybeSingle();
 
-      if (error) {
-        console.error('Error fetching progress:', error);
+      if (progressError) {
+        console.error('Error fetching progress:', progressError);
         toast.error('Failed to load progress');
         return;
       }
 
-      if (data) {
+      // Fetch question attempts
+      const { data: attemptsData, error: attemptsError } = await supabase
+        .from('question_attempts')
+        .select('*')
+        .eq('category', category)
+        .eq('user_id', user.id);
+
+      if (attemptsError) {
+        console.error('Error fetching attempts:', attemptsError);
+        toast.error('Failed to load attempts');
+        return;
+      }
+
+      // Update progress state
+      if (progressData) {
         setProgress({
-          questionsCompleted: data.questions_completed || 0,
-          averageTime: data.average_time || 0,
-          streakDays: data.streak_days || 0
+          questionsCompleted: progressData.questions_completed || 0,
+          averageTime: progressData.average_time || 0,
+          streakDays: progressData.streak_days || 0
         });
+      }
+
+      // Update question statuses based on attempts
+      if (attemptsData) {
+        const newStatuses = [...questionStatuses];
+        attemptsData.forEach(attempt => {
+          const questionIndex = demoQuiz.questions.findIndex(q => q.id === attempt.question_id);
+          if (questionIndex !== -1) {
+            newStatuses[questionIndex] = attempt.status as 'correct' | 'wrong' | 'unanswered';
+          }
+        });
+        setQuestionStatuses(newStatuses);
       }
     };
 
