@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { QuizWidgets } from "@/components/widgets/QuizWidgets";
 import { QuizQuestion } from "@/components/quiz/QuizQuestion";
 import { QuizNavigation } from "@/components/quiz/QuizNavigation";
@@ -9,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuizProgress } from "@/hooks/useQuizProgress";
 import { useQuestionAttempts } from "@/hooks/useQuestionAttempts";
+import { ArrowLeft } from "lucide-react";
 
 // Demo quiz data - in a real app, this would come from an API
 const demoQuiz = {
@@ -43,6 +45,7 @@ const demoQuiz = {
 
 const Quiz = () => {
   const { category } = useParams();
+  const navigate = useNavigate();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -142,6 +145,16 @@ const Quiz = () => {
   return (
     <div className="min-h-screen bg-muted py-8 px-4">
       <div className="container max-w-6xl mx-auto space-y-6">
+        <Button
+          variant="outline"
+          size="sm"
+          className="mb-4"
+          onClick={() => navigate('/')}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Index
+        </Button>
+
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle>{demoQuiz.title} - {category}</CardTitle>
