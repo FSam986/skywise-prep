@@ -68,16 +68,16 @@ export const CanvasTools = ({
             <Download className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-white shadow-lg border rounded-md min-w-[150px]">
+        <DropdownMenuContent align="end" className="bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700">
           <DropdownMenuItem 
-            onClick={() => onExport('png')} 
-            className="cursor-pointer hover:bg-muted px-3 py-2 rounded"
+            onClick={() => onExport('png')}
+            className="hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
           >
             Export as PNG
           </DropdownMenuItem>
           <DropdownMenuItem 
-            onClick={() => onExport('pdf')} 
-            className="cursor-pointer hover:bg-muted px-3 py-2 rounded"
+            onClick={() => onExport('pdf')}
+            className="hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
           >
             Export as PDF
           </DropdownMenuItem>
