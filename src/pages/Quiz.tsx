@@ -153,8 +153,6 @@ const Quiz = () => {
   return (
     <div className="min-h-screen bg-muted py-12 px-4">
       <div className="container max-w-3xl mx-auto">
-        <QuizWidgets subject={category || ""} />
-        
         <div className="space-y-6">
           <MasteryTracker
             questionsCompleted={progress.questionsCompleted}
@@ -163,8 +161,9 @@ const Quiz = () => {
           />
 
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle>{demoQuiz.title} - {category}</CardTitle>
+              <QuizWidgets subject={category || ""} />
             </CardHeader>
             <CardContent className="space-y-6">
               <QuizQuestion
