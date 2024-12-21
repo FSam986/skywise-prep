@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { StrictMode } from "react";
 
 // Page imports
 import Index from "./pages/Index";
@@ -51,6 +52,7 @@ import ATPLMeteorologicalMaterial from "./pages/subjects/ATPLMeteorologicalMater
 import NightRatingMaterial from "./pages/subjects/NightRatingMaterial";
 import InstrumentRatingMaterial from "./pages/subjects/InstrumentRatingMaterial";
 
+// Initialize QueryClient outside of component
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -97,29 +99,31 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <TooltipProvider>
-          <div className="fixed top-4 right-4 z-50">
-            <ThemeToggle />
-          </div>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              
-              {/* Protected Routes */}
-              <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-              <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-              <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
-              <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
-              <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
-              <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
-              <Route path="/study-material" element={<ProtectedRoute><StudyMaterial /></ProtectedRoute>} />
-              <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
-              <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-              
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <TooltipProvider>
+            <div className="fixed top-4 right-4 z-50">
+              <ThemeToggle />
+            </div>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                
+                {/* Protected Routes */}
+                <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+                <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+                <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
+                <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
+                <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
+                <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
+                <Route path="/study-material" element={<ProtectedRoute><StudyMaterial /></ProtectedRoute>} />
+                <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
+                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                
+                {/* Study Material Routes */}
               {/* PPL Study Material Routes */}
               <Route path="/ppl-navigation-material" element={<ProtectedRoute><PPLNavigationMaterial /></ProtectedRoute>} />
               <Route path="/ppl-flight-planning-material" element={<ProtectedRoute><PPLFlightPlanningMaterial /></ProtectedRoute>} />
@@ -150,11 +154,12 @@ const App = () => {
               {/* Ratings Study Material Routes */}
               <Route path="/night-rating-material" element={<ProtectedRoute><NightRatingMaterial /></ProtectedRoute>} />
               <Route path="/instrument-rating-material" element={<ProtectedRoute><InstrumentRatingMaterial /></ProtectedRoute>} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </StrictMode>
   );
 };
 
