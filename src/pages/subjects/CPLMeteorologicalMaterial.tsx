@@ -16,7 +16,7 @@ const CPLMeteorologicalMaterial = () => {
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">CPL Meteorology</h1>
             <p className="text-lg text-muted-foreground mb-8">
-              Advanced meteorological concepts for Commercial Pilot License
+              Advanced weather systems and meteorological principles for Commercial Pilot License
             </p>
           </div>
 
@@ -25,81 +25,103 @@ const CPLMeteorologicalMaterial = () => {
               <div className="prose prose-slate max-w-none">
                 <section className="space-y-6">
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">1. The Atmosphere</h2>
-                    <h3 className="text-xl mb-2">Composition:</h3>
+                    <h2 className="text-2xl font-semibold mb-4">1. Advanced Atmospheric Structure</h2>
+                    <h3 className="text-xl mb-2">Composition and Layers:</h3>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Nitrogen: 78.09%, Oxygen: 20.95%, Argon: 0.93%, Carbon Dioxide: 0.03%</li>
-                      <li>Trace gases include Neon, Helium, and Methane</li>
-                    </ul>
-                    <h3 className="text-xl mt-4 mb-2">Key Values:</h3>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>Tropopause height: ~8 km (poles), ~16-18 km (equator)</li>
-                      <li>Tropopause temperature: -40°C (poles), -75°C to -80°C (equator)</li>
+                      <li>Detailed composition of atmosphere</li>
+                      <li>Troposphere characteristics and phenomena</li>
+                      <li>Tropopause variations with latitude</li>
+                      <li>Stratosphere and its impact on aviation</li>
                     </ul>
                   </div>
 
                   <div>
                     <h2 className="text-2xl font-semibold mb-4">2. Advanced Pressure Systems</h2>
-                    <h3 className="text-xl mb-2">QFE, QNH, QFF:</h3>
+                    <h3 className="text-xl mb-2">Pressure Calculations:</h3>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>QFE: Pressure at aerodrome reference point</li>
-                      <li>QNH: Pressure adjusted to MSL using ISA</li>
-                      <li>QFF: True MSL pressure considering actual temperature</li>
+                      <li>QNH, QFE, and QFF relationships</li>
+                      <li>Pressure altitude calculations</li>
+                      <li>Pressure system movements and effects</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">3. Density Altitude</h2>
-                    <p>Density Altitude Formula:</p>
-                    <pre className="bg-gray-100 p-2 rounded">
-                      Density Altitude = Pressure Altitude + [120 × (Temp - ISA Temp)]
-                    </pre>
-                  </div>
-
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-4">4. Adiabatics and Stability</h2>
+                    <h2 className="text-2xl font-semibold mb-4">3. Temperature and Humidity</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Dry Adiabatic Lapse Rate (DALR): 3°C/1000 ft</li>
-                      <li>Saturated Adiabatic Lapse Rate (SALR): ~1.5°C/1000 ft</li>
-                      <li>Stability conditions: SALR vs DALR comparison</li>
+                      <li>Temperature/Dew point relationship</li>
+                      <li>Lapse rates and inversions</li>
+                      <li>Effects on aircraft performance</li>
+                      <li>Humidity measurements and calculations</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">5. Turbulence</h2>
+                    <h2 className="text-2xl font-semibold mb-4">4. Cloud Formation and Precipitation</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Mechanical turbulence</li>
-                      <li>Thermal turbulence</li>
-                      <li>Wake turbulence</li>
-                      <li>Clear Air Turbulence (CAT)</li>
+                      <li>Cloud types and associated weather</li>
+                      <li>Precipitation processes</li>
+                      <li>Thunderstorm development stages</li>
+                      <li>Associated hazards to aviation</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">6. Icing</h2>
+                    <h2 className="text-2xl font-semibold mb-4">5. Visibility and Fog</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Rime ice: Milky, forms in stratiform clouds</li>
-                      <li>Clear ice: Transparent, forms in cumuliform clouds</li>
-                      <li>Temperature range: +2°C to -20°C</li>
+                      <li>Types of fog and formation conditions</li>
+                      <li>Visibility measurement methods</li>
+                      <li>RVR and its significance</li>
+                      <li>Effects on commercial operations</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">7. Winds</h2>
+                    <h2 className="text-2xl font-semibold mb-4">6. Wind Systems</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Coriolis Effect: Deflects winds to the right in Northern Hemisphere</li>
-                      <li>Geostrophic Winds: Balance between Coriolis force and pressure gradient</li>
-                      <li>Jet Streams: High-altitude winds at the tropopause</li>
+                      <li>Global circulation patterns</li>
+                      <li>Local wind effects and terrain influence</li>
+                      <li>Wind shear and microburst recognition</li>
+                      <li>Jet streams and their impact</li>
                     </ul>
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">8. Climatology</h2>
-                    <h3 className="text-xl mb-2">Air Masses:</h3>
+                    <h2 className="text-2xl font-semibold mb-4">7. Air Masses and Fronts</h2>
                     <ul className="list-disc pl-6 space-y-1">
-                      <li>Polar and Tropical masses</li>
-                      <li>Continental and Maritime influences</li>
-                      <li>Climate Zones: Tropical, Temperate, Polar</li>
+                      <li>Air mass classification and characteristics</li>
+                      <li>Frontal types and associated weather</li>
+                      <li>Frontal movement prediction</li>
+                      <li>Flight planning considerations</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">8. Weather Charts and Forecasts</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Surface analysis charts</li>
+                      <li>Upper air charts interpretation</li>
+                      <li>METAR and TAF decoding</li>
+                      <li>SIGMET and AIRMET interpretation</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">9. Icing Conditions</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Types of airframe icing</li>
+                      <li>Carburetor and engine icing</li>
+                      <li>Anti-icing and de-icing procedures</li>
+                      <li>Icing intensity classifications</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-semibold mb-4">10. Hazardous Weather</h2>
+                    <ul className="list-disc pl-6 space-y-1">
+                      <li>Thunderstorm avoidance</li>
+                      <li>Turbulence types and causes</li>
+                      <li>Mountain wave phenomena</li>
+                      <li>Tropical weather systems</li>
                     </ul>
                   </div>
                 </section>
