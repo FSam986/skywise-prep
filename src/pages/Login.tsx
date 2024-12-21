@@ -74,7 +74,7 @@ const Login = () => {
           providers={['google']}
           redirectTo={`${window.location.origin}/`}
           onlyThirdPartyProviders={false}
-          view="sign_in"
+          view={window.location.hash.includes('type=recovery') ? 'update_password' : 'sign_in'}
           showLinks={true}
           magicLink={true}
         />
