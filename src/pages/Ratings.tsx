@@ -6,15 +6,15 @@ import { BackButton } from "@/components/BackButton";
 const subjects = [
   {
     title: "Night Rating",
-    description: "Night flying certification preparation",
+    description: "Test your night flying knowledge",
     icon: Moon,
-    path: "night-rating-material",
+    path: "quiz/night-rating",
   },
   {
     title: "Instrument Rating",
-    description: "Instrument flight certification",
+    description: "Practice instrument flight rules",
     icon: Compass,
-    path: "instrument-rating-material",
+    path: "quiz/instrument-rating",
   },
 ];
 
@@ -27,7 +27,7 @@ const Ratings = () => {
         <div className="mb-6">
           <BackButton />
         </div>
-        <h1 className="text-4xl font-bold text-center mb-12 text-primary">Aviation Ratings</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-primary">Rating Quizzes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 

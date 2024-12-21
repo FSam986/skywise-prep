@@ -1,50 +1,50 @@
 import { BookOpen, Cloud, Scale, Compass, Wrench, FileText, Brain, Plane } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { BackButton } from "@/components/BackButton";  // Added import for BackButton
+import { BackButton } from "@/components/BackButton";
 
 const subjects = [
   {
     title: "PPL Navigation",
-    description: "Basic navigation principles and techniques",
+    description: "Test your knowledge on navigation principles",
     icon: Compass,
-    path: "ppl-navigation-material",
+    path: "quiz/ppl-navigation",
   },
   {
-    title: "PPL Flight Planning (A)",
-    description: "Flight planning fundamentals",
+    title: "PPL Flight Planning",
+    description: "Practice flight planning concepts",
     icon: FileText,
-    path: "ppl-flight-planning-material",
+    path: "quiz/ppl-flight-planning",
   },
   {
     title: "PPL Meteorology",
-    description: "Weather patterns and meteorological principles",
+    description: "Test your understanding of weather patterns",
     icon: Cloud,
-    path: "ppl-meteorology-material",
+    path: "quiz/ppl-meteorology",
   },
   {
     title: "PPL Human Performance",
-    description: "Human factors in aviation",
+    description: "Quiz yourself on human factors",
     icon: Brain,
-    path: "ppl-human-performance-material",
+    path: "quiz/ppl-human-performance",
   },
   {
-    title: "PPL Principles of Flight (A)",
-    description: "Basic aerodynamics and flight principles",
+    title: "PPL Principles of Flight",
+    description: "Test your knowledge of flight principles",
     icon: Plane,
-    path: "ppl-principles-material",
+    path: "quiz/ppl-principles",
   },
   {
-    title: "PPL Aircraft Technical and General (A)",
-    description: "Aircraft systems and technical knowledge",
+    title: "PPL Aircraft Technical",
+    description: "Practice technical knowledge",
     icon: Wrench,
-    path: "ppl-technical-material",
+    path: "quiz/ppl-technical",
   },
   {
     title: "PPL Air Law",
-    description: "Aviation regulations and procedures",
+    description: "Test your understanding of aviation regulations",
     icon: BookOpen,
-    path: "ppl-air-law-material",
+    path: "quiz/ppl-air-law",
   },
 ];
 
@@ -55,9 +55,9 @@ const PPLSubjects = () => {
     <div className="min-h-screen bg-muted py-24">
       <div className="container">
         <div className="mb-6">
-          <BackButton />  {/* Added BackButton component */}
+          <BackButton />
         </div>
-        <h1 className="text-4xl font-bold text-center mb-12 text-primary">PPL Training Subjects</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-primary">PPL Training Quizzes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 

@@ -5,25 +5,25 @@ import { useNavigate } from "react-router-dom";
 const categories = [
   {
     title: "PPL Training",
-    description: "Start your aviation journey with Private Pilot License preparation",
+    description: "Practice PPL subjects with interactive quizzes",
     icon: Plane,
     path: "ppl-subjects",
   },
   {
     title: "CPL Training",
-    description: "Take the next step with Commercial Pilot License materials",
+    description: "Test your CPL knowledge with comprehensive quizzes",
     icon: Navigation,
     path: "cpl-subjects",
   },
   {
     title: "ATPL Training",
-    description: "Prepare for Airline Transport Pilot License certification",
+    description: "Challenge yourself with ATPL level quizzes",
     icon: Globe,
     path: "atpl-subjects",
   },
   {
     title: "Ratings",
-    description: "Prepare for additional pilot ratings and certifications",
+    description: "Test your knowledge on additional pilot ratings",
     icon: Compass,
     path: "ratings",
   },

@@ -6,39 +6,39 @@ import { BackButton } from "@/components/BackButton";
 const subjects = [
   {
     title: "ATPL Flight Planning",
-    description: "Advanced flight planning and operations",
+    description: "Test your advanced flight planning knowledge",
     icon: FileText,
-    path: "atpl-flight-planning-material",
+    path: "quiz/atpl-flight-planning",
   },
   {
     title: "ATPL ATG & POF",
-    description: "Aircraft technical and principles of flight",
+    description: "Quiz on aircraft technical and principles",
     icon: Scale,
-    path: "atpl-atg-pof-material",
+    path: "quiz/atpl-atg-pof",
   },
   {
-    title: "ATPL Instruments & Electronics",
-    description: "Complex aircraft systems",
+    title: "ATPL Instruments",
+    description: "Test your complex systems knowledge",
     icon: Scale,
-    path: "atpl-instruments-material",
+    path: "quiz/atpl-instruments",
   },
   {
     title: "ATPL Navigation",
-    description: "Advanced navigation systems",
+    description: "Practice advanced navigation concepts",
     icon: Compass,
-    path: "atpl-navigation-material",
+    path: "quiz/atpl-navigation",
   },
   {
     title: "ATPL Radio Aids",
-    description: "Advanced radio navigation",
+    description: "Test your radio navigation expertise",
     icon: Radio,
-    path: "atpl-radio-aids-material",
+    path: "quiz/atpl-radio-aids",
   },
   {
     title: "ATPL Meteorology",
-    description: "Advanced weather systems",
+    description: "Quiz on advanced weather systems",
     icon: Cloud,
-    path: "atpl-meteorology-material",
+    path: "quiz/atpl-meteorology",
   },
 ];
 
@@ -51,13 +51,13 @@ const ATPLSubjects = () => {
         <div className="mb-6">
           <BackButton />
         </div>
-        <h1 className="text-4xl font-bold text-center mb-12 text-primary">ATPL Training Subjects</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-primary">ATPL Training Quizzes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 
               key={subject.title} 
               className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/${subject.path}`)}
+              onClick={() => navigate(`/quiz/${subject.path}`)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">

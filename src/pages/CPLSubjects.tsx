@@ -5,52 +5,52 @@ import { BackButton } from "@/components/BackButton";
 
 const subjects = [
   {
-    title: "CPL General Navigation",
-    description: "Advanced navigation techniques",
+    title: "CPL Navigation",
+    description: "Test your advanced navigation knowledge",
     icon: Compass,
-    path: "cpl-navigation-material",
+    path: "quiz/cpl-navigation",
   },
   {
-    title: "CPL Instruments and Electronics",
-    description: "Aircraft instrumentation systems",
+    title: "CPL Instruments",
+    description: "Practice instrument knowledge",
     icon: Scale,
-    path: "cpl-instruments-material",
+    path: "quiz/cpl-instruments",
   },
   {
     title: "CPL Air Law",
-    description: "Commercial aviation regulations",
+    description: "Test your understanding of commercial aviation laws",
     icon: BookOpen,
-    path: "cpl-air-law-material",
+    path: "quiz/cpl-air-law",
   },
   {
-    title: "CPL Aircraft Technical and General",
-    description: "Advanced aircraft systems",
+    title: "CPL Aircraft Technical",
+    description: "Quiz yourself on advanced aircraft systems",
     icon: Wrench,
-    path: "cpl-technical-material",
+    path: "quiz/cpl-technical",
   },
   {
     title: "CPL Flight Planning",
-    description: "Advanced flight planning",
+    description: "Test your commercial flight planning skills",
     icon: FileText,
-    path: "cpl-flight-planning-material",
+    path: "quiz/cpl-flight-planning",
   },
   {
     title: "CPL Meteorology",
-    description: "Advanced weather systems",
+    description: "Practice advanced weather knowledge",
     icon: Cloud,
-    path: "cpl-meteorology-material",
+    path: "quiz/cpl-meteorology",
   },
   {
     title: "CPL Radio Aids",
-    description: "Radio navigation systems",
+    description: "Test your radio navigation knowledge",
     icon: Radio,
-    path: "cpl-radio-aids-material",
+    path: "quiz/cpl-radio-aids",
   },
   {
     title: "CPL Human Performance",
-    description: "Advanced human factors",
+    description: "Quiz on advanced human factors",
     icon: Brain,
-    path: "cpl-human-performance-material",
+    path: "quiz/cpl-human-performance",
   },
 ];
 
@@ -63,7 +63,7 @@ const CPLSubjects = () => {
         <div className="mb-6">
           <BackButton />
         </div>
-        <h1 className="text-4xl font-bold text-center mb-12 text-primary">CPL Training Subjects</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-primary">CPL Training Quizzes</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {subjects.map((subject) => (
             <Card 
