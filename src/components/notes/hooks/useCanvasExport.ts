@@ -8,10 +8,21 @@ export const useCanvasExport = (canvas: fabric.Canvas | null) => {
 
     try {
       if (type === 'pdf') {
-        const pdf = new jsPDF();
+        const pdf = new jsPDF({
+          orientation: 'landscape',
+          unit: 'px',
+          format: [canvas.width || 800, canvas.height || 600]
+        });
+        
         const imgData = canvas.toDataURL('image/png');
-        // Use correct parameters for addImage: data, format, x, y
-        pdf.addImage(imgData, 'PNG', 10, 10);
+        pdf.addImage({
+          imageData: imgData,
+          format: 'PNG',
+          x: 10,
+          y: 10,
+          width: canvas.width || 800,
+          height: canvas.height || 600
+        });
         pdf.save('notes.pdf');
       } else {
         const link = document.createElement('a');
