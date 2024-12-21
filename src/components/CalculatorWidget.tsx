@@ -4,10 +4,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { CalculatorDisplay } from "./calculator/CalculatorDisplay";
-import { NumericKeypad } from "./calculator/NumericKeypad";
+import { UnifiedKeypad } from "./calculator/UnifiedKeypad";
 import { FractionInput } from "./calculator/FractionInput";
 import { UnitConverter } from "./calculator/UnitConverter";
-import { ScientificKeypad } from "./calculator/ScientificKeypad";
 
 export const CalculatorWidget = () => {
   const [display, setDisplay] = useState("0");
@@ -16,7 +15,6 @@ export const CalculatorWidget = () => {
   const [newNumber, setNewNumber] = useState(true);
   const [memory, setMemory] = useState(0);
   const [isRadians, setIsRadians] = useState(false);
-  const [showScientific, setShowScientific] = useState(false);
 
   const handleNumber = (num: string) => {
     if (newNumber) {
@@ -138,18 +136,12 @@ export const CalculatorWidget = () => {
           <DialogTitle className="text-foreground">Calculator</DialogTitle>
         </DialogHeader>
         <Tabs defaultValue="calculator" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-muted">
+          <TabsList className="grid w-full grid-cols-3 bg-muted">
             <TabsTrigger 
               value="calculator"
               className="data-[state=active]:bg-background data-[state=active]:text-foreground"
             >
-              Basic
-            </TabsTrigger>
-            <TabsTrigger 
-              value="scientific"
-              className="data-[state=active]:bg-background data-[state=active]:text-foreground"
-            >
-              Scientific
+              Calculator
             </TabsTrigger>
             <TabsTrigger 
               value="fractions"
@@ -166,24 +158,17 @@ export const CalculatorWidget = () => {
           </TabsList>
           <TabsContent value="calculator" className="mt-4">
             <div className="grid gap-4">
-              <CalculatorDisplay display={display} memory={memory} />
-              <NumericKeypad
-                handleNumber={handleNumber}
-                handleOperation={handleOperation}
-                calculate={calculate}
-                clear={clear}
-              />
-            </div>
-          </TabsContent>
-          <TabsContent value="scientific" className="mt-4">
-            <div className="grid gap-4">
               <CalculatorDisplay 
                 display={display} 
-                memory={memory} 
-                angleUnit={isRadians ? "RAD" : "DEG"} 
+                memory={memory}
+                angleUnit={isRadians ? "RAD" : "DEG"}
               />
-              <ScientificKeypad
-                handleOperation={handleScientificOperation}
+              <UnifiedKeypad
+                handleNumber={handleNumber}
+                handleOperation={handleOperation}
+                handleScientificOperation={handleScientificOperation}
+                calculate={calculate}
+                clear={clear}
                 toggleAngleUnit={toggleAngleUnit}
                 isRadians={isRadians}
               />
