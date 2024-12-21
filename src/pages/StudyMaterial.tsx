@@ -7,13 +7,13 @@ const materials = [
     title: "PPL Study Material",
     description: "Comprehensive study materials for PPL",
     icon: BookOpen,
-    path: "ppl-study-material",
+    path: "ppl-subjects",  // Updated to match the route in App.tsx
   },
   {
     title: "CPL Study Material",
     description: "Advanced study materials for CPL",
     icon: BookOpen,
-    path: "cpl-study-material",
+    path: "cpl-subjects",
   },
   {
     title: "ATPL Study Material",
@@ -25,7 +25,7 @@ const materials = [
     title: "Ratings",
     description: "Study materials for aviation ratings",
     icon: BookOpen,
-    path: "ratings-material",
+    path: "ratings",
   },
 ];
 
