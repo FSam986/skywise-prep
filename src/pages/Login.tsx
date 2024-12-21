@@ -46,7 +46,8 @@ const Login = () => {
             }
           }}
           providers={['google']}
-          redirectTo={window.location.origin}
+          redirectTo={`${window.location.origin}/`}
+          onlyThirdPartyProviders={true}
         />
       </div>
     </div>
