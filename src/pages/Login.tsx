@@ -64,7 +64,7 @@ const Login = () => {
           providers={['google']}
           redirectTo={`${window.location.origin}/`}
           onlyThirdPartyProviders={false}
-          view="magic_link"
+          view="sign_in"
           showLinks={true}
           magicLink={true}
         />
