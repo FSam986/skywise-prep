@@ -10,6 +10,7 @@ export const useCanvasExport = (canvas: fabric.Canvas | null) => {
       if (type === 'pdf') {
         const pdf = new jsPDF();
         const imgData = canvas.toDataURL('image/png');
+        // Use correct parameters for addImage: data, format, x, y
         pdf.addImage(imgData, 'PNG', 10, 10);
         pdf.save('notes.pdf');
       } else {
