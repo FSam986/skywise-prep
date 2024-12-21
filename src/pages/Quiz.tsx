@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { NotesWidget } from "@/components/NotesWidget";
-import { CalculatorWidget } from "@/components/CalculatorWidget";
-import { FlightComputerWidget } from "@/components/FlightComputerWidget";
+import { QuizWidgets } from "@/components/widgets/QuizWidgets";
+import { QuizQuestion } from "@/components/quiz/QuizQuestion";
+import { QuizNavigation } from "@/components/quiz/QuizNavigation";
 
-// Demo quiz data
+// Demo quiz data - in a real app, this would come from an API
 const demoQuiz = {
   title: "Basic Aviation Knowledge",
   questions: [
@@ -57,64 +56,32 @@ const Quiz = () => {
   };
 
   const question = demoQuiz.questions[currentQuestion];
+  const isLastQuestion = currentQuestion === demoQuiz.questions.length - 1;
 
   return (
     <div className="min-h-screen bg-muted py-12 px-4">
       <div className="container max-w-3xl mx-auto">
-        <div className="flex justify-end gap-2 mb-4">
-          <NotesWidget subject={category || ""} />
-          <CalculatorWidget />
-          <FlightComputerWidget />
-        </div>
+        <QuizWidgets subject={category || ""} />
+        
         <Card className="mb-8">
           <CardHeader>
             <CardTitle>{demoQuiz.title} - {category}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="text-xl font-medium">
-              Question {currentQuestion + 1} of {demoQuiz.questions.length}
-            </div>
+            <QuizQuestion
+              currentQuestion={currentQuestion}
+              totalQuestions={demoQuiz.questions.length}
+              question={question}
+              selectedAnswer={selectedAnswer}
+              showExplanation={showExplanation}
+              onAnswerSelect={handleAnswerSelect}
+            />
             
-            <div className="text-lg mb-4">{question.question}</div>
-
-            <div className="space-y-3">
-              {question.options.map((option, index) => (
-                <Button
-                  key={index}
-                  variant={selectedAnswer === index ? 
-                    (index === question.correctAnswer ? "default" : "destructive") : 
-                    "outline"
-                  }
-                  className="w-full justify-start text-left h-auto py-4 px-6"
-                  onClick={() => handleAnswerSelect(index)}
-                  disabled={showExplanation}
-                >
-                  {option}
-                </Button>
-              ))}
-            </div>
-
-            {showExplanation && (
-              <div className={`p-4 rounded-lg ${
-                selectedAnswer === question.correctAnswer ? 
-                "bg-green-100 text-green-800" : 
-                "bg-red-100 text-red-800"
-              }`}>
-                <p className="font-medium">
-                  {selectedAnswer === question.correctAnswer ? "Correct!" : "Incorrect"}
-                </p>
-                <p className="mt-2">{question.explanation}</p>
-              </div>
-            )}
-
-            {showExplanation && currentQuestion < demoQuiz.questions.length - 1 && (
-              <Button 
-                className="w-full bg-secondary text-primary hover:bg-secondary/90"
-                onClick={handleNextQuestion}
-              >
-                Next Question
-              </Button>
-            )}
+            <QuizNavigation
+              showExplanation={showExplanation}
+              isLastQuestion={isLastQuestion}
+              onNextQuestion={handleNextQuestion}
+            />
           </CardContent>
         </Card>
       </div>
