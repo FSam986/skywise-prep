@@ -11,13 +11,13 @@ import {
 
 const meteorologyTopics = [
   {
-    title: "Advanced Atmospheric Structure",
+    title: "1. Advanced Atmospheric Structure",
     description: "Study composition, layers, and characteristics of the atmosphere",
     icon: Cloud,
     path: "quiz/ppl-meteorology/atmospheric-structure",
   },
   {
-    title: "Air Masses and Fronts",
+    title: "7. Air Masses and Fronts",
     description: "Learn about different air masses and frontal systems",
     icon: Wind,
     path: "quiz/ppl-meteorology/air-masses-fronts",
