@@ -19,6 +19,8 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
     );
   }
 
+  console.log('Rendering chapter content:', chapter);
+
   // Parse the content string into paragraphs
   const paragraphs = chapter.content.split('\n').filter(p => p.trim().length > 0);
 
@@ -36,13 +38,24 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
                 const level = paragraph.match(/^#+/)[0].length;
                 const text = paragraph.replace(/^#+\s*/, '');
                 const HeadingTag = `h${level}` as keyof JSX.IntrinsicElements;
-                return <HeadingTag key={index} className="font-bold mt-6 mb-4">{text}</HeadingTag>;
+                return (
+                  <HeadingTag 
+                    key={index} 
+                    className={`font-bold ${level === 1 ? 'text-2xl mt-0' : 'text-xl mt-6'} mb-4`}
+                  >
+                    {text}
+                  </HeadingTag>
+                );
               }
               
               // Handle lists
               if (paragraph.startsWith('- ')) {
                 const text = paragraph.substring(2);
-                return <li key={index} className="ml-4">{text}</li>;
+                return (
+                  <li key={index} className="ml-6 mb-2 text-base">
+                    {text}
+                  </li>
+                );
               }
               
               // Regular paragraphs
