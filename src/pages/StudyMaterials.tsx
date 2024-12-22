@@ -1,7 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Book, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const StudyMaterials = () => {
+  const navigate = useNavigate();
   const categories = [
     {
       title: "PPL Materials",
@@ -68,6 +70,11 @@ const StudyMaterials = () => {
     }
   ];
 
+  const handleSubjectClick = (category: string, subject: string) => {
+    const licenseType = category.split(' ')[0].toLowerCase();
+    navigate(`/study/${licenseType}/${subject.toLowerCase().replace(/ /g, '-')}`);
+  };
+
   return (
     <div className="container mx-auto py-8 px-4">
       <h1 className="text-4xl font-bold mb-8 text-center">Study Materials</h1>
@@ -89,6 +96,7 @@ const StudyMaterials = () => {
                   <div
                     key={subject}
                     className="flex items-center gap-2 p-2 rounded-lg hover:bg-accent cursor-pointer transition-colors"
+                    onClick={() => handleSubjectClick(category.title, subject)}
                   >
                     <Book className="h-4 w-4 text-primary" />
                     <span className="text-sm">{subject}</span>
