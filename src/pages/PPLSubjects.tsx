@@ -21,12 +21,6 @@ const meteorologyTopics = [
     description: "Learn about different air masses and frontal systems",
     icon: Wind,
     path: "quiz/ppl-meteorology/air-masses-fronts",
-  },
-  {
-    title: "Hazardous Weather",
-    description: "Understand thunderstorms, turbulence, and mountain waves",
-    icon: CloudRain,
-    path: "quiz/ppl-meteorology/hazardous-weather",
   }
 ];
 
