@@ -21,7 +21,7 @@ const SubjectContent = () => {
   const { licenseType, subject } = useParams();
   const [selectedChapter, setSelectedChapter] = React.useState<number | null>(1);
 
-  console.log('Loading subject content for:', { licenseType, subject });
+  console.log('Loading subject content for:', { licenseType, subject, selectedChapter });
 
   const { data: chapters = [], isLoading, error } = useQuery<Chapter[]>({
     queryKey: ['chapters', licenseType, subject],
