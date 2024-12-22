@@ -55,11 +55,6 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", event, session);
-      
-      if (event === 'TOKEN_REFRESHED') {
-        console.log("Token refreshed successfully");
-      }
-      
       setIsAuthenticated(!!session);
       setIsLoading(false);
     });
@@ -93,7 +88,7 @@ const App = () => {
                 
                 {/* Protected Routes */}
                 <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
-                <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+                <Route path="/quiz/:subject/:chapter" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
                 <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
                 <Route path="/ppl-subjects/:subject" element={<ProtectedRoute><SubjectTopics /></ProtectedRoute>} />
                 <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
