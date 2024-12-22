@@ -1,4 +1,4 @@
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "@/lib/supabase";
 
 export const seedAtmosphericStructureQuestions = async () => {
   const questions = [
@@ -99,7 +99,10 @@ export const seedAtmosphericStructureQuestions = async () => {
   for (const question of questions) {
     const { error } = await supabase
       .from('chapter_questions')
-      .insert([question]);
+      .insert([{
+        ...question,
+        options: JSON.stringify(question.options)
+      }]);
       
     if (error) {
       console.error("Error inserting question:", error);
