@@ -1,16 +1,178 @@
-import { Cloud, Wind } from "lucide-react";
+import { Cloud, Wind, Sun, Thermometer, Droplets, CloudRain, CloudLightning, CloudFog, CloudSnow, Compass } from "lucide-react";
 
 export const meteorologyTopics = [
   {
     title: "1. Advanced Atmospheric Structure",
     description: "Study composition, layers, and characteristics of the atmosphere",
     icon: Cloud,
-    path: "quiz/ppl-meteorology/atmospheric-structure",
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "2. Temperature and Heat Exchange",
+    description: "Learn about atmospheric temperature processes",
+    icon: Thermometer,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "3. Atmospheric Pressure",
+    description: "Understand pressure systems and their effects",
+    icon: Compass,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "4. Atmospheric Moisture",
+    description: "Study humidity, dew point, and precipitation",
+    icon: Droplets,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "5. Atmospheric Stability",
+    description: "Learn about air stability and instability",
+    icon: Wind,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "6. Cloud Formation",
+    description: "Understand cloud types and development",
+    icon: CloudRain,
+    path: "study/ppl/meteorology",
   },
   {
     title: "7. Air Masses and Fronts",
     description: "Learn about different air masses and frontal systems",
     icon: Wind,
-    path: "quiz/ppl-meteorology/air-masses-fronts",
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "8. Precipitation",
+    description: "Study various forms of precipitation",
+    icon: CloudRain,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "9. Visibility",
+    description: "Learn about factors affecting visibility",
+    icon: CloudFog,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "10. Hazardous Weather",
+    description: "Study thunderstorms and severe weather",
+    icon: CloudLightning,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "11. Wind Systems",
+    description: "Understand global and local wind patterns",
+    icon: Wind,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "12. Weather Charts",
+    description: "Learn to read and interpret weather maps",
+    icon: Compass,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "13. Weather Reports",
+    description: "Understand METAR and TAF reports",
+    icon: CloudRain,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "14. Flight Planning Weather",
+    description: "Apply weather knowledge to flight planning",
+    icon: Compass,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "15. Icing Conditions",
+    description: "Study aircraft icing and its effects",
+    icon: CloudSnow,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "16. Mountain Weather",
+    description: "Understand mountain wave and terrain effects",
+    icon: Cloud,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "17. Tropical Weather",
+    description: "Learn about tropical weather systems",
+    icon: Sun,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "18. Weather Radar",
+    description: "Understand weather radar interpretation",
+    icon: Compass,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "19. Jet Streams",
+    description: "Study high-altitude wind patterns",
+    icon: Wind,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "20. Climate Zones",
+    description: "Learn about global climate patterns",
+    icon: Sun,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "21. Seasonal Weather",
+    description: "Understand seasonal weather variations",
+    icon: Sun,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "22. Weather Services",
+    description: "Learn about aviation weather services",
+    icon: Cloud,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "23. Weather Technology",
+    description: "Study modern weather forecasting tools",
+    icon: Compass,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "24. Atmospheric Circulation",
+    description: "Understand global air circulation patterns",
+    icon: Wind,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "25. Weather Hazard Avoidance",
+    description: "Learn strategies for avoiding bad weather",
+    icon: CloudLightning,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "26. Weather Decision Making",
+    description: "Apply weather knowledge to pilot decisions",
+    icon: Cloud,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "27. Weather Emergency Procedures",
+    description: "Handle weather-related emergencies",
+    icon: CloudLightning,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "28. Advanced Weather Theory",
+    description: "Study complex meteorological concepts",
+    icon: Cloud,
+    path: "study/ppl/meteorology",
+  },
+  {
+    title: "29. Weather Review",
+    description: "Comprehensive review of meteorology topics",
+    icon: Cloud,
+    path: "study/ppl/meteorology",
   }
 ];
