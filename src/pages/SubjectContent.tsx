@@ -19,14 +19,14 @@ interface Chapter {
 
 const SubjectContent = () => {
   const { licenseType, subject } = useParams();
-  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(1); // Default to first chapter
+  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(1);
 
-  console.log('Current route params:', { licenseType, subject }); // Debug log
+  console.log('Loading subject content for:', { licenseType, subject });
 
-  const { data: chapters = [], isLoading } = useQuery<Chapter[]>({
+  const { data: chapters = [], isLoading, error } = useQuery<Chapter[]>({
     queryKey: ['chapters', licenseType, subject],
     queryFn: async () => {
-      console.log('Fetching chapters for:', { licenseType, subject }); // Debug log
+      console.log('Fetching chapters for:', { licenseType, subject });
       const { data, error } = await supabase
         .from('subject_chapters')
         .select('*')
@@ -38,6 +38,7 @@ const SubjectContent = () => {
         console.error('Error fetching chapters:', error);
         throw error;
       }
+      
       console.log('Fetched chapters:', data);
       return data;
     },
@@ -48,7 +49,19 @@ const SubjectContent = () => {
   );
 
   if (isLoading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-muted-foreground">Loading chapters...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-lg text-red-500">Error loading chapters. Please try again.</p>
+      </div>
+    );
   }
 
   return (
