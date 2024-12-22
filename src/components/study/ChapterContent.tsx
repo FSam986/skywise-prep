@@ -11,7 +11,6 @@ interface ChapterContentProps {
 }
 
 export const ChapterContent = ({ chapter }: ChapterContentProps) => {
-  // Add more detailed logging
   console.log('ChapterContent received chapter:', chapter);
 
   if (!chapter) {
@@ -38,7 +37,7 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
         <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="prose prose-sm max-w-none dark:prose-invert">
             {paragraphs.map((paragraph, index) => {
-              // Check if the paragraph starts with a heading marker
+              // Handle headings
               if (paragraph.startsWith('#')) {
                 const level = paragraph.match(/^#+/)[0].length;
                 const text = paragraph.replace(/^#+\s*/, '');
@@ -53,12 +52,23 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
                 );
               }
               
-              // Handle lists
-              if (paragraph.startsWith('- ')) {
-                const text = paragraph.substring(2);
+              // Handle nested list items
+              if (paragraph.startsWith('  - ')) {
+                // Nested list item
+                const text = paragraph.replace(/^\s*-\s*/, '');
                 return (
-                  <li key={index} className="ml-6 mb-2 text-base">
-                    {text}
+                  <li key={index} className="ml-12 mb-2 text-base list-disc">
+                    {text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
+                  </li>
+                );
+              }
+              
+              // Handle main list items
+              if (paragraph.startsWith('- ')) {
+                const text = paragraph.replace(/^-\s*/, '');
+                return (
+                  <li key={index} className="ml-6 mb-2 text-base font-semibold list-none">
+                    {text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
                   </li>
                 );
               }
