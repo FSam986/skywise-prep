@@ -11,7 +11,11 @@ interface ChapterContentProps {
 }
 
 export const ChapterContent = ({ chapter }: ChapterContentProps) => {
+  // Add more detailed logging
+  console.log('ChapterContent received chapter:', chapter);
+
   if (!chapter) {
+    console.warn('No chapter content available');
     return (
       <div className="flex items-center justify-center h-full p-8">
         <p className="text-muted-foreground">Select a chapter to view its content</p>
@@ -19,10 +23,11 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
     );
   }
 
-  console.log('Rendering chapter content:', chapter);
+  console.log('Chapter content:', chapter.content);
 
   // Parse the content string into paragraphs
   const paragraphs = chapter.content.split('\n').filter(p => p.trim().length > 0);
+  console.log('Parsed paragraphs:', paragraphs);
 
   return (
     <Card className="h-full border-0">
