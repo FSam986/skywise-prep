@@ -20,6 +20,7 @@ import Ratings from "./pages/Ratings";
 import StudyMaterials from "./pages/StudyMaterials";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
+import SubjectContent from "./pages/SubjectContent";
 
 // Initialize QueryClient outside of component
 const queryClient = new QueryClient({
@@ -91,6 +92,7 @@ const App = () => {
                 <Route path="/study-materials" element={<ProtectedRoute><StudyMaterials /></ProtectedRoute>} />
                 <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                <Route path="/study/:licenseType/:subject" element={<ProtectedRoute><SubjectContent /></ProtectedRoute>} />
               </Routes>
             </BrowserRouter>
           </TooltipProvider>
