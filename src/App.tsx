@@ -22,12 +22,12 @@ import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import SubjectContent from "./pages/SubjectContent";
 
-// Initialize QueryClient outside of component
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 1,
+      retry: 2,
       refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
     },
   },
 });
@@ -40,6 +40,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     const checkAuth = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
+        console.log("Current session:", session);
         setIsAuthenticated(!!session);
       } catch (error) {
         console.error("Error checking auth:", error);
@@ -51,8 +52,13 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
     checkAuth();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       console.log("Auth state changed:", event, session);
+      
+      if (event === 'TOKEN_REFRESHED') {
+        console.log("Token refreshed successfully");
+      }
+      
       setIsAuthenticated(!!session);
       setIsLoading(false);
     });
@@ -61,10 +67,12 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 dark:border-white"></div>
+    </div>;
   }
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
 const App = () => {
@@ -93,6 +101,9 @@ const App = () => {
                 <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/study/:licenseType/:subject" element={<ProtectedRoute><SubjectContent /></ProtectedRoute>} />
+                
+                {/* Catch all route */}
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </BrowserRouter>
           </TooltipProvider>
