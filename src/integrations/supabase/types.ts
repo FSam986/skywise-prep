@@ -129,6 +129,39 @@ export type Database = {
         }
         Relationships: []
       }
+      subject_chapters: {
+        Row: {
+          chapter_number: number
+          chapter_title: string
+          content: string
+          created_at: string
+          id: string
+          license_type: Database["public"]["Enums"]["license_type"]
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          chapter_number: number
+          chapter_title: string
+          content: string
+          created_at?: string
+          id?: string
+          license_type: Database["public"]["Enums"]["license_type"]
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          chapter_number?: number
+          chapter_title?: string
+          content?: string
+          created_at?: string
+          id?: string
+          license_type?: Database["public"]["Enums"]["license_type"]
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -137,7 +170,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      license_type: "ppl" | "cpl" | "atpl"
     }
     CompositeTypes: {
       [_ in never]: never

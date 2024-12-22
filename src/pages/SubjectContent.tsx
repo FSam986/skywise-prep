@@ -6,11 +6,22 @@ import { ChapterList } from '@/components/study/ChapterList';
 import { ChapterContent } from '@/components/study/ChapterContent';
 import { Separator } from '@/components/ui/separator';
 
+interface Chapter {
+  id: string;
+  license_type: 'ppl' | 'cpl' | 'atpl';
+  subject: string;
+  chapter_number: number;
+  chapter_title: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+}
+
 const SubjectContent = () => {
   const { licenseType, subject } = useParams();
   const [selectedChapter, setSelectedChapter] = React.useState<number | null>(null);
 
-  const { data: chapters = [], isLoading } = useQuery({
+  const { data: chapters = [], isLoading } = useQuery<Chapter[]>({
     queryKey: ['chapters', licenseType, subject],
     queryFn: async () => {
       const { data, error } = await supabase
