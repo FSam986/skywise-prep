@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { supabase } from "@/integrations/supabase/client";
 import { ChapterList } from '@/components/study/ChapterList';
 import { ChapterContent } from '@/components/study/ChapterContent';
-import { Separator } from '@/components/ui/separator';
 import { BackButton } from '@/components/BackButton';
 
 interface Chapter {
@@ -20,7 +19,7 @@ interface Chapter {
 
 const SubjectContent = () => {
   const { licenseType, subject } = useParams();
-  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(null);
+  const [selectedChapter, setSelectedChapter] = React.useState<number | null>(1); // Default to first chapter
 
   console.log('Current route params:', { licenseType, subject }); // Debug log
 
@@ -36,10 +35,10 @@ const SubjectContent = () => {
         .order('chapter_number');
 
       if (error) {
-        console.error('Error fetching chapters:', error); // Debug log
+        console.error('Error fetching chapters:', error);
         throw error;
       }
-      console.log('Fetched chapters:', data); // Debug log
+      console.log('Fetched chapters:', data);
       return data;
     },
   });
@@ -56,7 +55,7 @@ const SubjectContent = () => {
     <div className="container mx-auto py-8 px-4">
       <BackButton />
       <h1 className="text-3xl font-bold mb-8 capitalize">
-        {subject} - {licenseType?.toUpperCase()}
+        {subject?.replace(/-/g, ' ')} - {licenseType?.toUpperCase()}
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-8">
         <div className="bg-card rounded-lg p-4 shadow-sm">

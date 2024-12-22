@@ -26,9 +26,11 @@ export const ChapterContent = ({ chapter }: ChapterContentProps) => {
       </CardHeader>
       <CardContent className="p-6">
         <ScrollArea className="h-[calc(100vh-300px)]">
-          <div className="prose prose-sm max-w-none">
+          <div className="prose prose-sm max-w-none dark:prose-invert">
             {chapter.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4 whitespace-pre-wrap">{paragraph}</p>
+              <p key={index} className="mb-4 whitespace-pre-wrap leading-relaxed">
+                {paragraph.trim()}
+              </p>
             ))}
           </div>
         </ScrollArea>

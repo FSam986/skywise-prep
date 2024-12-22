@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
+import { Book } from "lucide-react";
 
 interface Chapter {
   id: string;
@@ -25,10 +26,13 @@ export const ChapterList = ({ chapters, selectedChapter, onSelectChapter }: Chap
         <Button
           key={chapter.id}
           variant={selectedChapter === chapter.chapter_number ? "secondary" : "ghost"}
-          className="w-full justify-start"
+          className="w-full justify-start gap-2 text-left"
           onClick={() => onSelectChapter(chapter.chapter_number)}
         >
-          Chapter {chapter.chapter_number}: {chapter.chapter_title}
+          <Book className="h-4 w-4" />
+          <span className="truncate">
+            Chapter {chapter.chapter_number}: {chapter.chapter_title}
+          </span>
         </Button>
       ))}
     </div>
