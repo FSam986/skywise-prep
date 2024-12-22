@@ -13,22 +13,22 @@ interface ChapterContentProps {
 export const ChapterContent = ({ chapter }: ChapterContentProps) => {
   if (!chapter) {
     return (
-      <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full p-8">
         <p className="text-muted-foreground">Select a chapter to view its content</p>
       </div>
     );
   }
 
   return (
-    <Card className="h-full">
-      <CardHeader>
+    <Card className="h-full border-0">
+      <CardHeader className="bg-muted/50">
         <CardTitle>Chapter {chapter.chapter_number}: {chapter.chapter_title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="p-6">
         <ScrollArea className="h-[calc(100vh-300px)]">
           <div className="prose prose-sm max-w-none">
             {chapter.content.split('\n').map((paragraph, index) => (
-              <p key={index} className="mb-4">{paragraph}</p>
+              <p key={index} className="mb-4 whitespace-pre-wrap">{paragraph}</p>
             ))}
           </div>
         </ScrollArea>
