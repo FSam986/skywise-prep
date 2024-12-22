@@ -2,7 +2,6 @@ import { BookOpen, Cloud, Compass, Wrench, FileText, Brain, Plane } from "lucide
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
 import { SubjectCard } from "@/components/subjects/SubjectCard";
-import { meteorologyTopics } from "@/components/subjects/MeteorologySyllabus";
 
 const subjects = [
   {
@@ -21,7 +20,7 @@ const subjects = [
     title: "PPL Meteorology",
     description: "Test your understanding of weather patterns",
     icon: Cloud,
-    topics: meteorologyTopics,
+    path: "ppl-subjects/meteorology",
   },
   {
     title: "PPL Human Performance",

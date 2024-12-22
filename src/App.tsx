@@ -21,6 +21,7 @@ import StudyMaterials from "./pages/StudyMaterials";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import SubjectContent from "./pages/SubjectContent";
+import SubjectTopics from "./pages/SubjectTopics";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -94,6 +95,7 @@ const App = () => {
                 <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
                 <Route path="/quiz/:category" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
                 <Route path="/ppl-subjects" element={<ProtectedRoute><PPLSubjects /></ProtectedRoute>} />
+                <Route path="/ppl-subjects/:subject" element={<ProtectedRoute><SubjectTopics /></ProtectedRoute>} />
                 <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
                 <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
                 <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
