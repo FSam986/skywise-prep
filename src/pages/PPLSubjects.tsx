@@ -1,7 +1,40 @@
-import { BookOpen, Cloud, Scale, Compass, Wrench, FileText, Brain, Plane } from "lucide-react";
+import { BookOpen, Cloud, Scale, Compass, Wrench, FileText, Brain, Plane, Wind, Sun, CloudRain } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { BackButton } from "@/components/BackButton";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const meteorologyTopics = [
+  {
+    title: "Atmospheric Structure",
+    description: "Study the layers and composition of the atmosphere",
+    icon: Cloud,
+    path: "quiz/ppl-meteorology/atmospheric-structure",
+  },
+  {
+    title: "Weather Systems",
+    description: "Learn about pressure systems and air masses",
+    icon: Wind,
+    path: "quiz/ppl-meteorology/weather-systems",
+  },
+  {
+    title: "Temperature and Humidity",
+    description: "Understand temperature variations and moisture content",
+    icon: Sun,
+    path: "quiz/ppl-meteorology/temperature-humidity",
+  },
+  {
+    title: "Weather Phenomena",
+    description: "Study clouds, precipitation, and visibility",
+    icon: CloudRain,
+    path: "quiz/ppl-meteorology/weather-phenomena",
+  },
+];
 
 const subjects = [
   {
@@ -20,7 +53,7 @@ const subjects = [
     title: "PPL Meteorology",
     description: "Test your understanding of weather patterns",
     icon: Cloud,
-    path: "quiz/ppl-meteorology",
+    topics: meteorologyTopics,
   },
   {
     title: "PPL Human Performance",
@@ -51,6 +84,12 @@ const subjects = [
 const PPLSubjects = () => {
   const navigate = useNavigate();
 
+  const handleCardClick = (subject: any) => {
+    if (subject.path) {
+      navigate(`/${subject.path}`);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-muted py-24">
       <div className="container">
@@ -62,8 +101,8 @@ const PPLSubjects = () => {
           {subjects.map((subject) => (
             <Card 
               key={subject.title} 
-              className="hover:shadow-lg transition-shadow cursor-pointer"
-              onClick={() => navigate(`/${subject.path}`)}
+              className={`hover:shadow-lg transition-shadow ${!subject.topics ? 'cursor-pointer' : ''}`}
+              onClick={() => !subject.topics && handleCardClick(subject)}
             >
               <CardHeader>
                 <div className="flex justify-center mb-4">
@@ -72,7 +111,31 @@ const PPLSubjects = () => {
                 <CardTitle className="text-center">{subject.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-center text-sm text-gray-600">{subject.description}</p>
+                {!subject.topics ? (
+                  <p className="text-center text-sm text-gray-600">{subject.description}</p>
+                ) : (
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="topics">
+                      <AccordionTrigger className="text-sm">
+                        View Topics
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-2">
+                          {subject.topics.map((topic) => (
+                            <div
+                              key={topic.title}
+                              className="p-2 hover:bg-accent rounded-md cursor-pointer flex items-center gap-2"
+                              onClick={() => navigate(`/${topic.path}`)}
+                            >
+                              <topic.icon className="h-4 w-4" />
+                              <span className="text-sm">{topic.title}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                )}
               </CardContent>
             </Card>
           ))}
