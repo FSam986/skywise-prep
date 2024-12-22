@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      chapter_questions: {
+        Row: {
+          chapter_number: number
+          correct_answer: number
+          created_at: string
+          difficulty: Database["public"]["Enums"]["question_difficulty"]
+          explanation: string
+          id: string
+          options: Json
+          question: string
+          subject: string
+          updated_at: string
+        }
+        Insert: {
+          chapter_number: number
+          correct_answer: number
+          created_at?: string
+          difficulty?: Database["public"]["Enums"]["question_difficulty"]
+          explanation: string
+          id?: string
+          options: Json
+          question: string
+          subject: string
+          updated_at?: string
+        }
+        Update: {
+          chapter_number?: number
+          correct_answer?: number
+          created_at?: string
+          difficulty?: Database["public"]["Enums"]["question_difficulty"]
+          explanation?: string
+          id?: string
+          options?: Json
+          question?: string
+          subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       notes: {
         Row: {
           content: Json
@@ -171,6 +210,7 @@ export type Database = {
     }
     Enums: {
       license_type: "ppl" | "cpl" | "atpl"
+      question_difficulty: "beginner" | "intermediate" | "expert"
     }
     CompositeTypes: {
       [_ in never]: never
