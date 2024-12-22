@@ -11,29 +11,23 @@ import {
 
 const meteorologyTopics = [
   {
-    title: "Atmospheric Structure",
-    description: "Study the layers and composition of the atmosphere",
+    title: "Advanced Atmospheric Structure",
+    description: "Study composition, layers, and characteristics of the atmosphere",
     icon: Cloud,
     path: "quiz/ppl-meteorology/atmospheric-structure",
   },
   {
-    title: "Weather Systems",
-    description: "Learn about pressure systems and air masses",
+    title: "Air Masses and Fronts",
+    description: "Learn about different air masses and frontal systems",
     icon: Wind,
-    path: "quiz/ppl-meteorology/weather-systems",
+    path: "quiz/ppl-meteorology/air-masses-fronts",
   },
   {
-    title: "Temperature and Humidity",
-    description: "Understand temperature variations and moisture content",
-    icon: Sun,
-    path: "quiz/ppl-meteorology/temperature-humidity",
-  },
-  {
-    title: "Weather Phenomena",
-    description: "Study clouds, precipitation, and visibility",
+    title: "Hazardous Weather",
+    description: "Understand thunderstorms, turbulence, and mountain waves",
     icon: CloudRain,
-    path: "quiz/ppl-meteorology/weather-phenomena",
-  },
+    path: "quiz/ppl-meteorology/hazardous-weather",
+  }
 ];
 
 const subjects = [
