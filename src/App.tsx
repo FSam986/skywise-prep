@@ -17,6 +17,7 @@ import PPLSubjects from "./pages/PPLSubjects";
 import CPLSubjects from "./pages/CPLSubjects";
 import ATPLSubjects from "./pages/ATPLSubjects";
 import Ratings from "./pages/Ratings";
+import StudyMaterials from "./pages/StudyMaterials";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 
@@ -87,6 +88,7 @@ const App = () => {
                 <Route path="/cpl-subjects" element={<ProtectedRoute><CPLSubjects /></ProtectedRoute>} />
                 <Route path="/atpl-subjects" element={<ProtectedRoute><ATPLSubjects /></ProtectedRoute>} />
                 <Route path="/ratings" element={<ProtectedRoute><Ratings /></ProtectedRoute>} />
+                <Route path="/study-materials" element={<ProtectedRoute><StudyMaterials /></ProtectedRoute>} />
                 <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
               </Routes>

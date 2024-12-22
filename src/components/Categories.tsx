@@ -1,4 +1,4 @@
-import { Compass, Globe, Navigation, Plane } from "lucide-react";
+import { Compass, Globe, Navigation, Plane, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +27,12 @@ const categories = [
     icon: Compass,
     path: "ratings",
   },
+  {
+    title: "Study Materials",
+    description: "Access PDF notes for all subjects",
+    icon: FileText,
+    path: "study-materials",
+  },
 ];
 
 export const Categories = () => {
@@ -38,7 +44,7 @@ export const Categories = () => {
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary bg-white/50 py-4 rounded-lg shadow-sm">
           Study Categories
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           {categories.map((category) => (
             <Card 
               key={category.title} 
