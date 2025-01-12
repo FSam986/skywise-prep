@@ -51,10 +51,6 @@ const Login = () => {
           title: "Signed out",
           description: "You have been signed out"
         });
-      } else if (event === 'USER_UPDATED') {
-        console.log("User profile updated");
-      } else if (event === 'PASSWORD_RECOVERY') {
-        console.log("Password recovery event detected");
       }
     });
 
