@@ -5,6 +5,11 @@ import { useNavigate } from "react-router-dom";
 export const Hero = () => {
   const navigate = useNavigate();
 
+  const handleGetStarted = () => {
+    console.log("Navigating to login page");
+    navigate("/login");
+  };
+
   return (
     <div className="relative overflow-hidden bg-primary py-24 sm:py-32">
       <div className="container mx-auto px-4">
@@ -22,7 +27,7 @@ export const Hero = () => {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Button 
               className="bg-secondary text-primary hover:bg-secondary/90"
-              onClick={() => navigate("/login")}
+              onClick={handleGetStarted}
             >
               Get Started
             </Button>
